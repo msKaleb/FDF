@@ -56,3 +56,6 @@ fdf_linux
 maps/
 minilibx-linux/
 .*
+minilibx/
+minilibx_macos/
+test_maps/
