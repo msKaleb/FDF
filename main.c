@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/22 19:08:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/23 13:21:46 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"mlx_linux/mlx.h"
+// #include"mlx_linux/mlx.h" // For Linux
+#include"mlx/mlx.h"
 #include"libft/libft.h"
 // TODO:
 // Gradient color from a to b function
@@ -28,14 +29,14 @@ int	main(void)
 	void	*ptr;
 	int		color = 0x00FF0000;
 	
-	char	c = 255;
-	ft_fprintf(1, "%d\n", c << 8);
-	exit(0);
+	// char	c = 255;
+	// ft_fprintf(1, "%d\n", 255 << 8);
+	// exit(0);
 	
 	mlx = mlx_init();
 	mlx_window = mlx_new_window(mlx, 640, 480, "Test");
 	mlx_image = mlx_new_image(mlx, 640, 480);
-	
+	mlx_loop(mlx);
 	addr = mlx_get_data_addr(mlx_image, &bpp, &sl, &endian);
 	// mlx_string_put(mlx, mlx_window, 100, 100, 0xeaf1f4, "Mikelo pargelo");
 

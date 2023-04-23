@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/22 17:34:47 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/23 13:15:47 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,14 +50,20 @@ CC		=	gcc
 
 LIBFT	=	libft/libft.a
 
-FLAGS	=	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz # check path to X11 in mac
+ # check path to X11 in mac
 # CFLAGS	=	-Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3
 
 # If on Linux, use the flag -e for echo command
 ifeq ($(OS), Linux)
 	ECHO = echo -e
-else
+	CCOBJ = -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	MLX = libmlx_Linux.a #check this out
+else ifeq ($(OS), Darwin)
 	ECHO = echo
+	CCOBJ = -Wall -Wextra -Werror -Imlx -c $< -o $@
+	FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+	MLX = mlx/libmlx.a
 endif
 
 #Define colors for output
@@ -84,17 +90,19 @@ pre-build:
 			@make -sC libft/
 			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
 			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
+			@make -sC mlx/
 
 %.o: %.c
-	 		$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	 		$(CC) $(CCOBJ)
 
 $(NAME):	pre-build $(OBJ)
-			$(CC) $(FLAGS) $(OBJ) $(LIBFT) libmlx_Linux.a -o $(NAME)
+			$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
 clean:
 			$(RM) $(OBJ)
 			@make clean -sC libft/
+			make clean -sC mlx/
 			
 fclean:		clean
 			$(RM) $(NAME)
