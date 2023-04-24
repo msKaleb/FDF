@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/24 10:02:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:28:06 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ int	main(void)
 	int y = 0;
 	char **linexyz;
 	ptr = &x;
-	mlx_key_hook(m.win, &keyhook, &m);
-	mlx_loop(m.mlx);
 	
 	fd = open(test_file, O_RDONLY);
 	while((line = get_next_line(fd)) != NULL)
@@ -114,9 +112,9 @@ int	main(void)
 		v = get_coords(linexyz);
 		while (linexyz[++x])
 		{
-			// color = v[x].z + 0xffffff;
-			// mlx_pixel_put(m.mlx, m.win, v[x].x, y * (480 / 11), color);
-			ft_fprintf(1, "x: %d ", v[x].x);
+			color = v[x].z + 0xffffff;
+			mlx_pixel_put(m.mlx, m.win, v[x].x, y * (480 / 11), color);
+			// ft_fprintf(1, "x: %d ", v[x].x);
 			// if (line[x] != ' ')
 			// 	mlx_pixel_put(m.mlx, m.win, x, y, 255);
 			// else
@@ -126,14 +124,16 @@ int	main(void)
 		ft_fprintf(1, "\n");
 		y++;
 		x = -1;
-		// free(v);
-		break;
+		free(v);
+		// break;
 		// line = get_next_line(fd);
 	}
 	
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	// exit(0);
 	
+	mlx_key_hook(m.win, &keyhook, &m);
+	mlx_loop(m.mlx);
 	
 	ft_fprintf(1, "m.bpp: %d\n", m.bpp);
 	ft_fprintf(1, "m.sl: %d\n", m.sl);
