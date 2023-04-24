@@ -6,14 +6,14 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/24 12:28:06 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:28:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"mlx_linux/mlx.h" // For Linux
 // #include"mlx/mlx.h"
 #include"ft_fdf.h"
-#include"libft/libft.h"
+#include"LibFT/libft.h"
 #include<fcntl.h>
 
 // TODO:
@@ -50,15 +50,18 @@ t_vertex	*get_coords(char **line)
 	while (line[i])
 		i++;
 	xlen = i;
-	v = malloc((sizeof(v) * xlen) + 1);
+	v = malloc(sizeof(v) + (xlen + 1));
 	i = 0;
+	// ft_fprintf(1, "i: %d - %d\n", xlen, ft_atoi(line[3]));
+	if (!v)
+		perror("");
 	while (line[i])
 	{
-		v[i].x = 20 + i * (640 / xlen);
+		v[i].x = i * (640 / xlen);
 		// v[i].x = i;
-		ft_fprintf(1, "i: %d ", v[i].x);
-		// v[i].y = 0;
-		// v[i].z = ft_atoi(line[i]);
+		// ft_fprintf(1, "i: %d ", v[i].x);
+		v[i].y = 0;
+		v[i].z = ft_atoi(line[i]);
 		i++;
 	}
 	return (v);
@@ -76,6 +79,35 @@ int	keyhook(int key_code, t_mlx *m)
 }
 
 int	main(void)
+{
+	t_vertex	*v;
+	char	*test_file = "maps/42.fdf";
+	int		fd;
+	char	*line;
+	char	**linexyz;
+	int x = -1;
+	int y = 0;
+	
+	fd = open(test_file, O_RDONLY);
+	if (fd == -1)
+		perror("");
+	while((line = get_next_line(fd)) != NULL)
+	{
+		linexyz = ft_split(line, ' ');
+		v = get_coords(linexyz);
+		
+		while (linexyz[++x])
+			ft_fprintf(1, "it: %d - x: %d - str: %s\n", x, v[x].x, linexyz[x]);
+		ft_fprintf(1, "\n");
+		y++;
+		x = -1;
+		free(v);
+		// break;
+		// line = get_next_line(fd);
+	}
+}
+
+/* int	main(void)
 {
 	t_mlx	m;
 	
@@ -105,11 +137,16 @@ int	main(void)
 	char **linexyz;
 	ptr = &x;
 	
+
+	
 	fd = open(test_file, O_RDONLY);
+	if (fd == -1)
+		perror("");
 	while((line = get_next_line(fd)) != NULL)
 	{
 		linexyz = ft_split(line, ' ');
 		v = get_coords(linexyz);
+		
 		while (linexyz[++x])
 		{
 			color = v[x].z + 0xffffff;
@@ -124,22 +161,23 @@ int	main(void)
 		ft_fprintf(1, "\n");
 		y++;
 		x = -1;
-		free(v);
+		// free(v);
 		// break;
 		// line = get_next_line(fd);
 	}
 	
-	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
+	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	// exit(0);
 	
-	mlx_key_hook(m.win, &keyhook, &m);
-	mlx_loop(m.mlx);
+
 	
 	ft_fprintf(1, "m.bpp: %d\n", m.bpp);
 	ft_fprintf(1, "m.sl: %d\n", m.sl);
 	close(fd);
 
-
+	mlx_key_hook(m.win, &keyhook, &m);
+	mlx_loop(m.mlx);
+	
 	for (int y = 0; y < 480; y++){
 		for(int x = 0; x < m.sl; x++){
 			ptr = m.addr + (y * m.sl + x * (m.bpp / 8));
@@ -148,4 +186,4 @@ int	main(void)
 	}
 
 	
-}
+} */

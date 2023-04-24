@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/23 16:40:06 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/24 13:02:54 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ OBJ		=	$(SRC:.c=.o)
 
 CC		=	gcc
 
-LIBFT	=	libft/libft.a
+LIBFT	=	LibFT/libft.a
 
 # Define flags according to OS
 ifeq ($(OS), Linux)
@@ -88,7 +88,7 @@ endif
 all:		$(NAME)
 
 pre-build:
-			@make -sC libft/
+			@make -sC LibFT/
 			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
 			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 			@make -sC $(MLXDIR)
@@ -102,12 +102,12 @@ $(NAME):	pre-build $(OBJ)
 
 clean:
 			$(RM) $(OBJ)
-			@make clean -sC libft/
+			@make clean -sC LibFT/
 			make clean -sC $(MLXDIR)
 			
 fclean:		clean
 			$(RM) $(NAME)
-			@make fclean -sC libft/
+			@make fclean -sC LibFT/
 
 re:			fclean $(NAME)
 

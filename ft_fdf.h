@@ -6,12 +6,14 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/24 10:00:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:05:47 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_FDF_H
 # define FT_FDF_H
+
+# include <stdio.h>
 
 typedef struct s_vertex
 {
