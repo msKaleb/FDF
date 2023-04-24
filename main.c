@@ -6,99 +6,146 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/23 17:32:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/24 10:02:47 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"mlx_linux/mlx.h" // For Linux
 // #include"mlx/mlx.h"
-#include"fdf.h"
+#include"ft_fdf.h"
 #include"libft/libft.h"
 #include<fcntl.h>
 
 // TODO:
 // Gradient color from a to b function
 
-void	get_coords(char **line)
+/* t_vertex	*get_coords(char **line)
 {
-	t_vertex	v;
-	int	x;
-	int	y;
+	t_vertex	*v;
+	int		i;
+	int		n;
 	
-	while (*line)
+	i = 0;
+	while (line[i])
+		i++;
+	v = malloc(sizeof(v) * i);
+	n = i;
+	i = -1;
+	while(++i < n)
 	{
-		
-		ft_fprintf(1, "%d ", ft_atoi(*line));
-		line++;
+		v[i].x = 20 + i * (640 / n);
+		v[i].z = ft_atoi(line[i]);
+		ft_fprintf(1, "%d-", v[i].z);
 	}
+	return (v);
+} */
+
+t_vertex	*get_coords(char **line)
+{
+	t_vertex	*v;
+	int			i;
+	int			xlen;
+	
+	i = 0;
+	while (line[i])
+		i++;
+	xlen = i;
+	v = malloc((sizeof(v) * xlen) + 1);
+	i = 0;
+	while (line[i])
+	{
+		v[i].x = 20 + i * (640 / xlen);
+		// v[i].x = i;
+		ft_fprintf(1, "i: %d ", v[i].x);
+		// v[i].y = 0;
+		// v[i].z = ft_atoi(line[i]);
+		i++;
+	}
+	return (v);
+}
+int	keyhook(int key_code, t_mlx *m)
+{
+	// ft_fprintf(1, "%s\n", change_base(key_code, 'x'));
+	if (key_code == 0xff1b)
+	{
+		mlx_destroy_image(m->mlx, m->img);
+		mlx_destroy_window(m->mlx, m->win);		
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
 }
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_window;
-	void	*mlx_image;
-	char	*addr;
+	t_mlx	m;
+	
 	char	*test_file = "maps/42.fdf";
-	int		bpp;
-	int		sl;
-	int		endian;
+	// int		bpp;
+	// int		sl;
+	// int		endian;
 	void	*ptr;
 	int		color = 0x00FF0000;
-	
+	t_vertex	*v;
 	// char	c = 255;
 	// ft_fprintf(1, "%d\n", 255 << 8);
 	// exit(0);
 	
-	int	fd = open(test_file, O_RDONLY);
+	int		fd;
 	char	*line;
 
 
-	mlx = mlx_init();
-	mlx_window = mlx_new_window(mlx, 640, 480, "Test");
-	mlx_image = mlx_new_image(mlx, 640, 480);
-	addr = mlx_get_data_addr(mlx_image, &bpp, &sl, &endian);
-	// mlx_string_put(mlx, mlx_window, 100, 100, 0xeaf1f4, "Mikelo pargelo");
+	m.mlx = mlx_init();
+	m.win = mlx_new_window(m.mlx, 640, 480, "Test");
+	m.img = mlx_new_image(m.mlx, 640, 480);
+	m.addr = mlx_get_data_addr(m.img, &m.bpp, &m.sl, &m.endian);
 
-	ptr = addr;
+	ptr = m.addr;
 	int x = -1;
 	int y = 0;
 	char **linexyz;
+	ptr = &x;
+	mlx_key_hook(m.win, &keyhook, &m);
+	mlx_loop(m.mlx);
 	
+	fd = open(test_file, O_RDONLY);
 	while((line = get_next_line(fd)) != NULL)
 	{
 		linexyz = ft_split(line, ' ');
-		get_coords(linexyz);
-		ft_fprintf(1, "\n");
-		while (line[++x])
+		v = get_coords(linexyz);
+		while (linexyz[++x])
 		{
-			if (line[x] != ' ')
-				mlx_pixel_put(mlx, mlx_window, x, y, 255);
-			else
-				mlx_pixel_put(mlx, mlx_window, x, y, 255255);
+			// color = v[x].z + 0xffffff;
+			// mlx_pixel_put(m.mlx, m.win, v[x].x, y * (480 / 11), color);
+			ft_fprintf(1, "x: %d ", v[x].x);
+			// if (line[x] != ' ')
+			// 	mlx_pixel_put(m.mlx, m.win, x, y, 255);
+			// else
+			// 	mlx_pixel_put(m.mlx, m.win, x, y, 255255);
 
 		}
+		ft_fprintf(1, "\n");
 		y++;
 		x = -1;
+		// free(v);
+		break;
 		// line = get_next_line(fd);
 	}
 	
-	// mlx_put_image_to_window(mlx, mlx_window, mlx_image, 0, 0);
+	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	// exit(0);
 	
 	
-	ft_fprintf(1, "bpp: %d\n", bpp);
-	ft_fprintf(1, "sl: %d\n", sl);
+	ft_fprintf(1, "m.bpp: %d\n", m.bpp);
+	ft_fprintf(1, "m.sl: %d\n", m.sl);
 	close(fd);
-	mlx_loop(mlx);
+
 
 	for (int y = 0; y < 480; y++){
-		for(int x = 0; x < sl; x++){
-			ptr = addr + (y * sl + x * (bpp / 8));
+		for(int x = 0; x < m.sl; x++){
+			ptr = m.addr + (y * m.sl + x * (m.bpp / 8));
 			*(unsigned int*)ptr = color + y;
 		}
 	}
-	mlx_destroy_image(mlx, mlx_image);
-	mlx_destroy_window(mlx, mlx_window);
+
 	
 }
