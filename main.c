@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/25 10:56:50 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/25 13:04:11 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@
 	return (v);
 } */
 
+int	get_color(char *str)
+{
+	int		color;
+	
+	color = ft_atoi_base(str + 2, "0123456789ABCDEF");
+	return (color);
+}
+
 /* Change the value of x and y, maybe with macros */
 /* Maybe change the arguments of the function */
 t_vertex	*get_coords(char **line, int y)
@@ -58,11 +66,13 @@ t_vertex	*get_coords(char **line, int y)
 		perror("");
 	while (line[i])
 	{
-		v[i].x = i * (DEFAULT_X / xlen);
-		v[i].y = y;
+		// v[i].x = (DEFAULT_X / (xlen * 2)) + i * (DEFAULT_X / xlen);
+		// v[i].y = y * (DEFAULT_Y / 10);	// change 10 for lines in the map!!!
+		v[i].x = i * 20;
+		v[i].y = y * 20;
 		v[i].z = ft_atoi(line[i]);
 		if (ft_strchr(line[i], ','))
-			v[i].color = ft_atoi(ft_strchr(line[i], ',')); // change to decimal, then to int
+		v[i].color = get_color(ft_strchr(line[i], ',') + 1);
 		else
 			v[i].color = 0xFFFFFF;
 		i++;
@@ -92,19 +102,51 @@ int	keyhook(int key_code, t_mlx *m)
 	return (0);
 }
 
+/* find the screen xy with trig, should I use mlx_pixel_put? */
+/* try Joe Iddon solution */
+void	put_vertex(t_vertex v, t_mlx m)
+{
+	// char	*ptr;
+	// int		offset;
+	int		scr_x;
+	int		scr_y;
+	
+	scr_x = (v.x - v.y) * cos(0.523599);
+	scr_y = -v.z + (v.x + v.y) * sin(0.523599);
+	mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color); // Almost!!!
+	
+	// offset = (v.y * m.sl + v.x * (m.bpp / 8)); // do I need this?
+	// offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
+	// ptr = m.addr + offset;
+	// for making each vertex of 4 pixels...
+	// *(unsigned int*)ptr = v.color;
+	// *(unsigned int*)(ptr + 1) = v.color;
+	// *(unsigned int*)(ptr + m.sl) = v.color;
+	// *(unsigned int*)(ptr + m.sl + 1) = v.color;
+}
+
+void	init_mlx(t_mlx *m)
+{
+	m->mlx = mlx_init();
+	m->win = mlx_new_window(m->mlx, DEFAULT_X, DEFAULT_Y, "Test");
+	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
+	m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
+}
+
 int	main(void)
 {
 	t_vertex	*v;
-	char	**linexyz;
-	int x = -1;
-	int y = 0;
+	t_mlx		m;
+	char		**linexyz;
+	int 		x = -1;
+	int 		y = 0;
 	
-	char	*line;
-	int		fd;
-	char	*test_file = "maps/42.fdf";
+	char		*line;
+	int			fd;
+	// char	*test_file = "maps/42.fdf";
+	char	*test_file = "maps/elem-col.fdf";
 	
-	ft_fprintf(1, "%d\n", ft_atoi("0xFFFFFF"));
-	exit(0);
+	init_mlx(&m);
 	fd = open(test_file, O_RDONLY);
 	if (fd == -1)
 		perror("Error"); // exit on error, make a function
@@ -113,8 +155,16 @@ int	main(void)
 		linexyz = ft_split(line, ' ');
 		v = get_coords(linexyz, y);
 		while (linexyz[++x])
+		{
+			put_vertex(v[x], m);
+			// ft_fprintf(1, "x: %d ", v[x].x);
+			// if (line[x] != ' ')
+			// 	mlx_pixel_put(m.mlx, m.win, x, y, 255);
+			// else
+			// 	mlx_pixel_put(m.mlx, m.win, x, y, 255255);
 			// ft_fprintf(1, "it: %d - x: %d - str: %s\n", x, v[x].x, linexyz[x]);
-			ft_fprintf(1, "x: %d - y: %d - z: %d - color: \n", v[x].x, v[x].y, v[x].z, v[x].color);
+			// ft_fprintf(1, "x: %d - y: %d - z: %d - color: %d\n", v[x].x, v[x].y, v[x].z, v[x].color);
+		}
 		ft_fprintf(1, "\n");
 		y++;
 		x = -1;
@@ -123,6 +173,9 @@ int	main(void)
 		dblfree((void **)linexyz);
 	}
 	close(fd);
+	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
+	mlx_key_hook(m.win, &keyhook, &m);
+	mlx_loop(m.mlx);
 	return (EXIT_SUCCESS);
 }
 

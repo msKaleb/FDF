@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/25 10:51:49 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:54:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define DEFAULT_Y 480
 
 # include <stdio.h>
+# include <math.h>
 
 typedef struct s_vertex
 {
