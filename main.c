@@ -123,22 +123,52 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 } */
 
 /* Maybe use a struct for deltas and slope */
-void	bresenham(t_vertex v1, t_vertex v2)
+void	bresenham(t_vertex v1, t_vertex v2, t_mlx *m)
 {
+	float	slope;
 	int	delta_x;
 	int	delta_y;
-	int	slope;
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
 
-	delta_x = v2.x - v1.x;
-	delta_y = v2.y - v1.y;
-	slope = delta_y / delta_x;
-	if (slope < 1)
+	/* check the direction of the line */
+	if (v1.x > v2.x)
 	{
-
+		x1 = v2.x;
+		y1 = v2.y;
+		x2 = v1.x;
+		y2 = v1.y;
 	}
-	if (slope > 1)
+	else
 	{
+		x1 = v1.x;
+		y1 = v1.y;
+		x2 = v2.x;
+		y2 = v2.y;
+	}
 
+	/* calculate the slope */
+	delta_x = x2 - x1;
+	delta_y = y2 - y1;
+	slope = delta_y / delta_x;
+
+	/* start creating the line */
+
+	while (x1 < x2)
+	{
+		mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
+		if (slope < 1)
+		{
+			x1++;
+			y1 = round(y1 + slope); // check
+		}
+		if (slope > 1)
+		{
+			y1++;
+			x1 = round(x1 + (1 / slope)); // check
+		}
 	}
 }
 
