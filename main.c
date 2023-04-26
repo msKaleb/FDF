@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/26 10:47:35 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:23:05 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,14 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 
 /* Function to draw a line between two given vertices */
 /* Now using Bresenham's Line Algorithm */
-/* void	draw_edge(t_vertex v1, t_vertex v2)
+/* Implement Xiaolin Wu's line algorithm in the short term */
+void	draw_edge(t_vertex v1, t_vertex v2)
 {
-	// Code here
-} */
+	
+}
 
 /* find the screen xy with trig, should I use mlx_pixel_put? */
-/* try Joe Iddon solution */
+/* -try Joe Iddon solution- */
 /* TRUE_ISO: 30º angle */
 /* ISO: 26.57º angle */
 void	put_vertex(t_vertex v, t_mlx m)
