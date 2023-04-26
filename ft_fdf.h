@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/26 10:26:11 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/26 10:37:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define TRUE_ISO 0.523599
 # define ISO 0.46373398
 
-/* Events for mlx_hook */
+
+/* Events and values for mlx_hook */
 # define ON_KEYDOWN 2
 # define ON_KEYUP 3
 # define ON_MOUSEDOWN 4
@@ -30,6 +31,7 @@
 # define ON_MOUSEMOVE 6
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
+# define X_MASK (1L << 17) // This is for Linux. Check if it fails in Mac
 
 # include <stdio.h>
 # include <math.h>

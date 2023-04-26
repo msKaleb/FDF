@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/26 10:18:18 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/26 10:47:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,20 @@ void	dblfree(void **var)
 	free(var);
 }
 
-/* 0xff1b = esc key */
+int	close_mlx(t_mlx *m)
+{
+	mlx_destroy_image(m->mlx, m->img);
+	mlx_destroy_window(m->mlx, m->win);		
+	mlx_destroy_display(m->mlx);
+	free(m->mlx);
+	exit(EXIT_SUCCESS);
+}
+
 int	key_hook(int key_code, t_mlx *m)
 {
-	ft_fprintf(1, "%s\n", change_base(key_code, 'x'));
+	// ft_fprintf(1, "%s\n", change_base(key_code, 'x'));
 	if (key_code == XK_Escape)
-	{
-		mlx_destroy_image(m->mlx, m->img);
-		mlx_destroy_window(m->mlx, m->win);		
-		mlx_destroy_display(m->mlx);
-		free(m->mlx);
-		exit(EXIT_SUCCESS);
-	}
+		close_mlx(m);
 	return (0);
 }
 
@@ -110,6 +112,13 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 	ft_fprintf(1, "%d - %d - %d\n", button, x, y);
 	return (0);
 }
+
+/* Function to draw a line between two given vertices */
+/* Now using Bresenham's Line Algorithm */
+/* void	draw_edge(t_vertex v1, t_vertex v2)
+{
+	// Code here
+} */
 
 /* find the screen xy with trig, should I use mlx_pixel_put? */
 /* try Joe Iddon solution */
@@ -124,7 +133,7 @@ void	put_vertex(t_vertex v, t_mlx m)
 	
 	scr_x = (v.x - v.y) * cos(TRUE_ISO);
 	scr_y = -v.z + (v.x + v.y) * sin(TRUE_ISO);
-	mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color); // Almost!!!
+	mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color);
 	
 	// offset = (v.y * m.sl + v.x * (m.bpp / 8)); // do I need this?
 	// offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
@@ -165,9 +174,11 @@ int	main(void)
 	{
 		linexyz = ft_split(line, ' ');
 		v = get_coords(linexyz, y);
-		while (linexyz[++x])
+		while (linexyz[++x]) // TODO: make a linked list, and go down the list to add rows
 		{
 			put_vertex(v[x], m);
+			// draw_line() ----------------
+			
 			// ft_fprintf(1, "x: %d ", v[x].x);
 			// if (line[x] != ' ')
 			// 	mlx_pixel_put(m.mlx, m.win, x, y, 255);
@@ -187,6 +198,7 @@ int	main(void)
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_mouse_hook(m.win, &mouse_hook, &m);
+	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
 	mlx_loop(m.mlx);
 	return (EXIT_SUCCESS);
 }
