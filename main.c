@@ -133,7 +133,7 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx *m)
 	int	x2;
 	int	y2;
 
-	/* check the direction of the line */
+	// check the direction of the line
 	if (v1.x > v2.x)
 	{
 		x1 = v2.x;
@@ -149,26 +149,66 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx *m)
 		y2 = v2.y;
 	}
 
-	/* calculate the slope */
+	// calculate the slope
 	delta_x = x2 - x1;
 	delta_y = y2 - y1;
-	slope = delta_y / delta_x;
-
-	/* start creating the line */
-
-	while (x1 < x2)
+	// if x2 - x1 equals 0, the line will be vertical
+	if (x2 - x1 == 0)
 	{
-		mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-		if (slope < 1)
+		while (y1 < y2)
 		{
+			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
+			y1++;
+		}
+		return ;
+	}
+	slope = delta_y / delta_x;
+	
+	// start creating the line
+	if (slope == 1)
+	{
+		while (x1 < x2)
+		{
+			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
+			x1++;
+			y1++;
+		}
+	}
+	if (slope == 0)
+	{
+		while (x1 < x2)
+		{
+			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
+			x1++;
+		}
+	}
+	if (slope < 1)
+	{
+		while (x1 < x2)
+		{
+			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
 			x1++;
 			y1 = round(y1 + slope); // check
+			// calculate the slope
+			delta_x = x2 - x1;
+			delta_y = y2 - y1;
+			slope = delta_y / delta_x;
 		}
-		if (slope > 1)
+		return ;
+	}
+	if (slope > 1)
+	{
+		while (y1 < y2)
 		{
+			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
 			y1++;
 			x1 = round(x1 + (1 / slope)); // check
+			// calculate the slope
+			delta_x = x2 - x1;
+			delta_y = y2 - y1;
+			slope = delta_y / delta_x;
 		}
+		return ;
 	}
 }
 
