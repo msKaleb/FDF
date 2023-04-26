@@ -114,11 +114,32 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 }
 
 /* Function to draw a line between two given vertices */
-/* Now using Bresenham's Line Algorithm */
+/* First trying to use DDA Algotithm */
+/* Next using Bresenham's Line Algorithm */
 /* Implement Xiaolin Wu's line algorithm in the short term */
-void	draw_edge(t_vertex v1, t_vertex v2)
+/* void	draw_edge(t_vertex v1, t_vertex v2)
 {
 	
+} */
+
+/* Maybe use a struct for deltas and slope */
+void	bresenham(t_vertex v1, t_vertex v2)
+{
+	int	delta_x;
+	int	delta_y;
+	int	slope;
+
+	delta_x = v2.x - v1.x;
+	delta_y = v2.y - v1.y;
+	slope = delta_y / delta_x;
+	if (slope < 1)
+	{
+
+	}
+	if (slope > 1)
+	{
+
+	}
 }
 
 /* find the screen xy with trig, should I use mlx_pixel_put? */
