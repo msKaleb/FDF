@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/24 13:02:54 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/26 09:43:51 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ endif
 all:		$(NAME)
 
 pre-build:
-			@make -sC LibFT/
+			@make bonus -sC LibFT/
 			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
 			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
 			@make -sC $(MLXDIR)

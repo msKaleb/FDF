@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/25 13:04:11 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/26 10:18:18 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,12 @@ t_vertex	*get_coords(char **line, int y)
 		perror("");
 	while (line[i])
 	{
-		// v[i].x = (DEFAULT_X / (xlen * 2)) + i * (DEFAULT_X / xlen);
-		// v[i].y = y * (DEFAULT_Y / 10);	// change 10 for lines in the map!!!
-		v[i].x = i * 20;
-		v[i].y = y * 20;
-		v[i].z = ft_atoi(line[i]);
+		// TODO: Find out a nice offset for x and y
+		v[i].x = (DEFAULT_X / 3) + i * ((DEFAULT_X / 3) / xlen);
+		v[i].y = y * ((DEFAULT_Y / 3) / 10);	// TODO: change 10 for number of lines in the map
+		v[i].z = ft_atoi(line[i]) * 5; // TODO: Find a valid multiplier (depending on the max z value)
 		if (ft_strchr(line[i], ','))
-		v[i].color = get_color(ft_strchr(line[i], ',') + 1);
+			v[i].color = get_color(ft_strchr(line[i], ',') + 1);
 		else
 			v[i].color = 0xFFFFFF;
 		i++;
@@ -90,20 +89,32 @@ void	dblfree(void **var)
 	free(var);
 }
 
-int	keyhook(int key_code, t_mlx *m)
+/* 0xff1b = esc key */
+int	key_hook(int key_code, t_mlx *m)
 {
-	// ft_fprintf(1, "%s\n", change_base(key_code, 'x'));
-	if (key_code == 0xff1b)
+	ft_fprintf(1, "%s\n", change_base(key_code, 'x'));
+	if (key_code == XK_Escape)
 	{
 		mlx_destroy_image(m->mlx, m->img);
 		mlx_destroy_window(m->mlx, m->win);		
+		mlx_destroy_display(m->mlx);
+		free(m->mlx);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
 }
 
+int	mouse_hook(int button, int x, int y, t_mlx *m)
+{
+	(void)m;
+	ft_fprintf(1, "%d - %d - %d\n", button, x, y);
+	return (0);
+}
+
 /* find the screen xy with trig, should I use mlx_pixel_put? */
 /* try Joe Iddon solution */
+/* TRUE_ISO: 30º angle */
+/* ISO: 26.57º angle */
 void	put_vertex(t_vertex v, t_mlx m)
 {
 	// char	*ptr;
@@ -111,8 +122,8 @@ void	put_vertex(t_vertex v, t_mlx m)
 	int		scr_x;
 	int		scr_y;
 	
-	scr_x = (v.x - v.y) * cos(0.523599);
-	scr_y = -v.z + (v.x + v.y) * sin(0.523599);
+	scr_x = (v.x - v.y) * cos(TRUE_ISO);
+	scr_y = -v.z + (v.x + v.y) * sin(TRUE_ISO);
 	mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color); // Almost!!!
 	
 	// offset = (v.y * m.sl + v.x * (m.bpp / 8)); // do I need this?
@@ -150,7 +161,7 @@ int	main(void)
 	fd = open(test_file, O_RDONLY);
 	if (fd == -1)
 		perror("Error"); // exit on error, make a function
-	while((line = get_next_line(fd)) != NULL)
+	while((line = get_next_line(fd)) != NULL) // TODO: make a function to read the map
 	{
 		linexyz = ft_split(line, ' ');
 		v = get_coords(linexyz, y);
@@ -165,7 +176,7 @@ int	main(void)
 			// ft_fprintf(1, "it: %d - x: %d - str: %s\n", x, v[x].x, linexyz[x]);
 			// ft_fprintf(1, "x: %d - y: %d - z: %d - color: %d\n", v[x].x, v[x].y, v[x].z, v[x].color);
 		}
-		ft_fprintf(1, "\n");
+		// ft_fprintf(1, "\n");
 		y++;
 		x = -1;
 		free(v);
@@ -174,7 +185,8 @@ int	main(void)
 	}
 	close(fd);
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
-	mlx_key_hook(m.win, &keyhook, &m);
+	mlx_key_hook(m.win, &key_hook, &m);
+	mlx_mouse_hook(m.win, &mouse_hook, &m);
 	mlx_loop(m.mlx);
 	return (EXIT_SUCCESS);
 }
@@ -247,7 +259,7 @@ int	main(void)
 	ft_fprintf(1, "m.sl: %d\n", m.sl);
 	close(fd);
 
-	mlx_key_hook(m.win, &keyhook, &m);
+	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_loop(m.mlx);
 	
 	for (int y = 0; y < 480; y++){
