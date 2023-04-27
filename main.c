@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/27 11:44:31 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:10:38 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	get_color(char *str)
 	return (color);
 }
 
-/* Maybe change the arguments of the function */
-t_vertex	*get_coords(char **line, int y)
+/*Get rid of 'y' argument */
+t_vertex	*get_coords(char **line, int y, int rows)
 {
 	t_vertex	*v;
 	int			i;
@@ -46,9 +46,11 @@ t_vertex	*get_coords(char **line, int y)
 	{
 		// TODO: Find out a nice offset for x and y
 		v[i].x = (DEFAULT_X / 3) + i * ((DEFAULT_X / 3) / xlen);
-		v[i].y = y * ((DEFAULT_Y / 3) / 500);	// TODO: change 10 for number of lines in the map
-		v[i].z = ft_atoi(line[i]); // TODO: Find a valid multiplier (depending on the max z value)
-		if (ft_strchr(line[i], ','))
+		v[i].y = y * ((DEFAULT_Y / 3) / rows);
+		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
+		v[i].y = y * ((DEFAULT_Y / 2) / rows);
+		v[i].z = ft_atoi(line[i]) * 10; // TODO: Find a valid multiplier (depending on the max z value)
+		if (ft_strchr(line[i], ',')) // TODO: implement this if-else inside get_color()
 			v[i].color = get_color(ft_strchr(line[i], ',') + 1);
 		else
 			v[i].color = DEFAULT_COLOR;
@@ -205,6 +207,7 @@ void	put_vertex(t_vertex v, t_mlx m)
 	
 	scr_x = (v.x - v.y) * cos(TRUE_ISO);
 	scr_y = -v.z + (v.x + v.y) * sin(TRUE_ISO);
+	ft_fprintf(1, "x: %d y: %d - scr_x: %d ", v.x, v.y, scr_x);
 	// mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color);
 	
 	// offset = (v.y * m.sl) + (v.x * (m.bpp / 8)); // how is it calculated?
@@ -248,19 +251,12 @@ t_vertex	**read_map(int fd, int rows)
 	int			i;
 	
 	i = 0;
-	v = malloc(sizeof(t_vertex *) * rows);
+	v = malloc(sizeof(t_vertex *) * (rows + 1));
 	while((line = get_next_line(fd)) != NULL) // TODO: make a function to read the map
 	{
 		linexyz = ft_split(line, ' ');
-		v[i] = get_coords(linexyz, i);
-		/* while (linexyz[j]) // TODO: make a linked list, and go down the list to add rows
-		{
-			put_vertex(v[j], m);
-			// dda_line(v[x], v[x + 1], &m);
-			j++;
-		} */
+		v[i] = get_coords(linexyz, i, rows);
 		i++;
-		// free(v);
 		free(line);
 		dblfree((void **)linexyz);
 	}
@@ -276,22 +272,29 @@ int	main(void)
 	// int 		y = 0;
 	
 	// char	*test_file = "maps/42.fdf";
-	char	*test_file = "maps/elem-col.fdf";
+	char	*test_file = "maps/pyramide.fdf";
 	// char	*test_file = "maps/julia.fdf";
 	int	rows = count_rows(test_file);
+	// ft_fprintf(1, "rows: %d\n", rows);
 	fd = open(test_file, O_RDONLY);
 	if (fd == -1)
 		perror("Error"); // exit on error, make a function
 	init_mlx(&m);
 	v = read_map(fd, rows);
 	// print digits for testing
+	// for (int i = 0; i < rows; i++){
+	// 	for (int j = 0; j < v[i]->size_x; j++)
+	// 		ft_fprintf(1, "%d ", v[i][j].x);
+	// 	ft_fprintf(1, "\n");
+	// }
+	// loop for putting vertices using **v structure
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < v[i]->size_x; j++)
-			ft_fprintf(1, "%d ", v[i][j].color);
-		ft_fprintf(1, "\n");
-	}
+			put_vertex(v[i][j], m);
+		ft_fprintf(1, "\n");}
 	dblfree((void **)v);
-	exit(0);
+	ft_fprintf(1, "debug \n");
+	// exit(0);
 	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_mouse_hook(m.win, &mouse_hook, &m);
