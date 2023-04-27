@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/26 10:37:25 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:40:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define XK_MISCELLANY
 
 /* Some needed values */
+# define DEFAULT_COLOR 0xBADA55
 # define DEFAULT_X 640
 # define DEFAULT_Y 480
 # define TRUE_ISO 0.523599
@@ -43,6 +44,7 @@ typedef struct s_vertex
 	int	y;
 	int	z;
 	int	color;
+	int	size_x;
 }				t_vertex;
 
 /* Make a linked list to dinamically add rows */
