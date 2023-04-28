@@ -6,26 +6,17 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 10:27:28 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:51:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"mlx_linux/mlx.h" // For Linux
-// #include"mlx/mlx.h"
+
 #include"ft_fdf.h"
-#include"LibFT/libft.h"
 #include<fcntl.h>
 
 // TODO:
 // Gradient color from a to b function
 
-int	get_color(char *str)
-{
-	int		color;
-	
-	color = ft_atoi_base(str + 2, "0123456789ABCDEF");
-	return (color);
-}
 
 /*Get rid of 'y' argument */
 t_vertex	*get_coords(char **line, int y, int rows)
@@ -51,7 +42,7 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
 		v[i].z = ft_atoi(line[i]) * 10; // TODO: Find a valid multiplier (depending on the max z value)
 		if (ft_strchr(line[i], ',')) // TODO: implement this if-else inside get_color()
-			v[i].color = get_color(ft_strchr(line[i], ',') + 1);
+			v[i].color = get_color(ft_strchr(line[i], ',') + 1); // TODO: get lower case and incomplete numbers (0xff), to work
 		else
 			v[i].color = DEFAULT_COLOR;
 		v[i].size_x = xlen;
@@ -59,31 +50,7 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	}
 	return (v);
 }
-void	freemap(t_vertex **v)
-{
-	int i = 0;
-	int	rows = v[0]->size_y;
-	
-	while (i < rows)
-	{
-		ft_fprintf(1, "var[%d]: %s\n", i, v[i]->size_y);
-		free(v[i]);
-		i++;
-	}
-	free(v);
-}
 
-void	dblfree(void **var)
-{
-	int	i;
-
-	i = 0;
-	while (var[i]){
-		free(var[i]);
-		i++;
-		}
-	free(var);
-}
 
 int	close_mlx(t_mlx *m)
 {
@@ -109,105 +76,7 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 	return (0);
 }
 
-/* Function to draw a line between two given vertices */
-/* First trying to use DDA Algotithm */
-/* Next using Bresenham's Line Algorithm */
-/* Implement Xiaolin Wu's line algorithm in the short term */
 
-/* Maybe use a struct for deltas and slope */
-void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m)
-{
-	float	slope;
-	int	delta_x;
-	int	delta_y;
-	int	x1;
-	int	y1;
-	int	x2;
-	int	y2;
-	
-	// v1.x = (v1.x - v1.y) * cos(TRUE_ISO);
-	// v1.y = -v1.z + (v1.x + v1.y) * sin(TRUE_ISO);
-	// v2.x = (v2.x - v2.y) * cos(TRUE_ISO);
-	// v2.y = -v2.z + (v2.x + v2.y) * sin(TRUE_ISO);
-
-	// check the direction of the line
-	if (v1.x > v2.x)
-	{
-		x1 = v2.x;
-		y1 = v2.y;
-		x2 = v1.x;
-		y2 = v1.y;
-	}
-	else
-	{
-		x1 = v1.x;
-		y1 = v1.y;
-		x2 = v2.x;
-		y2 = v2.y;
-	}
-
-	// calculate the slope
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	// if x2 - x1 equals 0, the line will be vertical
-	if (x2 - x1 == 0)
-	{
-		while (y1 < y2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			y1++;
-		}
-		return ;
-	}
-	slope = delta_y / delta_x;
-	
-	// start creating the line
-	if (slope == 1)
-	{
-		while (x1 < x2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			x1++;
-			y1++;
-		}
-	}
-	if (slope == 0)
-	{
-		while (x1 < x2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			x1++;
-		}
-	}
-	if (slope < 1)
-	{
-		while (x1 < x2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			x1++;
-			y1 = round(y1 + slope); // check
-			// calculate the slope
-			delta_x = x2 - x1;
-			delta_y = y2 - y1;
-			slope = delta_y / delta_x;
-		}
-		return ;
-	}
-	if (slope > 1)
-	{
-		while (y1 < y2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			y1++;
-			x1 = round(x1 + (1 / slope)); // check
-			// calculate the slope
-			delta_x = x2 - x1;
-			delta_y = y2 - y1;
-			slope = delta_y / delta_x;
-		}
-		return ;
-	}
-}
 
 /* find the screen xy with trig, should I use mlx_pixel_put? */
 /* -try Joe Iddon solution- */
@@ -215,21 +84,21 @@ void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m)
 /* ISO: 26.57º angle */
 void	put_vertex(t_vertex v, t_mlx m)
 {
-	char	*ptr;
-	int		offset;
+	// char	*ptr;
+	// int		offset;
 	int		scr_x;
 	int		scr_y;
 	
 	scr_x = (v.x - v.y) * cos(TRUE_ISO);
 	scr_y = -v.z + (v.x + v.y) * sin(TRUE_ISO);
 	// ft_fprintf(1, "x: %d y: %d - scr_x: %d ", v.x, v.y, scr_x);
-	// mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color);
+	mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color);
 	
 	// offset = (v.y * m.sl) + (v.x * (m.bpp / 8)); // how is it calculated?
-	offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
-	ptr = m.addr + offset;
-	// for making each vertex of 4 pixels...
-	*(unsigned int*)ptr = v.color;
+	// offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
+	// ptr = m.addr + offset;
+	// // for making each vertex of 4 pixels...
+	// *(unsigned int*)ptr = v.color;
 	// *(unsigned int*)(ptr + 1) = v.color;
 	// *(unsigned int*)(ptr + m.sl) = v.color;
 	// *(unsigned int*)(ptr + m.sl + 1) = v.color;
@@ -286,10 +155,13 @@ int	main(void)
 	// int 		x = -1;
 	// int 		y = 0;
 	
-	char	*test_file = "maps/42.fdf";
+	// char	*test_file = "maps/42.fdf";
 	// char	*test_file = "maps/elem-col.fdf";
 	// char	*test_file = "maps/pyramide.fdf";
+	// char	*test_file = "maps/elem2.fdf";
 	// char	*test_file = "maps/julia.fdf";
+	char	*test_file = "maps/basictest.fdf";
+	
 	int	rows = count_rows(test_file);
 	// ft_fprintf(1, "rows: %d\n", rows);
 	fd = open(test_file, O_RDONLY);
@@ -297,20 +169,15 @@ int	main(void)
 		perror("Error"); // exit on error, make a function
 	init_mlx(&m);
 	v = read_map(fd, rows);
-	// print digits for testing
-	// for (int i = 0; i < rows; i++){
-	// 	for (int j = 0; j < v[i]->size_x; j++)
-	// 		ft_fprintf(1, "%d ", v[i][j].x);
-	// 	ft_fprintf(1, "\n");
-	// }
 	// loop for putting vertices using **v structure
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < v[i]->size_x; j++)
 			put_vertex(v[i][j], m);
+			// dda_line(v[i][j], v[i][j + 1], &m);
 		// ft_fprintf(1, "\n");
 		}
 	freemap(v);
-	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
+	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_mouse_hook(m.win, &mouse_hook, &m);
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);

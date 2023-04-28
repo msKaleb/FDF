@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/27 23:12:30 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:40:41 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,30 @@
 # define XK_MISCELLANY
 
 /* Some needed values */
-# define DEFAULT_COLOR 0xBADA55
+# define DEFAULT_COLOR 0xBADA55 // Badass color
 # define DEFAULT_X 640
 # define DEFAULT_Y 480
-# define TRUE_ISO 0.523599
-# define ISO 0.46373398
+# define TRUE_ISO 0.523599 // 30º gngle
+# define ISO 0.46373398 // 26.57º angle
 
-
-/* Events and values for mlx_hook */
-# define ON_KEYDOWN 2
-# define ON_KEYUP 3
-# define ON_MOUSEDOWN 4
-# define ON_MOUSEUP 5
-# define ON_MOUSEMOVE 6
-# define ON_EXPOSE 12
-# define ON_DESTROY 17
-# define X_MASK (1L << 17) // This is for Linux. Check if it fails in Mac
-
+# include "mlx_linux/mlx.h" // For Linux
+# include "mlx/mlx.h" // For Mac
+# include "LibFT/libft.h"
+# include "keysymdef.h" // remove??
 # include <stdio.h>
 # include <math.h>
-# include "keysymdef.h"
+
+/* Events and values for mlx_hook */
+enum{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17,
+	X_MASK = (1L << 17)
+};
 
 typedef struct s_vertex
 {
@@ -48,14 +52,7 @@ typedef struct s_vertex
 	int	size_y;
 }				t_vertex;
 
-/* Make a linked list to dinamically add rows */
-typedef struct s_vlist
-{
-	t_vertex		*v;
-	struct s_vlist	*next;
-}				t_vlist;
-
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
@@ -65,5 +62,11 @@ typedef struct	s_mlx
 	int		sl;
 	int		endian;
 }				t_mlx;
+
+/* Functions prototipes */
+void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
+void	freemap(t_vertex **v);
+void	dblfree(void **var);
+int		get_color(char *str);
 
 #endif

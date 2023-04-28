@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/26 09:43:51 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/28 11:11:47 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ OS		=	$(shell uname -s)
 
 NAME	=	fdf
 
-SRC		=	main.c
+SRC		=	main.c \
+			utils.c \
+			graphics.c
 
 OBJ		=	$(SRC:.c=.o)
 
