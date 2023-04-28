@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 14:40:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:09:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_FDF_H
 # define FT_FDF_H
 
-/* XK_MISCELLANY for stander key events */
+/* XK_MISCELLANY for standard key events */
 # define XK_MISCELLANY
 
 /* Some needed values */
@@ -62,6 +62,19 @@ typedef struct s_mlx
 	int		sl;
 	int		endian;
 }				t_mlx;
+
+typedef struct s_trig
+{
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
+	int	d;
+	int	dx;
+	int	dy;
+	int	de;
+	int	dne;
+}				t_trig;
 
 /* Functions prototipes */
 void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m);

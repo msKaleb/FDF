@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 14:51:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:20:02 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		v[i].y = y * ((DEFAULT_Y / 3) / rows);
 		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
-		v[i].z = ft_atoi(line[i]) * 10; // TODO: Find a valid multiplier (depending on the max z value)
+		v[i].z = ft_atoi(line[i]) * 2; // TODO: Find a valid multiplier (depending on the max z value)
 		if (ft_strchr(line[i], ',')) // TODO: implement this if-else inside get_color()
 			v[i].color = get_color(ft_strchr(line[i], ',') + 1); // TODO: get lower case and incomplete numbers (0xff), to work
 		else
@@ -56,15 +56,15 @@ int	close_mlx(t_mlx *m)
 {
 	mlx_destroy_image(m->mlx, m->img);
 	mlx_destroy_window(m->mlx, m->win);		
-	mlx_destroy_display(m->mlx);
+	// mlx_destroy_display(m->mlx);
 	free(m->mlx);
 	exit(EXIT_SUCCESS);
 }
 
 int	key_hook(int key_code, t_mlx *m)
 {
-	// ft_fprintf(1, "%s\n", change_base(key_code, 'x'));
-	if (key_code == XK_Escape)
+	// ft_fprintf(1, "%s\n", change_base((unsigned long long)key_code, 'x'));
+	if (key_code == 0x35) // 0xff1b in Linux
 		close_mlx(m);
 	return (0);
 }
@@ -158,9 +158,9 @@ int	main(void)
 	// char	*test_file = "maps/42.fdf";
 	// char	*test_file = "maps/elem-col.fdf";
 	// char	*test_file = "maps/pyramide.fdf";
-	// char	*test_file = "maps/elem2.fdf";
+	char	*test_file = "maps/elem2.fdf";
 	// char	*test_file = "maps/julia.fdf";
-	char	*test_file = "maps/basictest.fdf";
+	// char	*test_file = "maps/basictest.fdf";
 	
 	int	rows = count_rows(test_file);
 	// ft_fprintf(1, "rows: %d\n", rows);
