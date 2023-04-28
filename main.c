@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/27 13:10:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 10:27:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,29 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	}
 	return (v);
 }
+void	freemap(t_vertex **v)
+{
+	int i = 0;
+	int	rows = v[0]->size_y;
+	
+	while (i < rows)
+	{
+		ft_fprintf(1, "var[%d]: %s\n", i, v[i]->size_y);
+		free(v[i]);
+		i++;
+	}
+	free(v);
+}
 
 void	dblfree(void **var)
 {
 	int	i;
 
-	i = -1;
-	while (var[++i])
+	i = 0;
+	while (var[i]){
 		free(var[i]);
+		i++;
+		}
 	free(var);
 }
 
@@ -207,7 +222,7 @@ void	put_vertex(t_vertex v, t_mlx m)
 	
 	scr_x = (v.x - v.y) * cos(TRUE_ISO);
 	scr_y = -v.z + (v.x + v.y) * sin(TRUE_ISO);
-	ft_fprintf(1, "x: %d y: %d - scr_x: %d ", v.x, v.y, scr_x);
+	// ft_fprintf(1, "x: %d y: %d - scr_x: %d ", v.x, v.y, scr_x);
 	// mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color);
 	
 	// offset = (v.y * m.sl) + (v.x * (m.bpp / 8)); // how is it calculated?
@@ -271,8 +286,9 @@ int	main(void)
 	// int 		x = -1;
 	// int 		y = 0;
 	
-	// char	*test_file = "maps/42.fdf";
-	char	*test_file = "maps/pyramide.fdf";
+	char	*test_file = "maps/42.fdf";
+	// char	*test_file = "maps/elem-col.fdf";
+	// char	*test_file = "maps/pyramide.fdf";
 	// char	*test_file = "maps/julia.fdf";
 	int	rows = count_rows(test_file);
 	// ft_fprintf(1, "rows: %d\n", rows);
@@ -291,10 +307,9 @@ int	main(void)
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < v[i]->size_x; j++)
 			put_vertex(v[i][j], m);
-		ft_fprintf(1, "\n");}
-	dblfree((void **)v);
-	ft_fprintf(1, "debug \n");
-	// exit(0);
+		// ft_fprintf(1, "\n");
+		}
+	freemap(v);
 	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, &key_hook, &m);
 	mlx_mouse_hook(m.win, &mouse_hook, &m);
