@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:28:05 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 10:38:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:14:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	freemap(t_vertex **v)
 	
 	while (i < rows)
 	{
-		ft_fprintf(1, "var[%d]: %s\n", i, v[i]->size_y);
+		// ft_fprintf(1, "var[%d]: %s\n", i, v[i]->size_y);
 		free(v[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 17:09:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:37:53 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_trig
 	int	y1;
 	int	x2;
 	int	y2;
+	int	z;
 	int	d;
 	int	dx;
 	int	dy;
@@ -78,6 +79,8 @@ typedef struct s_trig
 
 /* Functions prototipes */
 void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
+void	bresenham(t_vertex v1, t_vertex v2, t_mlx m);
+void	put_vertex(t_vertex v, t_mlx m);
 void	freemap(t_vertex **v);
 void	dblfree(void **var);
 int		get_color(char *str);

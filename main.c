@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 16:20:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:44:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,8 +171,10 @@ int	main(void)
 	v = read_map(fd, rows);
 	// loop for putting vertices using **v structure
 	for (int i = 0; i < rows; i++){
-		for (int j = 0; j < v[i]->size_x; j++)
-			put_vertex(v[i][j], m);
+		for (int j = 0; j < v[i]->size_x - 1; j++){
+			// put_vertex(v[i][j], m);
+			bresenham(v[i][j], v[i][j + 1], m);
+		}
 			// dda_line(v[i][j], v[i][j + 1], &m);
 		// ft_fprintf(1, "\n");
 		}

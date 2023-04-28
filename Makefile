@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/28 11:11:47 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/28 17:24:39 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ NAME	=	fdf
 
 SRC		=	main.c \
 			utils.c \
-			graphics.c
-
+			graphics.c \
+			trig.c
 OBJ		=	$(SRC:.c=.o)
 
 CC		=	gcc
