@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/29 18:30:22 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/29 19:27:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 /* Some needed values */
 # define DEFAULT_COLOR 0xBADA55	// Badass color
-# define TRUE_ISO 0.523599		// 30º gngle
+# define TRUE_ISO 0.523599		// 30º angle
 # define ISO 0.46373398			// 26.57º angle
 # define DEFAULT_X 640
 # define DEFAULT_Y 480
@@ -75,6 +75,7 @@ typedef struct s_trig
 	int	x2;
 	int	y2;
 	int	z;
+	int	m;
 	int	d;
 	int	dx;
 	int	dy;
@@ -85,7 +86,7 @@ typedef struct s_trig
 /* Functions prototipes */
 void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
 void	bresenham(t_vertex v1, t_vertex v2, t_mlx m);
-void	put_vertex(t_vertex *v, t_mlx m);
+void	put_vertex(t_vertex v, t_mlx m);
 void	freemap(t_vertex **v);
 void	dblfree(void **var);
 int		get_color(char *str);

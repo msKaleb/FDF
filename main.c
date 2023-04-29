@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 17:44:54 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/29 20:40:40 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,15 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		v[i].y = y * ((DEFAULT_Y / 3) / rows);
 		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
+		v[i].x = i * (DEFAULT_X / (xlen));
+		v[i].y = y * ((DEFAULT_Y) / rows);
 		v[i].z = ft_atoi(line[i]) * 2; // TODO: Find a valid multiplier (depending on the max z value)
 		if (ft_strchr(line[i], ',')) // TODO: implement this if-else inside get_color()
 			v[i].color = get_color(ft_strchr(line[i], ',') + 1); // TODO: get lower case and incomplete numbers (0xff), to work
 		else
 			v[i].color = DEFAULT_COLOR;
 		v[i].size_x = xlen;
+		v[i].size_y = rows;
 		i++;
 	}
 	return (v);
@@ -64,7 +67,7 @@ int	close_mlx(t_mlx *m)
 int	key_hook(int key_code, t_mlx *m)
 {
 	// ft_fprintf(1, "%s\n", change_base((unsigned long long)key_code, 'x'));
-	if (key_code == 0x35) // 0xff1b in Linux
+	if (key_code == XK_ESCAPE)
 		close_mlx(m);
 	return (0);
 }
@@ -147,6 +150,29 @@ t_vertex	**read_map(int fd, int rows)
 	return (v);
 }
 
+void	print_lines(t_vertex **v, t_mlx m)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < v[i]->size_y - 1)
+	{
+		while (j < v[i]->size_x - 1)
+		{
+			ft_fprintf(1, "i: %d, j: %d\n", i, j);
+			bresenham(v[i][j], v[i][j + 1], m);
+			bresenham(v[i][j], v[i + 1][j], m);
+			j++;
+		}
+		bresenham(v[i][j], v[i + 1][j], m);
+		bresenham(v[i + 1][j], v[i + 1][j + 1], m);
+		j = 0;
+		i++;
+	}
+}
+
 int	main(void)
 {
 	t_vertex	**v;
@@ -155,10 +181,10 @@ int	main(void)
 	// int 		x = -1;
 	// int 		y = 0;
 	
-	// char	*test_file = "maps/42.fdf";
+	char	*test_file = "maps/42.fdf";
 	// char	*test_file = "maps/elem-col.fdf";
 	// char	*test_file = "maps/pyramide.fdf";
-	char	*test_file = "maps/elem2.fdf";
+	// char	*test_file = "maps/elem2.fdf";
 	// char	*test_file = "maps/julia.fdf";
 	// char	*test_file = "maps/basictest.fdf";
 	
@@ -169,15 +195,7 @@ int	main(void)
 		perror("Error"); // exit on error, make a function
 	init_mlx(&m);
 	v = read_map(fd, rows);
-	// loop for putting vertices using **v structure
-	for (int i = 0; i < rows; i++){
-		for (int j = 0; j < v[i]->size_x - 1; j++){
-			// put_vertex(v[i][j], m);
-			bresenham(v[i][j], v[i][j + 1], m);
-		}
-			// dda_line(v[i][j], v[i][j + 1], &m);
-		// ft_fprintf(1, "\n");
-		}
+	print_lines(v, m);
 	freemap(v);
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, &key_hook, &m);
