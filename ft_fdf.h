@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 17:37:53 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:30:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_FDF_H
 # define FT_FDF_H
 
-/* XK_MISCELLANY for standard key events */
-# define XK_MISCELLANY
-
-/* Some needed values */
-# define DEFAULT_COLOR 0xBADA55 // Badass color
-# define DEFAULT_X 640
-# define DEFAULT_Y 480
-# define TRUE_ISO 0.523599 // 30º gngle
-# define ISO 0.46373398 // 26.57º angle
-
-# include "mlx_linux/mlx.h" // For Linux
-# include "mlx/mlx.h" // For Mac
+/* MLX for Linux */
+# include "mlx_linux/mlx.h"
+/* MLX for Mac */
+# include "mlx/mlx.h"
 # include "LibFT/libft.h"
-# include "keysymdef.h" // remove??
 # include <stdio.h>
 # include <math.h>
+
+/* Keys may vary depending on the OS */
+# ifdef __linux__
+#  define XK_ESCAPE 0xff1b
+# elif __APPLE__
+#  define XK_ESCAPE 0x35
+# endif
+
+/* Some needed values */
+# define DEFAULT_COLOR 0xBADA55	// Badass color
+# define TRUE_ISO 0.523599		// 30º gngle
+# define ISO 0.46373398			// 26.57º angle
+# define DEFAULT_X 640
+# define DEFAULT_Y 480
 
 /* Events and values for mlx_hook */
 enum{
@@ -80,7 +85,7 @@ typedef struct s_trig
 /* Functions prototipes */
 void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
 void	bresenham(t_vertex v1, t_vertex v2, t_mlx m);
-void	put_vertex(t_vertex v, t_mlx m);
+void	put_vertex(t_vertex *v, t_mlx m);
 void	freemap(t_vertex **v);
 void	dblfree(void **var);
 int		get_color(char *str);
