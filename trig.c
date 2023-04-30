@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/29 23:48:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/30 13:36:52 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_vertex(t_vertex v, t_mlx m)
 	
 	scr_x = (v.x - v.y) * cos(TRUE_ISO);
 	scr_y = -v.z + (v.x + v.y) * sin(TRUE_ISO);
-	ft_fprintf(1, "x: %d y: %d\n", v.x, v.y);
+	// ft_fprintf(1, "x: %d y: %d\n", v.x, v.y);
 	mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v.color);
 }
 /* no funciona, primero posicionar vértices en 3d
@@ -69,13 +69,13 @@ void	print_horizontal_line(t_vertex v1, t_vertex v2, t_mlx m)
 		v.x = x1;
 		v.y = v1.y;
 		v.z = v1.z;
-		ft_fprintf(1, "hor x: %d\n", v.x);
+		// ft_fprintf(1, "hor x: %d\n", v.x);
 		// print_vertex(v, m);
 		mlx_pixel_put(m.mlx, m.win, (v.x - v.y) * cos(TRUE_ISO), -v.z + (v.x + v.y) * sin(TRUE_ISO), v1.color);
 		// mlx_pixel_put(m.mlx, m.win, v.x, v.y, v1.color);
 		x1++;
 	}
-	ft_fprintf(1, "---------------------\n");
+	// ft_fprintf(1, "---------------------\n");
 }
 
 t_trig	init_trig_var(t_vertex v1, t_vertex v2)

@@ -6,17 +6,50 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/28 10:41:09 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/30 14:46:41 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
+char	*parse_color(char *str)
+{
+	char	*color;
+	int		i;
+	int		len;
+
+	color = malloc(7);
+	color[6] = '\0';
+	len = ft_strlen(str);
+	// ft_fprintf(1, "str: %s\t", str);
+	if (ft_isalnum(str[len - 1]) == 0)
+		len--;
+	// ft_fprintf(1, "len: %d\t", len);
+	i = 6;
+	while (i--)
+		color[i] = '0';
+	i = 5;
+	while (len--)
+		color[i--] = ft_toupper(str[len]);
+	// ft_fprintf(1, "color: %s\n", color);
+	return (color);
+}
+
 int	get_color(char *str)
 {
 	int		color;
-	
-	color = ft_atoi_base(str + 2, "0123456789ABCDEF");
+	int		len;
+	char	*ccode;
+
+	len = ft_strlen(str);
+	if (ft_strnstr(str, ",0x", len) || ft_strnstr(str, ",0X", len))
+	{
+		ccode = parse_color(ft_strchr(str, ',') + 3);
+		color = ft_atoi_base(ccode, "0123456789ABCDEF");
+		free(ccode);
+	}
+	else
+		color = DEFAULT_COLOR;
 	return (color);
 }
 
