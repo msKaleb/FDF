@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/30 14:47:34 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/30 18:45:02 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ void	print_lines(t_vertex **v, t_mlx m)
 		while (j < v[i]->size_x - 1)
 		{
 			// ft_fprintf(1, "i: %d, j: %d\n", i, j);
-			bresenham(v[i][j], v[i][j + 1], m);
-			bresenham(v[i][j], v[i + 1][j], m);
+			// bresenham(v[i][j], v[i][j + 1], m);
+			// bresenham(v[i][j], v[i + 1][j], m);
+			put_vertex(v[i][j], m);
 			j++;
 		}
-		bresenham(v[i][j], v[i + 1][j], m);
+		// bresenham(v[i][j], v[i + 1][j], m);
 		// bresenham(v[i + 1][j], v[i + 1][j + 1], m);
 		j = 0;
 		i++;
@@ -78,16 +79,17 @@ int	main(void)
 	// char	*test_file = "maps/elem-col.fdf";
 	char	*test_file = "maps/pyramide.fdf";
 	// char	*test_file = "maps/elem2.fdf";
+	// char	*test_file = "maps/t1.fdf";
 	// char	*test_file = "maps/julia.fdf";
-	// char	*test_file = "maps/basictest.fdf";
+	// char	*test_file = "maps/mars.fdf";
 	
-	int	rows = count_rows(test_file);
+	// int	rows = count_rows(test_file);
 	// ft_fprintf(1, "rows: %d\n", rows);
 	fd = open(test_file, O_RDONLY);
 	if (fd == -1)
 		perror("Error"); // exit on error, make a function
 	init_mlx(&m);
-	v = read_map(fd, rows);
+	v = read_map(fd, count_rows(test_file));
 	print_lines(v, m);
 	freemap(v);
 	// mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);
@@ -96,6 +98,5 @@ int	main(void)
 	mlx_hook(m.win, ON_DESTROY, X_MASK, &close_mlx, &m);
 	mlx_loop(m.mlx);
 	close(fd);
-	(void)v;
 	return (EXIT_SUCCESS);
 }

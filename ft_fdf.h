@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/30 13:14:35 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/30 17:53:43 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include "LibFT/libft.h"
 # include <stdio.h>
 # include <math.h>
-# include<fcntl.h>
+# include <fcntl.h>
+# include <limits.h>
 
 /* Keys may vary depending on the OS */
 # ifdef __linux__
