@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/29 20:44:13 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/04/30 13:12:55 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,10 @@ NAME	=	fdf
 SRC		=	main.c \
 			utils.c \
 			graphics.c \
-			trig.c
+			trig.c \
+			map_utils.c \
+			mlx_utils.c
+			
 OBJ		=	$(SRC:.c=.o)
 
 CC		=	gcc
@@ -56,7 +59,7 @@ LIBFT	=	LibFT/libft.a
 ifeq ($(OS), Linux)
 # Linux
 	ECHO = echo -e
-	CCOBJ = -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	CCOBJ = -I/usr/include -Imlx_linux -O3 -c $< -o $@
 	FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 	MLXDIR = mlx_linux/
 	MLX = $(MLXDIR)libmlx_Linux.a

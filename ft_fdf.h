@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/29 19:27:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/04/30 13:14:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "LibFT/libft.h"
 # include <stdio.h>
 # include <math.h>
+# include<fcntl.h>
 
 /* Keys may vary depending on the OS */
 # ifdef __linux__
@@ -32,8 +33,8 @@
 # define DEFAULT_COLOR 0xBADA55	// Badass color
 # define TRUE_ISO 0.523599		// 30º angle
 # define ISO 0.46373398			// 26.57º angle
-# define DEFAULT_X 640
-# define DEFAULT_Y 480
+# define DEFAULT_X 1024
+# define DEFAULT_Y 768
 
 /* Events and values for mlx_hook */
 enum{
@@ -84,11 +85,18 @@ typedef struct s_trig
 }				t_trig;
 
 /* Functions prototipes */
-void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
-void	bresenham(t_vertex v1, t_vertex v2, t_mlx m);
-void	put_vertex(t_vertex v, t_mlx m);
-void	freemap(t_vertex **v);
-void	dblfree(void **var);
-int		get_color(char *str);
+t_vertex	*get_coords(char **line, int y, int rows);
+t_vertex	**read_map(int fd, int rows);
+void		dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
+void		bresenham(t_vertex v1, t_vertex v2, t_mlx m);
+void		put_vertex(t_vertex v, t_mlx m);
+void		freemap(t_vertex **v);
+void		dblfree(void **var);
+void		init_mlx(t_mlx *m);
+int			mouse_hook(int button, int x, int y, t_mlx *m);
+int			key_hook(int key_code, t_mlx *m);
+int			count_rows(char *map);
+int			get_color(char *str);
+int			close_mlx(t_mlx *m);
 
 #endif
