@@ -112,10 +112,16 @@ void	print_line(t_mlx m, t_trig t)
 	{
 		while (t.x1 < t.x2)
 		{
-			
-			mlx_pixel_put(m.mlx, m.win, x1, y, DEFAULT_COLOR); // change color to gradient
-			t.d = 2 * t.dy - t.dx;
+			mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, DEFAULT_COLOR); // change color to gradient
+			if (t.d <= 0)
+				t.d += t.de;
+			else if (t.d > 0)
+			{
+				t.d += t.dne;
+				t.y1++;
+			}
 			t.x1++;
+			t.d = 2 * t.dy - t.dx;
 		}
 		return;
 	}
