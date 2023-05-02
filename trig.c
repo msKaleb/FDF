@@ -105,7 +105,7 @@ void	print_diagonal_line(t_vertex v1, t_vertex v2, t_mlx m) // change, add t_tri
 
 void	print_line(t_mlx m, t_trig t)
 {
-	int	slope; //float??
+	float	slope;
 (void)m;
 	slope = t.dy / t.dx;
 	if (slope < 1)
@@ -113,6 +113,9 @@ void	print_line(t_mlx m, t_trig t)
 		while (t.x1 < t.x2)
 		{
 			
+			mlx_pixel_put(m.mlx, m.win, x1, y, DEFAULT_COLOR); // change color to gradient
+			t.d = 2 * t.dy - t.dx;
+			t.x1++;
 		}
 		return;
 	}

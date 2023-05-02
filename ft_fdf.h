@@ -100,4 +100,4 @@ int			count_rows(char *map);
 int			get_color(char *str);
 int			close_mlx(t_mlx *m);
 
-#endif
+#endif /* FT_FDF_H */
