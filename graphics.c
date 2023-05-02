@@ -6,11 +6,35 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/30 14:46:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:15:29 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
+
+/* find the screen xy with trig, should I use mlx_pixel_put? */
+/* -try Joe Iddon solution- */
+/* TRUE_ISO: 30º angle */
+/* ISO: 26.57º angle */
+/* change or create a new array with the new values */
+void	put_vertex(t_vertex *v, t_mlx m)
+{
+	// char	*ptr;
+	// int		offset;
+	int		scr_x;
+	int		scr_y;
+	
+	scr_x = (v->x - v->y) * cos(TRUE_ISO);
+	scr_y = -v->z + (v->x + v->y) * sin(TRUE_ISO);
+	// mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v->color);
+	v->x = scr_x;
+	v->y = scr_y;
+	mlx_pixel_put(m.mlx, m.win, v->x, v->y, v->color);
+	// offset = (v->y * m.sl) + (v->x * (m.bpp / 8)); // how is it calculated?
+	// offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
+	// ptr = m.addr + offset;
+	// *(unsigned int*)ptr = v->color;
+}
 
 char	*parse_color(char *str)
 {

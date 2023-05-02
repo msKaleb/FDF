@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/04/30 18:42:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:12:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	count_rows(char *map)
 		rows++;
 	close(fd);
 	return (rows);
+}
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (n * -1);
+	return (n);
 }
 
 /*Get rid of 'y' argument */
@@ -49,9 +55,9 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		// v[i].y = y * ((DEFAULT_Y / 3) / rows);
 		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
-		// v[i].x = i * (DEFAULT_X / (xlen));
-		// v[i].y = y * ((DEFAULT_Y) / rows);
-		v[i].z = ft_atoi(line[i]); // TODO: Find a valid multiplier (depending on the max z value)
+		// v[i].x = (DEFAULT_X / 2) - (xlen * 2) + (i * 4);
+		// v[i].y = (DEFAULT_Y / 2) - (rows * 2) + (y * 4);
+		v[i].z = ft_atoi(line[i]) * 2;
 		v[i].color = get_color(line[i]);
 		v[i].size_x = xlen;
 		v[i].size_y = rows;
@@ -60,29 +66,10 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	return (v);
 }
 
-void	fill_max_z(t_vertex **v, int max_z)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = -1;
-	// ft_fprintf(1, "z: %d - mz: %d\n", v[0][0].z, max_z);
-	// return ;
-	while (i < v[i]->size_y - 1)
-	{
-		while (++j < v[i]->size_x)
-		{
-			v[i][j].z = v[i][j].z * ((DEFAULT_Y / 3) / max_z);
-			ft_fprintf(1, "z: %d - mz: %d\n", v[i][j].z, max_z);
-			ft_fprintf(1, "x: %d\n", v[0][0].x);
-		}
-		j = -1;
-		i++;
-	}
-}
-
-void	get_max_z(t_vertex **v)
+/* get_z_limits calculates the boundaries of z value */
+/* and apply an offset to it to have the map framed */
+/* not used */
+void	get_z_limits(t_vertex **v)
 {
 	int	i;
 	int	j;
@@ -91,22 +78,23 @@ void	get_max_z(t_vertex **v)
 	nbr = INT_MIN;
 	i = 0;
 	j = -1;
-	// ft_fprintf(1, "nbr: %d\n", nbr);
 	while (i < v[i]->size_y - 1)
 	{
 		while (++j < v[i]->size_x)
-		{
-			if (v[i][j].z > nbr)
-			{
+			if (ft_abs(v[i][j].z) > ft_abs(nbr))
 				nbr = v[i][j].z;
-				// ft_fprintf(1, "v_mz: %d\n", v[i][j].z);
-			}
-		}
 		j = -1;
 		i++;
 	}
-	ft_fprintf(1, "mz: %d\n", nbr);
-	fill_max_z(v, nbr);
+	i = 0;
+	j = -1;
+	while (i < v[i]->size_y - 1)
+	{
+		while (++j < v[i]->size_x)
+			v[i][j].z = v[i][j].z * ((DEFAULT_Y / 3) / ft_abs(nbr));
+		j = -1;
+		i++;
+	}
 }
 
 t_vertex	**read_map(int fd, int rows)
@@ -126,6 +114,6 @@ t_vertex	**read_map(int fd, int rows)
 		free(line);
 		dblfree((void **)linexyz);
 	}
-	get_max_z(v);
+	// get_z_limits(v);
 	return (v);
 }
