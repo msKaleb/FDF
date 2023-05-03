@@ -119,3 +119,32 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 }
 
 	// ft_fprintf(1, "dx: %d - dy: %d - slope: %d\n", t.dx, t.dy, (t.dy / t.dx));
+
+/* void drawline(int x0, int y0, int x1, int y1)
+{
+    int dx, dy, p, x, y;
+ 
+    dx=x1-x0;
+    dy=y1-y0;
+    
+    x=x0;
+    y=y0;
+    
+    p=2*dy-dx;
+    
+    while(x<x1)
+    {
+        if(p>=0)
+        {
+            putpixel(x,y,7);
+            y=y+1;
+            p=p+2*dy-2*dx;
+        }
+        else
+        {
+            putpixel(x,y,7);
+            p=p+2*dy;
+        }
+        x=x+1;
+    }
+} */
