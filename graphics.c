@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/02 12:15:29 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/03 09:57:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 /* -try Joe Iddon solution- */
 /* TRUE_ISO: 30º angle */
 /* ISO: 26.57º angle */
-/* change or create a new array with the new values */
+
+/* change or create a new array with the new values instead */
+		/* of printing individual vertices */
 void	put_vertex(t_vertex *v, t_mlx m)
 {
 	// char	*ptr;
@@ -75,6 +77,36 @@ int	get_color(char *str)
 	else
 		color = DEFAULT_COLOR;
 	return (color);
+}
+
+void	print_lines(t_vertex **v, t_mlx m)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = -1;
+	while (i < v[i]->size_y - 1)
+	{
+		while (++j < v[i]->size_x - 1)
+			put_vertex(&v[i][j], m); // TODO: instead of printing, just change values
+		j = -1;
+		i++;
+	}
+	i = 0;
+	j = -1;
+	while (i < v[i]->size_y - 1)
+	{
+		while (++j < v[i]->size_x - 2) // size_x - 2, due to v[i][j + 1]
+		{
+			bresenham(v[i][j], v[i][j + 1], m);
+			// bresenham(v[i][j], v[i + 1][j], m);
+		}
+		// bresenham(v[i][j], v[i + 1][j], m);
+		// bresenham(v[i + 1][j], v[i + 1][j + 1], m);
+		j = -1;
+		i++;
+	}
 }
 
 /* Functions to draw a line between two given vertices */

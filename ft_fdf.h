@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/02 11:52:40 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/03 09:57:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_trig
 t_vertex	*get_coords(char **line, int y, int rows);
 t_vertex	**read_map(int fd, int rows);
 void		dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
+void		print_lines(t_vertex **v, t_mlx m);
 void		bresenham(t_vertex v1, t_vertex v2, t_mlx m);
 void		put_vertex(t_vertex *v, t_mlx m);
 void		freemap(t_vertex **v);

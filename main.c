@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/02 12:20:55 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:01:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,53 +16,15 @@
 // TODO:
 // Gradient color from a to b function
 
-void	print_lines(t_vertex **v, t_mlx m)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < v[i]->size_y - 1)
-	{
-		while (j < v[i]->size_x - 1)
-		{
-			put_vertex(&v[i][j], m); // TODO: instead of printing, just change values
-			ft_fprintf(1, "v[i][j].x: %d\t", v[i][j].x);
-			ft_fprintf(1, "v[i][j].y: %d\n", v[i][j].y);
-			j++;
-		}
-		// bresenham(v[i][j], v[i + 1][j], m);
-		// bresenham(v[i + 1][j], v[i + 1][j + 1], m);
-		j = 0;
-		i++;
-	}
-	i = 0;
-	j = 0;
-	while (i < v[i]->size_y - 1)
-	{
-		while (j < v[i]->size_x - 1)
-		{
-			bresenham(v[i][j], v[i][j + 1], m);
-			bresenham(v[i][j], v[i + 1][j], m);
-			j++;
-		}
-		// bresenham(v[i][j], v[i + 1][j], m);
-		// bresenham(v[i + 1][j], v[i + 1][j + 1], m);
-		j = 0;
-		i++;
-	}
-}
-
 int	main(void)
 {
 	t_vertex	**v;
 	t_mlx		m;
 	int			fd;
 	
-	// char	*test_file = "maps/42.fdf";
+	char	*test_file = "maps/elem2.fdf";
 	// char	*test_file = "maps/elem-col.fdf";
-	char	*test_file = "maps/pyramide.fdf";
+	// char	*test_file = "maps/pyramide.fdf";
 	// char	*test_file = "maps/100-6.fdf";
 	// char	*test_file = "maps/t2.fdf";
 	// char	*test_file = "maps/julia.fdf";
