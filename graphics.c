@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/03 09:57:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/03 13:07:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,9 @@ void	print_lines(t_vertex **v, t_mlx m)
 	{
 		while (++j < v[i]->size_x - 2) // size_x - 2, due to v[i][j + 1]
 		{
+			// ft_fprintf(1, "v.x: %d - v.y: %d\n", v[i][j].x, v[i][j].y);
 			bresenham(v[i][j], v[i][j + 1], m);
-			// bresenham(v[i][j], v[i + 1][j], m);
+			bresenham(v[i][j], v[i + 1][j], m);
 		}
 		// bresenham(v[i][j], v[i + 1][j], m);
 		// bresenham(v[i + 1][j], v[i + 1][j + 1], m);

@@ -58,3 +58,7 @@ minilibx-linux/
 minilibx/
 minilibx_macos/
 test_maps/
+backup
+debug*
+mlx_linux/test/*
+valgrind*

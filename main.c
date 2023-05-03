@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/03 10:01:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/03 13:08:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	main(void)
 	t_mlx		m;
 	int			fd;
 	
-	char	*test_file = "maps/elem2.fdf";
+	// char	*test_file = "maps/elem2.fdf";
 	// char	*test_file = "maps/elem-col.fdf";
-	// char	*test_file = "maps/pyramide.fdf";
+	char	*test_file = "maps/pyramide.fdf";
 	// char	*test_file = "maps/100-6.fdf";
 	// char	*test_file = "maps/t2.fdf";
 	// char	*test_file = "maps/julia.fdf";

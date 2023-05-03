@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/03 09:57:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:53:41 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #  define XK_ESCAPE 0xff1b
 # elif __APPLE__
 #  define XK_ESCAPE 0x35
-# endif
+# endif /* OS Check */
 
 /* Some needed values */
 # define DEFAULT_COLOR 0xBADA55	// Badass color
@@ -38,7 +38,7 @@
 # define DEFAULT_Y 768
 
 /* Events and values for mlx_hook */
-enum{
+enum events{
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -76,8 +76,8 @@ typedef struct s_trig
 	int	y1;
 	int	x2;
 	int	y2;
-	int	z;
-	int	m;
+	int	z; //
+	int	m; //
 	int	d;
 	int	dx;
 	int	dy;
@@ -100,5 +100,6 @@ int			key_hook(int key_code, t_mlx *m);
 int			count_rows(char *map);
 int			get_color(char *str);
 int			close_mlx(t_mlx *m);
+int			ft_abs(int n);
 
 #endif /* FT_FDF_H */
