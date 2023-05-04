@@ -3,21 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   trig.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/04 12:02:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:05:10 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
+void	print_line(t_mlx m, t_trig t);
+
 void	long_slope(t_mlx m, t_trig t)
 {
-	(void)m;
+/* 	(void)m;
 	(void)t;
 	ft_fprintf(1, "long slope\n");
-	return;
+	return; */
+	int	tmp;
+	tmp = t.x1;
+	t.x1 = t.y1;
+	t.y1 = tmp;
+	tmp = t.x2;
+	t.x2 = t.y2;
+	t.y2 = tmp;
+	t.dx = t.x2 - t.x1;
+	t.dy = (t.y2 - t.y1);
+	t.d = 2 * t.dy - t.dx;
+	t.de = 2 * t.dy;
+	t.dne = 2 * (t.dy - t.dx);
+	print_line(m, t);
 }
 
 void	print_tvalues(t_trig t)
@@ -39,7 +54,7 @@ void	print_line(t_mlx m, t_trig t)
 	slope = t.dy / t.dx;
 	if (slope < 1)
 	{
-		while (t.x1 < t.x2)
+		while (t.x1 < t.x2) // TODO: put it into a function
 		{
 			if (t.d <= 0){
 				if (t.dy < 0){
@@ -62,7 +77,7 @@ void	print_line(t_mlx m, t_trig t)
 		}
 	}
 	else
-		long_slope(m, t); // v1 & v2?
+		long_slope(m, t); // v1 & v2? // recursive???
 }
 
 t_trig	init_trig_var(t_vertex v1, t_vertex v2)
