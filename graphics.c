@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/04 10:10:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:01:47 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	put_vertex(t_vertex *v, t_mlx m)
 	// mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v->color);
 	v->x = scr_x;
 	v->y = scr_y;
+	// ft_fprintf(1, "v->x: %d\n", v->x);
 	mlx_pixel_put(m.mlx, m.win, v->x, v->y, v->color);
 	// offset = (v->y * m.sl) + (v->x * (m.bpp / 8)); // how is it calculated?
 	// offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
@@ -84,29 +85,32 @@ void	print_lines(t_vertex **v, t_mlx m)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	j = -1;
-	while (i < v[i]->size_y - 1)
+	while (++i < v[0]->size_y)
 	{
-		while (++j < v[i]->size_x - 1)
+		// ft_fprintf(1, "i: %d - size_y: %d - size_x: %d\n", i, v[i]->size_y, v[i]->size_x);
+		while (++j < v[i]->size_x)
 			put_vertex(&v[i][j], m); // TODO: instead of printing, just change values
 		j = -1;
-		i++;
 	}
-	i = 0;
+
+	i = -1;
 	j = -1;
-	while (i < v[i]->size_y - 1)
+	while (++i < v[0]->size_y)
 	{
-		while (++j < v[i]->size_x - 2) // size_x - 2, due to v[i][j + 1]
+		while (++j < v[i]->size_x - 1) // size_x - 2, due to v[i][j + 1]
 		{
-			// ft_fprintf(1, "v.x: %d - v.y: %d\n", v[i][j].x, v[i][j].y);
+			// ft_fprintf(1, "i: %d j: %d v.x: %d - v.y: %d\n", i, j, v[i+1][j].x, v[i+1][j].y);
 			bresenham(v[i][j], v[i][j + 1], m);
-			// bresenham(v[i][j], v[i + 1][j], m);
+			// ft_fprintf(1, "---------------------\n");
+			if (i < v[0]->size_y - 1)
+				bresenham(v[i][j], v[i + 1][j], m);
+			// ft_fprintf(1, "///////////////////\n");
 		}
 		// bresenham(v[i][j], v[i + 1][j], m);
 		// bresenham(v[i + 1][j], v[i + 1][j + 1], m);
 		j = -1;
-		i++;
 	}
 }
 

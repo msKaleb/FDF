@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/02 12:12:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:02:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		// v[i].x = (DEFAULT_X / 3) + (i * ((DEFAULT_X / 3) / xlen));
 		// v[i].y = y * ((DEFAULT_Y / 3) / rows);
 		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
+		// ft_fprintf(1, "get_coords x: %d i: %d\n", v[i].x, i);
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
 		// v[i].x = (DEFAULT_X / 2) - (xlen * 2) + (i * 4);
 		// v[i].y = (DEFAULT_Y / 2) - (rows * 2) + (y * 4);
