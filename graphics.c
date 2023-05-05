@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/04 12:01:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/05 09:39:39 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,20 @@ void	print_lines(t_vertex **v, t_mlx m)
 	j = -1;
 	while (++i < v[0]->size_y)
 	{
-		// ft_fprintf(1, "i: %d - size_y: %d - size_x: %d\n", i, v[i]->size_y, v[i]->size_x);
 		while (++j < v[i]->size_x)
 			put_vertex(&v[i][j], m); // TODO: instead of printing, just change values
 		j = -1;
 	}
-
 	i = -1;
 	j = -1;
 	while (++i < v[0]->size_y)
 	{
-		while (++j < v[i]->size_x - 1) // size_x - 2, due to v[i][j + 1]
+		while (++j < v[i]->size_x - 1)
 		{
-			// ft_fprintf(1, "i: %d j: %d v.x: %d - v.y: %d\n", i, j, v[i+1][j].x, v[i+1][j].y);
 			bresenham(v[i][j], v[i][j + 1], m);
-			// ft_fprintf(1, "---------------------\n");
 			if (i < v[0]->size_y - 1)
 				bresenham(v[i][j], v[i + 1][j], m);
-			// ft_fprintf(1, "///////////////////\n");
 		}
-		// bresenham(v[i][j], v[i + 1][j], m);
-		// bresenham(v[i + 1][j], v[i + 1][j + 1], m);
 		j = -1;
 	}
 }
@@ -129,11 +122,6 @@ void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m)
 	int	y1;
 	int	x2;
 	int	y2;
-	
-	// v1.x = (v1.x - v1.y) * cos(TRUE_ISO);
-	// v1.y = -v1.z + (v1.x + v1.y) * sin(TRUE_ISO);
-	// v2.x = (v2.x - v2.y) * cos(TRUE_ISO);
-	// v2.y = -v2.z + (v2.x + v2.y) * sin(TRUE_ISO);
 
 	// check the direction of the line
 	if (v1.x > v2.x)

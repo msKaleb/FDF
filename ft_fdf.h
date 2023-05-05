@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/03 12:53:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:11:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define DEFAULT_Y 768
 
 /* Events and values for mlx_hook */
-enum events{
+enum e_events{
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -76,8 +76,8 @@ typedef struct s_trig
 	int	y1;
 	int	x2;
 	int	y2;
-	int	z; //
-	int	m; //
+	int	scolor;
+	int	fcolor;
 	int	d;
 	int	dx;
 	int	dy;
@@ -88,6 +88,13 @@ typedef struct s_trig
 /* Functions prototipes */
 t_vertex	*get_coords(char **line, int y, int rows);
 t_vertex	**read_map(int fd, int rows);
+
+t_trig		init_trig_var(t_vertex v1, t_vertex v2);
+
+void		print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
+void		vertical_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
+void		horizontal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
+void		diagonal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void		dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
 void		print_lines(t_vertex **v, t_mlx m);
 void		bresenham(t_vertex v1, t_vertex v2, t_mlx m);
@@ -95,6 +102,7 @@ void		put_vertex(t_vertex *v, t_mlx m);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
+
 int			mouse_hook(int button, int x, int y, t_mlx *m);
 int			key_hook(int key_code, t_mlx *m);
 int			count_rows(char *map);
