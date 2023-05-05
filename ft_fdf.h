@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/05 10:11:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/05 12:57:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,10 @@ void		put_vertex(t_vertex *v, t_mlx m);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
+void		print_tvalues(t_trig t);
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);
+int			gradient(t_vertex v1, t_vertex v2, t_trig t);
 int			key_hook(int key_code, t_mlx *m);
 int			count_rows(char *map);
 int			get_color(char *str);

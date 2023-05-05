@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/04/30 13:28:37 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/05 10:23:07 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC		=	main.c \
 			utils.c \
 			graphics.c \
 			trig.c \
+			trig_utils.c \
 			map_utils.c \
 			mlx_utils.c
 			
