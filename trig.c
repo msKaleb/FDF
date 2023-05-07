@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/05 13:15:44 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/07 14:18:50 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	gradient(t_vertex v1, t_vertex v2, t_trig t)
 	else
 		return (v2.color);
 }
-
+/* esta está mal */
 void	long_slope(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
 {
 	int	tmp;
@@ -48,27 +48,25 @@ void	long_slope(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
 
 void	short_slope(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
 {
+	int	sign_dy;
+
+	sign_dy = 1;
+	if (t.dy < 0)
+		sign_dy = -1;
 	ft_fprintf(1, "short slope\n");
 	while (t.x1 < t.x2)
 	{
-		if (t.d <= 0)
-		{
-			if (t.dy < 0)
-			{
-				t.x1++;
-				t.y1--;
-			}
+		t.x1 = t.dx < 0 ? t.x1 -1: t.x1 + 1; // change
+		if (t.d < 0)
 			t.d += t.de;
-		}
 		else
 		{
-			if (t.dy <= 0)
-				t.y1--;
-			else
-				t.y1++;
+			t.y1 += sign_dy;
 			t.d += t.dne;
 		}
-		t.x1++;
+		ft_fprintf(1, "ss x1: %d - y1: %d\n", t.x1, t.y1);
+		ft_fprintf(1, "ss dx: %d - dy: %d - d: %d\n", t.x2 - t.x1, t.y2 - t.y1, t.d);
+		// ft_fprintf(1, "ss x2: %d - y2: %d\n", t.x2, t.y2);
 		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
 	}
 }
@@ -80,21 +78,7 @@ void	print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
 
 	print_tvalues(t);
 	slope = t.dy / t.dx;
-	if (slope < 0)
-	{
-		ft_fprintf(1, "m: %d\n", slope);
-		while (t.x1 <= t.x2)
-		{
-			while (slope < 0){
-				mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, 0xff0000);
-				t.y1--;
-				slope++;
-				}
-			t.x1++;
-			slope = t.dy / t.dx;
-		}
-	}
-	else if (slope >= 0 && slope < 1)
+	if (slope < 1)
 		short_slope(v1, v2, m, t);
 	else if (slope > 1)
 		long_slope(v1, v2, m, t);
