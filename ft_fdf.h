@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/05 12:57:35 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:53:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_trig
 	int	y1;
 	int	x2;
 	int	y2;
+	int	start;
+	int	finish;
 	int	scolor;
 	int	fcolor;
 	int	d;
