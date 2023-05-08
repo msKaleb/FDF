@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/07 17:18:06 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:20:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 		t.x2 = v2.x;
 		t.y2 = v2.y;
 	}
-	t.dx = (t.x2 - t.x1);
-	t.dy = (t.y2 - t.y1);
-	t.d = 2 * ft_abs(t.dy) - ft_abs(t.dx);
-	t.de = ft_abs(2 * t.dy);
-	t.dne = (2 * ft_abs(t.dy) - 2 * ft_abs(t.dx));
+	t.dx = ft_abs(t.x2 - t.x1);
+	t.dy = ft_abs(t.y2 - t.y1);
+	t.d = 2 * (t.dy) - (t.dx);
+	t.de = (2 * t.dy);
+	t.dne = (2 * (t.dy) - 2 * (t.dx));
 	t.start = t.x1;
 	t.finish = t.x2;
 	return (t);

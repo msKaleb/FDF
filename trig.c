@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/07 17:20:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:42:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	get_deltas(t_trig *t)
 	// t->d = t->dy < t->dx ? 2 * t->dy - t->dx : 2 * t->dx - t->dy;
 	if (ft_abs(t->dy) > ft_abs(t->dx))
 	{
-		t->d = 2 * ft_abs(t->dx) - ft_abs(t->dy);
-		t->de = 2 * ft_abs(t->dx);
-		t->dne = 2 * (ft_abs(t->dx) - ft_abs(t->dy));
+		t->d = 2 * (t->dx) - (t->dy);
+		t->de = 2 * (t->dx);
+		t->dne = 2 * ((t->dx) - (t->dy));
 		t->start = t->y1;
 		t->finish = t->y2;
 	}
@@ -61,49 +61,56 @@ void	get_deltas(t_trig *t)
 void	short_slope(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
 {
 	int	sign_dy;
-	int	sign_dx;
+/* 	int	sign_dx;
 
 	sign_dx = 1;
-	if (t.dx < 0)
-		sign_dx = -1;
+	if (t.x1 > t.x2)
+		sign_dx = -1; */
 	sign_dy = 1;
-	if (t.dy < 0)
+	if (t.y1 > t.y2)
 		sign_dy = -1;
 	ft_fprintf(1, "short slope\n");
 	get_deltas(&t);
-	ft_fprintf(1, "absdy: %d - absdx: %d\n", ft_abs(t.dy), ft_abs(t.dx));
-	if (ft_abs(t.dy) < ft_abs(t.dx)){
-	while (t.x1 < t.x2)
+	ft_fprintf(1, "absdx: %d - absdy: %d\n", (t.dx), (t.dy));
+	ft_fprintf(1, "d: %d\n", t.d);
+	ft_fprintf(1, "de: %d\n", t.de);
+	ft_fprintf(1, "dne: %d\n", t.dne);
+	if (ft_abs(t.dx) > ft_abs(t.dy)) // horizontal
 	{
-		// t.x1 = t.dx < 0 ? t.x1 -1: t.x1 + 1; // change
-		t.x1 = t.dx < 0 ? t.x1 -1: t.x1 + 1; // change
-		if (t.d < 0)
-			t.d += t.de;
-		else
+		while (t.x1 < t.x2)
 		{
-			t.y1 += sign_dy;
-			t.d += t.dne;
+			// t.x1 = t.dx < 0 ? t.x1 -1: t.x1 + 1; // change
+			t.x1 = t.dx < 0 ? t.x1 -1: t.x1 + 1; // change
+			if (t.d < 0)
+				t.d += t.de;
+			else
+			{
+				t.y1 += sign_dy;
+				t.d += t.dne;
+			}
+			ft_fprintf(1, "hor x1: %d - y1: %d\n", t.x1, t.y1);
+			// ft_fprintf(1, "ss dx: %d - dy: %d - d: %d\n", t.x2 - t.x1, t.y2 - t.y1, t.d);
+			// ft_fprintf(1, "ss x2: %d - y2: %d\n", t.x2, t.y2);
+			mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
 		}
-		ft_fprintf(1, "ss x1: %d - y1: %d\n", t.x1, t.y1);
-		ft_fprintf(1, "ss dx: %d - dy: %d - d: %d\n", t.x2 - t.x1, t.y2 - t.y1, t.d);
-		// ft_fprintf(1, "ss x2: %d - y2: %d\n", t.x2, t.y2);
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
 	}
-	}else if (t.y1 > t.y2)/* (ft_abs(t.dy) > ft_abs(t.dx)) */{
-	while (t.y1 >= t.y2)
+	else // vertical
 	{
-		// t.x1 = t.dx < 0 ? t.x1 -1: t.x1 + 1; // change
-		t.y1--; // change
-		if (t.d < 0)
-			t.d += t.de;
-		else
+		while ((t.dy)--)/* (t.y1 >= t.y2) */
 		{
-			t.x1 += sign_dx;
-			t.d += t.dne;
+			// t.x1 = t.dx < 0 ? t.x1 -1: t.x1 + 1; // change
+			t.y1 += sign_dy; // change
+			if (t.d < 0)
+				t.d += t.de;
+			else
+			{
+				t.x1++;
+				t.d += t.dne;
+			}
+			ft_fprintf(1, "vert x1: %d - y1: %d\n", t.x1, t.y1);
+			// ft_fprintf(1, "ss x2: %d - y2: %d\n", t.x2, t.y2);
+			mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, 0x00ff00);
 		}
-		// ft_fprintf(1, "ss x2: %d - y2: %d\n", t.x2, t.y2);
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, 0x00ff00);
-	}
 	}
 }
 
@@ -132,5 +139,6 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 	else if ((t.dy % t.dx) == 0 && (t.dy / t.dx) == 1)
 		diagonal_line(v1, v2, m, t);
 	else
-		print_line(v1, v2, m, t);
+		// print_line(v1, v2, m, t);
+		short_slope(v1, v2, m, t);
 }
