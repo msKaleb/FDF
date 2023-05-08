@@ -6,27 +6,29 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/05 12:37:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:20:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
+/* Count the rows of a map */
 int	count_rows(char *map)
 {
-	char	*line;
 	int		rows;
 	int		fd;
 
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
-		perror("Error"); // exit on error, make a function	
+		perror("Error");
 	rows = 0;
-	while((line = get_next_line(fd)) != NULL)
+	while (get_next_line(fd) != NULL)
 		rows++;
 	close(fd);
 	return (rows);
 }
+
+/* Simple function to get the absolute value of a number */
 int	ft_abs(int n)
 {
 	if (n < 0)
@@ -34,13 +36,15 @@ int	ft_abs(int n)
 	return (n);
 }
 
-/*Get rid of 'y' argument */
+/* Get the coordinates of each line in the map */
+/* TODO:	Find out a good offset for x and y */
+/*			Get rid of 'y' argument 		*/
 t_vertex	*get_coords(char **line, int y, int rows)
 {
 	t_vertex	*v;
 	int			i;
 	int			xlen;
-	
+
 	xlen = 0;
 	while (line[xlen])
 		xlen++;
@@ -50,15 +54,9 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		perror("");
 	while (line[i])
 	{
-		// TODO: Find out a good offset for x and y
-		// v[i].x = (DEFAULT_X / 3) + (i * ((DEFAULT_X / 3) / xlen));
-		// v[i].y = y * ((DEFAULT_Y / 3) / rows);
 		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
-		// ft_fprintf(1, "get_coords x: %d i: %d\n", v[i].x, i);
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
-		// v[i].x = (DEFAULT_X / 2) - (xlen * 2) + (i * 4);
-		// v[i].y = (DEFAULT_Y / 2) - (rows * 2) + (y * 4);
-		v[i].z = ft_atoi(line[i]) * 4;
+		v[i].z = ft_atoi(line[i]);
 		v[i].color = get_color(line[i]);
 		v[i].size_x = xlen;
 		v[i].size_y = rows;
@@ -69,7 +67,6 @@ t_vertex	*get_coords(char **line, int y, int rows)
 
 /* get_z_limits calculates the boundaries of z value */
 /* and apply an offset to it to have the map framed */
-/* -not used- */
 void	get_z_limits(t_vertex **v)
 {
 	int	i;
@@ -104,17 +101,19 @@ t_vertex	**read_map(int fd, int rows)
 	char		**linexyz;
 	char		*line;
 	int			i;
-	
+
 	i = 0;
 	v = malloc(sizeof(t_vertex *) * (rows + 1));
-	while((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		linexyz = ft_split(line, ' ');
 		v[i] = get_coords(linexyz, i, rows);
 		i++;
 		free(line);
 		dblfree((void **)linexyz);
+		line = get_next_line(fd);
 	}
-	// get_z_limits(v);
+	get_z_limits(v);
 	return (v);
 }

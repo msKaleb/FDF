@@ -6,15 +6,11 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/07 05:50:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:18:05 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include"ft_fdf.h"
-
-// TODO:
-// Gradient color from a to b function
 
 int	main(void)
 {

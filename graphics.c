@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/07 14:00:40 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:23:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,34 @@
 /* TRUE_ISO: 30º angle */
 /* ISO: 26.57º angle */
 
-/* change or create a new array with the new values instead */
-		/* of printing individual vertices */
-void	put_vertex(t_vertex *v, t_mlx m)
+/* void	xyztoiso(t_vertex *v, t_mlx m)
 {
 	// char	*ptr;
 	// int		offset;
 	int		scr_x;
 	int		scr_y;
-	
+	(void)m;
 	scr_x = (v->x - v->y) * cos(TRUE_ISO);
 	scr_y = -v->z + (v->x + v->y) * sin(TRUE_ISO);
 	// mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v->color);
 	v->x = scr_x;
 	v->y = scr_y;
-	// ft_fprintf(1, "v->x: %d\n", v->x);
-	mlx_pixel_put(m.mlx, m.win, v->x, v->y, v->color);
 	// offset = (v->y * m.sl) + (v->x * (m.bpp / 8)); // how is it calculated?
 	// offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
 	// ptr = m.addr + offset;
 	// *(unsigned int*)ptr = v->color;
+} */
+
+/* Function to convert xyz coordinates to screen xy coordinates */
+void	xyztoiso(t_vertex *v)
+{
+	int		scr_x;
+	int		scr_y;
+
+	scr_x = (v->x - v->y) * cos(TRUE_ISO);
+	scr_y = -v->z + (v->x + v->y) * sin(TRUE_ISO);
+	v->x = scr_x;
+	v->y = scr_y;
 }
 
 char	*parse_color(char *str)
@@ -48,17 +56,14 @@ char	*parse_color(char *str)
 	color = malloc(7);
 	color[6] = '\0';
 	len = ft_strlen(str);
-	// ft_fprintf(1, "str: %s\t", str);
 	if (ft_isalnum(str[len - 1]) == 0)
 		len--;
-	// ft_fprintf(1, "len: %d\t", len);
 	i = 6;
 	while (i--)
 		color[i] = '0';
 	i = 5;
 	while (len--)
 		color[i--] = ft_toupper(str[len]);
-	// ft_fprintf(1, "color: %s\n", color);
 	return (color);
 }
 
@@ -80,6 +85,7 @@ int	get_color(char *str)
 	return (color);
 }
 
+/* TODO: adapt to Norm */
 void	print_lines(t_vertex **v, t_mlx m)
 {
 	int	i;
@@ -90,19 +96,15 @@ void	print_lines(t_vertex **v, t_mlx m)
 	while (++i < v[0]->size_y)
 	{
 		while (++j < v[i]->size_x)
-			put_vertex(&v[i][j], m); // TODO: instead of printing, just change values
+			xyztoiso(&v[i][j]);
 		j = -1;
 	}
-
 	i = -1;
 	j = -1;
 	while (++i < v[0]->size_y)
 	{
 		while (++j < v[i]->size_x)
 		{
-			ft_fprintf(1, "i: %d - j: %d -\
-				v[i][j].x: %d - v[i][j].y %d\n",
-				i, j, v[i][j].x, v[i][j].y);
 			if (j == v[0]->size_x - 1)
 				bresenham(v[i][j], v[i][j - 1], m);
 			else
@@ -111,105 +113,5 @@ void	print_lines(t_vertex **v, t_mlx m)
 				bresenham(v[i][j], v[i + 1][j], m);
 		}
 		j = -1;
-	}
-}
-
-/* Functions to draw a line between two given vertices */
-/* First trying to use DDA Algotithm */
-/* Next using Bresenham's Line Algorithm */
-/* Implement Xiaolin Wu's line algorithm in the short term */
-
-/* Maybe use a struct for deltas and slope */
-void	dda_line(t_vertex v1, t_vertex v2, t_mlx *m)
-{
-	float	slope;
-	int	delta_x;
-	int	delta_y;
-	int	x1;
-	int	y1;
-	int	x2;
-	int	y2;
-	
-	// v1.x = (v1.x - v1.y) * cos(TRUE_ISO);
-	// v1.y = -v1.z + (v1.x + v1.y) * sin(TRUE_ISO);
-	// v2.x = (v2.x - v2.y) * cos(TRUE_ISO);
-	// v2.y = -v2.z + (v2.x + v2.y) * sin(TRUE_ISO);
-
-	// check the direction of the line
-	if (v1.x > v2.x)
-	{
-		x1 = v2.x;
-		y1 = v2.y;
-		x2 = v1.x;
-		y2 = v1.y;
-	}
-	else
-	{
-		x1 = v1.x;
-		y1 = v1.y;
-		x2 = v2.x;
-		y2 = v2.y;
-	}
-
-	// calculate the slope
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	// if x2 - x1 equals 0, the line will be vertical
-	if (x2 - x1 == 0)
-	{
-		while (y1 < y2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			y1++;
-		}
-		return ;
-	}
-	slope = delta_y / delta_x;
-	
-	// start creating the line
-	if (slope == 1)
-	{
-		while (x1 < x2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			x1++;
-			y1++;
-		}
-	}
-	if (slope == 0)
-	{
-		while (x1 < x2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			x1++;
-		}
-	}
-	if (slope < 1)
-	{
-		while (x1 < x2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			x1++;
-			y1 = round(y1 + slope); // check
-			// calculate the slope
-			delta_x = x2 - x1;
-			delta_y = y2 - y1;
-			slope = delta_y / delta_x;
-		}
-		return ;
-	}
-	if (slope > 1)
-	{
-		while (y1 < y2)
-		{
-			mlx_pixel_put(m->mlx, m->win, x1, y1, v1.color); // change color to gradient
-			y1++;
-			x1 = round(x1 + (1 / slope)); // check
-			// calculate the slope
-			delta_x = x2 - x1;
-			delta_y = y2 - y1;
-			slope = delta_y / delta_x;
-		}
-		return ;
 	}
 }
