@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/08 12:10:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/09 09:08:18 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 		t.x2 = v1.x;
 		t.y2 = v1.y;
 		t.scolor = v2.color;
-		t.fcolor = v2.color;
+		t.fcolor = v1.color;
 	}
 	else
 	{
@@ -59,7 +59,7 @@ t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 		t.x2 = v2.x;
 		t.y2 = v2.y;
 		t.scolor = v1.color;
-		t.fcolor = v1.color;
+		t.fcolor = v2.color;
 	}
 	t.dx = ft_abs(t.x2 - t.x1);
 	t.dy = ft_abs(t.y2 - t.y1);

@@ -6,28 +6,43 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/08 12:10:28 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:08:34 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
-int	gradient(t_vertex v1, t_vertex v2, t_trig t)
+/* Calculates the color gradient between two points via linear interpolation.*/
+/* We use bitshifting and bitwise operations to access to the diferent */
+/* components of the color */
+int	gradient(t_trig t, float position)
 {
-	if (v1.x == t.x1)
-		return (v1.color);
-	else
-		return (v2.color);
+	int	color;
+	int	red;
+	int	green;
+	int	blue;
+
+	red = (1 - position) * ((t.scolor >> 16) & 0xFF)
+		+ ((t.fcolor >> 16) & 0xFF) * position;
+	green = (1 - position) * ((t.scolor >> 8) & 0xFF)
+		+ ((t.fcolor >> 8) & 0xFF) * position;
+	blue = (1 - position) * (t.scolor & 0xFF)
+		+ ((t.fcolor) & 0xFF) * position;
+	color = ((red << 16) | (green << 8) | blue);
+	return (color);
 }
 
-void	bresenham_horizontal(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
+void	bresenham_horizontal(t_mlx m, t_trig t)
 {
-	int	sign_dy;
+	float	pos;
+	int		sign_dy;
+	int		i;
 
+	i = 0;
 	sign_dy = 1;
 	if (t.y1 > t.y2)
 		sign_dy = -1;
-	while (t.dx--)
+	while (i < t.dx)
 	{
 		t.x1++;
 		if (t.d < 0)
@@ -37,18 +52,23 @@ void	bresenham_horizontal(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
 			t.y1 += sign_dy;
 			t.d += t.dne;
 		}
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
+		pos = (float)i / t.dx;
+		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(t, pos));
+		i++;
 	}
 }
 
-void	bresenham_vertical(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
+void	bresenham_vertical(t_mlx m, t_trig t)
 {
-	int	sign_dy;
+	float	pos;
+	int		sign_dy;
+	int		i;
 
 	sign_dy = 1;
 	if (t.y1 > t.y2)
 		sign_dy = -1;
-	while ((t.dy)--)
+	i = 0;
+	while (i < t.dy)
 	{
 		t.y1 += sign_dy;
 		if (t.d < 0)
@@ -58,7 +78,9 @@ void	bresenham_vertical(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
 			t.x1++;
 			t.d += t.dne;
 		}
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
+		pos = (float)i / t.dy;
+		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(t, pos));
+		i++;
 	}
 }
 
@@ -68,7 +90,7 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 
 	t = init_trig_var(v1, v2);
 	if (t.dx > t.dy)
-		bresenham_horizontal(v1, v2, m, t);
+		bresenham_horizontal(m, t);
 	else
-		bresenham_vertical(v1, v2, m, t);
+		bresenham_vertical(m, t);
 }

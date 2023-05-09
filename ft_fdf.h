@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/08 12:23:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/09 09:29:44 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void		init_mlx(t_mlx *m);
 void		print_tvalues(t_trig t);
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);
-int			gradient(t_vertex v1, t_vertex v2, t_trig t);
+int			gradient(t_trig t, float position);
 int			key_hook(int key_code, t_mlx *m);
 int			count_rows(char *map);
 int			get_color(char *str);
