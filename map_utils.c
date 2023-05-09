@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/08 12:20:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:56:36 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	return (v);
 }
 
+/* TODO: fix this */
 /* get_z_limits calculates the boundaries of z value */
 /* and apply an offset to it to have the map framed */
 void	get_z_limits(t_vertex **v)
@@ -86,10 +87,13 @@ void	get_z_limits(t_vertex **v)
 	}
 	i = 0;
 	j = -1;
+	ft_fprintf(1, "%d\n", nbr);
+	if (ft_abs(nbr) < 5)
+		return ;
 	while (i < v[i]->size_y - 1)
 	{
 		while (++j < v[i]->size_x)
-			v[i][j].z = v[i][j].z * ((DEFAULT_Y / 3) / ft_abs(nbr));
+			v[i][j].z = v[i][j].z * ((DEFAULT_Y / 3) / nbr);
 		j = -1;
 		i++;
 	}

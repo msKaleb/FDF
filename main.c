@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/08 12:18:05 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:55:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int	main(void)
 	
 	// char	*test_file = "maps/elem2.fdf";
 	// char	*test_file = "maps/elem-col.fdf";
-	char	*test_file = "maps/pyramide.fdf";
+	// char	*test_file = "maps/pyramide.fdf";
+	// char	*test_file = "maps/pylone.fdf";
 	// char	*test_file = "maps/100-6.fdf";
 	// char	*test_file = "maps/t2.fdf";
-	// char	*test_file = "maps/julia.fdf";
+	char	*test_file = "maps/julia.fdf";
 	// char	*test_file = "maps/mars.fdf";
 	// char	*test_file = "maps/pentenegpos.fdf";
 	
