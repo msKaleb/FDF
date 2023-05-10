@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   trig_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 09:16:28 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:05:30 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
+/*
+For debugging purposes
+*/
 void	print_tvalues(t_trig t)
 {
 	ft_fprintf(1, "x1: %d - y1: %d\n", t.x1, t.y1);
@@ -23,6 +26,10 @@ void	print_tvalues(t_trig t)
 	ft_fprintf(1, "m: %d\n", t.dy / t.dx);
 }
 
+/*
+Gets the decision_parameter variable depending on the trajectory
+of the line: predominantly horizontal or predominantly vertical
+*/
 void	get_deltas(t_trig *t)
 {
 	if (ft_abs(t->dy) > ft_abs(t->dx))
@@ -39,6 +46,9 @@ void	get_deltas(t_trig *t)
 	}
 }
 
+/*
+Initializes the variable with x, y and color parameters of two vertices
+*/
 t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 {
 	t_trig	t;

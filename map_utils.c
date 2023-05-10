@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 13:12:17 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:54:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	get_z_limits(t_vertex **v)
 }
 
 /*
-Function to get the coordinates of each line in the map
 * TODO:	
 **		Find out a good offset for x and y
 ** 		Get rid of 'y' argument
 **		Check xlen is the same in every line
+Function to get the coordinates of each line in the map
 */
 t_vertex	*get_coords(char **line, int y, int rows)
 {
@@ -106,6 +106,9 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	return (v);
 }
 
+/*
+Creates a double pointer that stores the map
+*/
 t_vertex	**read_map(int fd, int rows)
 {
 	t_vertex	**v;

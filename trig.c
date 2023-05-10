@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   trig.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 09:34:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:07:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
-/* Calculates the color gradient between two points via linear interpolation.*/
-/* We use bitshifting and bitwise operations to access to the diferent */
-/* components of the color, being the first two bytes the red color, */
-/* the next two the green one, and the last two corresponding to blue. */
-/* (Transparency is not taken into account.) */
-/* An example with the default color 0xBADA55: */
-/* (0xBADA55 >> 16)	= 0xBA 		& 0xFF = 0xBA - Red */
-/* (0xBADA55 >> 8)	= 0xBADA 	& 0xFF = 0xDA - Green */
-/* (0xBADA55 >> 0)	= 0xBADA55 	& 0xFF = 0x55 - Blue */
+/*
+Calculates the color gradient between two points via linear interpolation.
+We use bitshifting and bitwise operations to access to the diferent
+components of the color, being the first two bytes the red color,
+the next two the green one, and the last two corresponding to blue.
+(Transparency is not taken into account.)
+An example with the default color 0xBADA55:
+(0xBADA55 >> 16)	= 0xBA 		& 0xFF = 0xBA - Red
+(0xBADA55 >> 8)	= 0xBADA 	& 0xFF = 0xDA - Green
+(0xBADA55 >> 0)	= 0xBADA55 	& 0xFF = 0x55 - Blue
+*/
 int	gradient(t_trig t, float position)
 {
 	int	color;
@@ -38,6 +40,9 @@ int	gradient(t_trig t, float position)
 	return (color);
 }
 
+/*
+For predominantly horizontal lines
+*/
 void	bresenham_horizontal(t_mlx m, t_trig t)
 {
 	float	pos;
@@ -64,6 +69,9 @@ void	bresenham_horizontal(t_mlx m, t_trig t)
 	}
 }
 
+/*
+For predominantly vertical lines
+*/
 void	bresenham_vertical(t_mlx m, t_trig t)
 {
 	float	pos;
@@ -90,6 +98,10 @@ void	bresenham_vertical(t_mlx m, t_trig t)
 	}
 }
 
+/*
+This function decides which of the variants has to be used:
+bresenham_horizontal() or bresenham_vertical()
+*/
 void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 {
 	t_trig	t;
