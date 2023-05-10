@@ -6,19 +6,19 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 09:31:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:22:18 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
-/* TODO: -try Joe Iddon solution- */
-
-/* In order to know where to put the vertex, we calculate the offset */
-/* using the values filled by the 'mlx_get_data_addr()' function: */
-/* bits per pixel, size of line, and the endian value, then we use the formula */
-/* 'y * size_line + x * (bits_per_pixel / 8)' to change the atributes of */
-/* a specific vertex (or pixel). */
+/*
+*In order to know where to put the vertex, we calculate the offset
+*using the values filled by the 'mlx_get_data_addr()' function:
+*bits per pixel, size of line, and the endian value, then we use the formula
+*'y * size_line + x * (bits_per_pixel / 8)' to change the atributes
+*of a specific vertex (or pixel).
+*/
 void	print_vertex(t_mlx m, t_trig t, int color)
 {
 	char	*ptr;
@@ -29,9 +29,11 @@ void	print_vertex(t_mlx m, t_trig t, int color)
 	*(unsigned int*)ptr = color;
 }
 
-/* Function to convert xyz coordinates to screen xy coordinates */
-/* TRUE_ISO: 30º angle */
-/* ISO: 26.57º angle */
+/* 
+*Function to convert xyz coordinates to screen xy coordinates
+**TRUE_ISO: 30º angle
+**ISO: 26.57º angle 
+*/
 void	xyztoiso(t_vertex *v)
 {
 	int		scr_x;
@@ -43,6 +45,10 @@ void	xyztoiso(t_vertex *v)
 	v->y = scr_y;
 }
 
+/*
+Converts every hexadecimal color that is not in the format
+of 0xFFFFFF (eg 0xff -> 0x0000FF or 0xff00 -> 0x00FF00)
+*/
 char	*parse_color(char *str)
 {
 	char	*color;
@@ -63,6 +69,10 @@ char	*parse_color(char *str)
 	return (color);
 }
 
+/*
+*TODO:
+**		Check the use of mlx_get_color_value()
+*/
 int	get_color(char *str)
 {
 	int		color;
@@ -81,7 +91,10 @@ int	get_color(char *str)
 	return (color);
 }
 
-/* TODO: adapt to Norm */
+/*
+*TODO: 
+**		Adapt to Norm 
+*/
 void	print_lines(t_vertex **v, t_mlx m)
 {
 	int	i;

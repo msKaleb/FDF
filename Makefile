@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/05 10:23:07 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/10 13:22:41 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,6 @@ export HEADER
 
 # $@ = Name of the target
 # $< = First prerequisite name - in this case, in $(SRC)
-# ifeq ($(shell uname -s), Darwin)
-# 	# mac
-# 	CFLAGS = -Wall -Wextra -Werror -Imlx -c $< -o $@
-# else ifeq ($(shell uname -s), Linux)
-# 	# Linux
-# 	CFLAGS = -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3
-# endif
-
-# CFLAGS	=	-Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3
 
 OS		=	$(shell uname -s)
 

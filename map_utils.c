@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/09 10:56:36 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:12:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,13 @@ int	ft_abs(int n)
 	return (n);
 }
 
-/* Get the coordinates of each line in the map */
-/* TODO:	Find out a good offset for x and y */
-/*			Get rid of 'y' argument 		*/
-t_vertex	*get_coords(char **line, int y, int rows)
-{
-	t_vertex	*v;
-	int			i;
-	int			xlen;
-
-	xlen = 0;
-	while (line[xlen])
-		xlen++;
-	v = malloc(sizeof(t_vertex) * (xlen + 1));
-	i = 0;
-	if (!v)
-		perror("");
-	while (line[i])
-	{
-		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
-		v[i].y = y * ((DEFAULT_Y / 2) / rows);
-		v[i].z = ft_atoi(line[i]);
-		v[i].color = get_color(line[i]);
-		v[i].size_x = xlen;
-		v[i].size_y = rows;
-		i++;
-	}
-	return (v);
-}
-
-/* TODO: fix this */
-/* get_z_limits calculates the boundaries of z value */
-/* and apply an offset to it to have the map framed */
+/*
+* TODO: 
+**		Get a good z value
+**		Adapt to Norm
+Calculates the boundaries of z value and
+apply an offset to it to have the map framed
+*/
 void	get_z_limits(t_vertex **v)
 {
 	int	i;
@@ -87,7 +62,6 @@ void	get_z_limits(t_vertex **v)
 	}
 	i = 0;
 	j = -1;
-	ft_fprintf(1, "%d\n", nbr);
 	if (ft_abs(nbr) < 5)
 		return ;
 	while (i < v[i]->size_y - 1)
@@ -97,6 +71,39 @@ void	get_z_limits(t_vertex **v)
 		j = -1;
 		i++;
 	}
+}
+
+/*
+Function to get the coordinates of each line in the map
+* TODO:	
+**		Find out a good offset for x and y
+** 		Get rid of 'y' argument
+**		Check xlen is the same in every line
+*/
+t_vertex	*get_coords(char **line, int y, int rows)
+{
+	t_vertex	*v;
+	int			i;
+	int			xlen;
+
+	xlen = 0;
+	while (line[xlen] && ft_isalnum(line[xlen][0]) != 0)
+		xlen++;
+	v = malloc(sizeof(t_vertex) * (xlen + 1));
+	i = 0;
+	if (!v)
+		perror("");
+	while (line[i])
+	{
+		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
+		v[i].y = y * ((DEFAULT_Y / 2) / rows);
+		v[i].z = ft_atoi(line[i]);
+		v[i].color = get_color(line[i]);
+		v[i].size_x = xlen;
+		v[i].size_y = rows;
+		i++;
+	}
+	return (v);
 }
 
 t_vertex	**read_map(int fd, int rows)
