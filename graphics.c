@@ -6,36 +6,32 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/08 12:23:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 09:31:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
-/* find the screen xy with trig, should I use mlx_pixel_put? */
-/* -try Joe Iddon solution- */
-/* TRUE_ISO: 30º angle */
-/* ISO: 26.57º angle */
+/* TODO: -try Joe Iddon solution- */
 
-/* void	xyztoiso(t_vertex *v, t_mlx m)
+/* In order to know where to put the vertex, we calculate the offset */
+/* using the values filled by the 'mlx_get_data_addr()' function: */
+/* bits per pixel, size of line, and the endian value, then we use the formula */
+/* 'y * size_line + x * (bits_per_pixel / 8)' to change the atributes of */
+/* a specific vertex (or pixel). */
+void	print_vertex(t_mlx m, t_trig t, int color)
 {
-	// char	*ptr;
-	// int		offset;
-	int		scr_x;
-	int		scr_y;
-	(void)m;
-	scr_x = (v->x - v->y) * cos(TRUE_ISO);
-	scr_y = -v->z + (v->x + v->y) * sin(TRUE_ISO);
-	// mlx_pixel_put(m.mlx, m.win, scr_x, scr_y, v->color);
-	v->x = scr_x;
-	v->y = scr_y;
-	// offset = (v->y * m.sl) + (v->x * (m.bpp / 8)); // how is it calculated?
-	// offset = (scr_y * m.sl + scr_x * (m.bpp / 8)); // do I need this?
-	// ptr = m.addr + offset;
-	// *(unsigned int*)ptr = v->color;
-} */
+	char	*ptr;
+	int		offset;
+
+	offset = (t.y1 * m.sl) + (t.x1 * (m.bpp / 8));
+	ptr = m.addr + offset;
+	*(unsigned int*)ptr = color;
+}
 
 /* Function to convert xyz coordinates to screen xy coordinates */
+/* TRUE_ISO: 30º angle */
+/* ISO: 26.57º angle */
 void	xyztoiso(t_vertex *v)
 {
 	int		scr_x;

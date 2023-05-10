@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/09 09:08:18 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 09:16:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,3 @@ t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 	return (t);
 }
 
-/* void	vertical_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
-{
-	while (t.y1 <= t.y2)
-	{
-		// ft_fprintf(1, "vertical\n");
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
-		t.y1++;
-	}
-}
-
-void	horizontal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
-{
-	while (t.x1 <= t.x2)
-	{
-		// ft_fprintf(1, "horizontal\n");
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
-		t.x1++;
-	}
-}
-
-void	diagonal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t)
-{
-	while (t.x1 <= t.x2)
-	{
-		// ft_fprintf(1, "diagonal\n");
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(v1, v2, t));
-		t.y1--;
-		t.x1++;
-	}
-} */

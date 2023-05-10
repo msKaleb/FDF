@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/09 10:38:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 09:34:41 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	bresenham_horizontal(t_mlx m, t_trig t)
 			t.d += t.dne;
 		}
 		pos = (float)i / t.dx;
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(t, pos));
+		print_vertex(m, t, gradient(t, pos));
 		i++;
 	}
 }
@@ -85,7 +85,7 @@ void	bresenham_vertical(t_mlx m, t_trig t)
 			t.d += t.dne;
 		}
 		pos = (float)i / t.dy;
-		mlx_pixel_put(m.mlx, m.win, t.x1, t.y1, gradient(t, pos));
+		print_vertex(m, t, gradient(t, pos));
 		i++;
 	}
 }

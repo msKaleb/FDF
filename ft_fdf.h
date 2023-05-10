@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/09 09:29:44 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/10 09:33:29 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void		print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void		vertical_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void		horizontal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void		diagonal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
-void		dda_line(t_vertex v1, t_vertex v2, t_mlx *m);
-void		print_lines(t_vertex **v, t_mlx m);
 void		bresenham(t_vertex v1, t_vertex v2, t_mlx m);
+void		print_vertex(t_mlx m, t_trig t, int color);
+void		print_lines(t_vertex **v, t_mlx m);
 void		xyztoiso(t_vertex *v);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
