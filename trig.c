@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 13:07:25 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/11 14:59:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ the next two the green one, and the last two corresponding to blue.
 (Transparency is not taken into account.)
 An example with the default color 0xBADA55:
 (0xBADA55 >> 16)	= 0xBA 		& 0xFF = 0xBA - Red
-(0xBADA55 >> 8)	= 0xBADA 	& 0xFF = 0xDA - Green
-(0xBADA55 >> 0)	= 0xBADA55 	& 0xFF = 0x55 - Blue
+(0xBADA55 >> 8)		= 0xBADA 	& 0xFF = 0xDA - Green
+(0xBADA55 >> 0)		= 0xBADA55 	& 0xFF = 0x55 - Blue
 */
 int	gradient(t_trig t, float position)
 {
@@ -111,4 +111,14 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 		bresenham_horizontal(m, t);
 	else
 		bresenham_vertical(m, t);
+}
+
+/*
+Function to implement Joe Iddon's method to represent vertices in screen (provisional)
+*/
+void	xyztoperspective(t_vertex *v)
+{
+	float	pitch;
+	float	yaw;
+
 }
