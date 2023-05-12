@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 09:33:29 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:27:00 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_FDF_H
 # define FT_FDF_H
 
-/* MLX for Linux */
-# include "mlx_linux/mlx.h"
-/* MLX for Mac */
-# include "mlx/mlx.h"
 # include "LibFT/libft.h"
 # include <stdio.h>
 # include <math.h>
@@ -26,8 +22,10 @@
 /* Keys may vary depending on the OS */
 # ifdef __linux__
 #  define XK_ESCAPE 0xff1b
+#  include "mlx_linux/mlx.h"	// MLX for Linux
 # elif __APPLE__
 #  define XK_ESCAPE 0x35
+#  include "mlx/mlx.h"			// MLX for Mac
 # endif /* OS Check */
 
 /* Some needed values */
@@ -85,6 +83,14 @@ typedef struct s_trig
 	int	fcolor;
 }				t_trig;
 
+typedef struct s_cam
+{
+	int	x;
+	int	y;
+	int	z;
+	int	fov;
+}				t_cam;
+
 /* Functions prototipes */
 t_vertex	*get_coords(char **line, int y, int rows);
 t_vertex	**read_map(int fd, int rows);
@@ -98,11 +104,13 @@ void		diagonal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void		bresenham(t_vertex v1, t_vertex v2, t_mlx m);
 void		print_vertex(t_mlx m, t_trig t, int color);
 void		print_lines(t_vertex **v, t_mlx m);
+void		xyztoperspective(t_vertex *v);
 void		xyztoiso(t_vertex *v);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
-void		print_tvalues(t_trig t);
+
+void		print_tvalues(t_trig t); // provisional
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);
 int			gradient(t_trig t, float position);

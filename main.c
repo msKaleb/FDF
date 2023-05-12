@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 13:21:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:03:29 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
+	{
 		perror("Error");
+		exit(EXIT_FAILURE);
+	}
 	init_mlx(&m);
 	v = read_map(fd, count_rows(argv[1]));
 	print_lines(v, m);

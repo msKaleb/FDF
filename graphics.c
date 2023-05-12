@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 13:22:18 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:51:06 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	print_lines(t_vertex **v, t_mlx m)
 	{
 		while (++j < v[i]->size_x)
 			xyztoiso(&v[i][j]);
+			// xyztoperspective(&v[i][j]);
 		j = -1;
 	}
 	i = -1;

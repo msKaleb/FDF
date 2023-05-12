@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trig.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/11 14:59:53 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/12 12:49:20 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,23 @@ Function to implement Joe Iddon's method to represent vertices in screen (provis
 */
 void	xyztoperspective(t_vertex *v)
 {
-	float	pitch;
-	float	yaw;
-
+	int		pitch;
+	int		yaw;
+	int		scr_x;
+	int		scr_y;
+	t_cam	cam;
+	
+	cam.x = 0;
+	cam.y = 10;
+	cam.z = 0;
+	cam.fov = 90;
+	yaw = atan2(v->x - cam.x, v->y - cam.y) * (180 / M_PI);
+	pitch = atan2(v->z - cam.z, v->y - cam.y) * (180 / M_PI);
+	scr_x = DEFAULT_X / 2 + (yaw * (DEFAULT_X / cam.fov));
+	scr_y = DEFAULT_Y / 2 - (pitch * (DEFAULT_X / cam.fov));
+	ft_fprintf(1, "v->x: %d, v->y: %d\n", v->x, v->y);
+	v->x = scr_x;
+	v->y = scr_y;
+	ft_fprintf(1, "x: %d, y: %d\n", scr_x, scr_y);
+	ft_fprintf(1, "pitch: %d, yaw: %d\n", pitch, yaw);
 }
