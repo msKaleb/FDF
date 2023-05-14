@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/12 12:27:00 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/14 12:34:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 #  define XK_ESCAPE 0x35
 #  include "mlx/mlx.h"			// MLX for Mac
 # endif /* OS Check */
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846	// pi
+# endif
 
 /* Some needed values */
 # define DEFAULT_COLOR 0xBADA55	// Badass color
@@ -98,18 +102,15 @@ t_vertex	**read_map(int fd, int rows);
 t_trig		init_trig_var(t_vertex v1, t_vertex v2);
 
 void		print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
-void		vertical_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
-void		horizontal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
-void		diagonal_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void		bresenham(t_vertex v1, t_vertex v2, t_mlx m);
 void		print_vertex(t_mlx m, t_trig t, int color);
 void		print_lines(t_vertex **v, t_mlx m);
-void		xyztoperspective(t_vertex *v);
-void		xyztoiso(t_vertex *v);
+void		xyztoperspective(t_vertex **v);
+void		frame_map(t_vertex **v);
+void		xyztoiso(t_vertex **v);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
-
 void		print_tvalues(t_trig t); // provisional
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 12:54:53 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/14 12:34:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	ft_abs(int n)
 * TODO: 
 **		Get a good z value
 **		Adapt to Norm
-Calculates the boundaries of z value and
-apply an offset to it to have the map framed
+*Calculates the boundaries of z value and
+*apply an offset to it to have the map framed
 */
 void	get_z_limits(t_vertex **v)
 {
@@ -77,8 +77,8 @@ void	get_z_limits(t_vertex **v)
 * TODO:	
 **		Find out a good offset for x and y
 ** 		Get rid of 'y' argument
-**		Check xlen is the same in every line
-Function to get the coordinates of each line in the map
+**		Check xlen is the same in every line (in count_rows())
+*Function to get the coordinates of each line in the map
 */
 t_vertex	*get_coords(char **line, int y, int rows)
 {
@@ -95,6 +95,8 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		perror("");
 	while (line[i])
 	{
+		v[i].x = i;
+		v[i].y = y;
 		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
 		v[i].z = ft_atoi(line[i]);

@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   trig.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/12 12:49:20 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/14 12:18:29 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
 /*
-Calculates the color gradient between two points via linear interpolation.
-We use bitshifting and bitwise operations to access to the diferent
-components of the color, being the first two bytes the red color,
-the next two the green one, and the last two corresponding to blue.
-(Transparency is not taken into account.)
-An example with the default color 0xBADA55:
-(0xBADA55 >> 16)	= 0xBA 		& 0xFF = 0xBA - Red
-(0xBADA55 >> 8)		= 0xBADA 	& 0xFF = 0xDA - Green
-(0xBADA55 >> 0)		= 0xBADA55 	& 0xFF = 0x55 - Blue
+*Calculates the color gradient between two points via linear interpolation.
+*We use bitshifting and bitwise operations to access to the diferent
+*components of the color, being the first two bytes the red color,
+*the next two the green one, and the last two corresponding to blue.
+*(Transparency is not taken into account.)
+*An example with the default color 0xBADA55:
+*(0xBADA55 >> 16)	= 0xBA 		& 0xFF = 0xBA - Red
+*(0xBADA55 >> 8)		= 0xBADA 	& 0xFF = 0xDA - Green
+*(0xBADA55 >> 0)		= 0xBADA55 	& 0xFF = 0x55 - Blue
 */
 int	gradient(t_trig t, float position)
 {
@@ -41,7 +41,7 @@ int	gradient(t_trig t, float position)
 }
 
 /*
-For predominantly horizontal lines
+*For predominantly horizontal lines
 */
 void	bresenham_horizontal(t_mlx m, t_trig t)
 {
@@ -70,7 +70,7 @@ void	bresenham_horizontal(t_mlx m, t_trig t)
 }
 
 /*
-For predominantly vertical lines
+*For predominantly vertical lines
 */
 void	bresenham_vertical(t_mlx m, t_trig t)
 {
@@ -99,8 +99,8 @@ void	bresenham_vertical(t_mlx m, t_trig t)
 }
 
 /*
-This function decides which of the variants has to be used:
-bresenham_horizontal() or bresenham_vertical()
+*This function decides which of the variants has to be used:
+*bresenham_horizontal() or bresenham_vertical()
 */
 void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 {
@@ -114,27 +114,50 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 }
 
 /*
-Function to implement Joe Iddon's method to represent vertices in screen (provisional)
+*TODO:
+**		put pitch and yaw in cam struct
+*Function to implement Joe Iddon's method to represent
+*vertices in screen (provisional)
 */
-void	xyztoperspective(t_vertex *v)
+void	xyztoperspective(t_vertex **v)
 {
 	int		pitch;
 	int		yaw;
 	int		scr_x;
 	int		scr_y;
+	int		i;
+	int		j;
 	t_cam	cam;
-	
+
+	i = -1;
+	j = -1;
 	cam.x = 0;
 	cam.y = 10;
 	cam.z = 0;
-	cam.fov = 90;
-	yaw = atan2(v->x - cam.x, v->y - cam.y) * (180 / M_PI);
-	pitch = atan2(v->z - cam.z, v->y - cam.y) * (180 / M_PI);
-	scr_x = DEFAULT_X / 2 + (yaw * (DEFAULT_X / cam.fov));
-	scr_y = DEFAULT_Y / 2 - (pitch * (DEFAULT_X / cam.fov));
-	ft_fprintf(1, "v->x: %d, v->y: %d\n", v->x, v->y);
-	v->x = scr_x;
-	v->y = scr_y;
-	ft_fprintf(1, "x: %d, y: %d\n", scr_x, scr_y);
-	ft_fprintf(1, "pitch: %d, yaw: %d\n", pitch, yaw);
+	cam.fov = 50;
+	while (++i < v[0]->size_y)
+	{
+		while (++j < v[i]->size_x)
+		{
+		yaw = atan2(v[i][j].x - cam.x, v[i][j].y - cam.y) * (180 / M_PI);
+		pitch = atan2(v[i][j].z - cam.z, v[i][j].y - cam.y) * (180 / M_PI);
+		scr_x = DEFAULT_X / 2 + (yaw * (DEFAULT_X / cam.fov));
+		scr_y = DEFAULT_Y / 2 - (pitch * (DEFAULT_X / cam.fov));
+		ft_fprintf(1, "v[i][j].x: %d, v[i][j].y: %d\n", v[i][j].x, v[i][j].y);
+		v[i][j].x = scr_x;
+		v[i][j].y = scr_y;
+		ft_fprintf(1, "x: %d, y: %d\n", scr_x, scr_y);
+		ft_fprintf(1, "pitch: %d, yaw: %d\n", pitch, yaw);
+		// yaw = atan2(v[i][j].x - cam.x, v[i][j].y - cam.y) * (180 / M_PI);
+		// pitch = atan2(v[i][j].z - cam.z, v[i][j].y - cam.y) * (180 / M_PI);
+		// scr_x = DEFAULT_X / 2 + (yaw * (DEFAULT_X / cam.fov));
+		// scr_y = DEFAULT_Y / 2 - (pitch * (DEFAULT_X / cam.fov));
+		// ft_fprintf(1, "v->x: %d, v->y: %d\n", v[i][j].x, v[i][j].y);
+		// v[i][j].x = scr_x;
+		// v[i][j].y = scr_y;
+		// ft_fprintf(1, "pitch: %d, yaw: %d\n", pitch, yaw);
+		// ft_fprintf(1, "x: %d, y: %d\n", scr_x, scr_y);
+		}
+		j = -1;
+	}
 }

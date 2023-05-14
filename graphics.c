@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/12 12:51:06 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/14 12:32:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_vertex(t_mlx m, t_trig t, int color)
 
 	offset = (t.y1 * m.sl) + (t.x1 * (m.bpp / 8));
 	ptr = m.addr + offset;
-	*(unsigned int*)ptr = color;
+	*(unsigned int *)ptr = color;
 }
 
 /* 
@@ -34,15 +34,26 @@ void	print_vertex(t_mlx m, t_trig t, int color)
 **TRUE_ISO: 30º angle
 **ISO: 26.57º angle 
 */
-void	xyztoiso(t_vertex *v)
+void	xyztoiso(t_vertex **v)
 {
 	int		scr_x;
 	int		scr_y;
+	int		i;
+	int		j;
 
-	scr_x = (v->x - v->y) * cos(TRUE_ISO);
-	scr_y = -v->z + (v->x + v->y) * sin(TRUE_ISO);
-	v->x = scr_x;
-	v->y = scr_y;
+	i = -1;
+	j = -1;
+	while (++i < v[0]->size_y)
+	{
+		while (++j < v[i]->size_x)
+		{
+		scr_x = (v[i][j].x - v[i][j].y) * cos(TRUE_ISO);
+		scr_y = -v[i][j].z + (v[i][j].x + v[i][j].y) * sin(TRUE_ISO);
+		v[i][j].x = scr_x;
+		v[i][j].y = scr_y;
+		}
+		j = -1;
+	}
 }
 
 /*
@@ -91,24 +102,13 @@ int	get_color(char *str)
 	return (color);
 }
 
-/*
-*TODO: 
-**		Adapt to Norm 
-*/
 void	print_lines(t_vertex **v, t_mlx m)
 {
 	int	i;
 	int	j;
 
-	i = -1;
-	j = -1;
-	while (++i < v[0]->size_y)
-	{
-		while (++j < v[i]->size_x)
-			xyztoiso(&v[i][j]);
-			// xyztoperspective(&v[i][j]);
-		j = -1;
-	}
+	xyztoiso(v);
+	// xyztoperspective(v);
 	i = -1;
 	j = -1;
 	while (++i < v[0]->size_y)
@@ -125,3 +125,14 @@ void	print_lines(t_vertex **v, t_mlx m)
 		j = -1;
 	}
 }
+
+/* void	xyztoiso(t_vertex *v)
+{
+	int		scr_x;
+	int		scr_y;
+
+	scr_x = (v->x - v->y) * cos(TRUE_ISO);
+	scr_y = -v->z + (v->x + v->y) * sin(TRUE_ISO);
+	v->x = scr_x;
+	v->y = scr_y;
+} */
