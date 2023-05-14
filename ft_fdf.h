@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/14 12:34:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/14 12:44:38 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void		xyztoiso(t_vertex **v);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
-void		print_tvalues(t_trig t); // provisional
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);
 int			gradient(t_trig t, float position);

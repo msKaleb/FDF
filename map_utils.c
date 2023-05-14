@@ -6,13 +6,17 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/14 12:34:08 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:12:11 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
-/* Count the rows of a map */
+/*
+*TODO:
+**		check every line has the same length 
+*Count the rows of a map 
+*/
 int	count_rows(char *map)
 {
 	int		rows;
@@ -87,7 +91,7 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	int			xlen;
 
 	xlen = 0;
-	while (line[xlen] && ft_isalnum(line[xlen][0]) != 0)
+	while (line[xlen] && line[xlen][0] != '\n')
 		xlen++;
 	v = malloc(sizeof(t_vertex) * (xlen + 1));
 	i = 0;
@@ -130,6 +134,6 @@ t_vertex	**read_map(int fd, int rows)
 		dblfree((void **)linexyz);
 		line = get_next_line(fd);
 	}
-	get_z_limits(v);
+	// get_z_limits(v);
 	return (v);
 }

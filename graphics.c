@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/14 12:32:25 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:53:57 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void	print_lines(t_vertex **v, t_mlx m)
 	int	j;
 
 	xyztoiso(v);
-	// xyztoperspective(v);
+	// xyztoperspective(v); // mal
+	frame_map(v); // mal
 	i = -1;
 	j = -1;
 	while (++i < v[0]->size_y)

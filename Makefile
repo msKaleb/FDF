@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/10 13:22:41 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/14 12:40:35 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC		=	main.c \
 			trig.c \
 			trig_utils.c \
 			map_utils.c \
-			mlx_utils.c
+			mlx_utils.c \
+			frame_map.c
 			
 OBJ		=	$(SRC:.c=.o)
 

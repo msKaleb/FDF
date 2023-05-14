@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/14 12:18:29 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:52:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 *(Transparency is not taken into account.)
 *An example with the default color 0xBADA55:
 *(0xBADA55 >> 16)	= 0xBA 		& 0xFF = 0xBA - Red
-*(0xBADA55 >> 8)		= 0xBADA 	& 0xFF = 0xDA - Green
-*(0xBADA55 >> 0)		= 0xBADA55 	& 0xFF = 0x55 - Blue
+*(0xBADA55 >> 8)	= 0xBADA 	& 0xFF = 0xDA - Green
+*(0xBADA55 >> 0)	= 0xBADA55 	& 0xFF = 0x55 - Blue
 */
 int	gradient(t_trig t, float position)
 {
