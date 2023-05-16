@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/14 19:53:57 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:16:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	print_vertex(t_mlx m, t_trig t, int color)
 */
 void	xyztoiso(t_vertex **v)
 {
-	int		scr_x;
-	int		scr_y;
+	float		scr_x;
+	float		scr_y;
 	int		i;
 	int		j;
 
@@ -48,7 +48,7 @@ void	xyztoiso(t_vertex **v)
 		while (++j < v[i]->size_x)
 		{
 		scr_x = (v[i][j].x - v[i][j].y) * cos(TRUE_ISO);
-		scr_y = -v[i][j].z + (v[i][j].x + v[i][j].y) * sin(TRUE_ISO);
+		scr_y = (v[i][j].x + v[i][j].y) * sin(TRUE_ISO) - v[i][j].z;
 		v[i][j].x = scr_x;
 		v[i][j].y = scr_y;
 		}
@@ -108,14 +108,14 @@ void	print_lines(t_vertex **v, t_mlx m)
 	int	j;
 
 	xyztoiso(v);
-	// xyztoperspective(v); // mal
-	frame_map(v); // mal
+	// frame_map(v); // mal
 	i = -1;
 	j = -1;
 	while (++i < v[0]->size_y)
 	{
 		while (++j < v[i]->size_x)
 		{
+			// mlx_pixel_put(m.mlx, m.win, v[i][j].x, v[i][j].y, 0xff0000);
 			if (j == v[0]->size_x - 1)
 				bresenham(v[i][j], v[i][j - 1], m);
 			else

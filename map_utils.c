@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/14 20:12:11 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:15:37 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ t_vertex	*get_coords(char **line, int y, int rows)
 		perror("");
 	while (line[i])
 	{
-		v[i].x = i;
-		v[i].y = y;
+		// v[i].x = i;
+		// v[i].y = y;
 		v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
 		v[i].y = y * ((DEFAULT_Y / 2) / rows);
 		v[i].z = ft_atoi(line[i]);
