@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/16 13:14:19 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:27:04 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,20 @@ enum e_events{
 	X_MASK = (1L << 17)
 };
 
+typedef struct s_map_limits
+{
+	float	xmin;
+	float	ymin;
+	float	xmax;
+	float	ymax;
+	float	map_width;
+	float	map_height;
+}				t_map_limits;
 typedef struct s_vertex
 {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 	int	color;
 	int	size_x;
 	int	size_y;
