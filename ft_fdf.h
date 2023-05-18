@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/17 10:27:04 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:14:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define DEFAULT_COLOR 0xBADA55	// Badass color
 # define TRUE_ISO 0.523599		// 30º angle
 # define ISO 0.46373398			// 26.57º angle
-# define DEFAULT_X 1024
-# define DEFAULT_Y 768
+# define DEFAULT_X 1024.0
+# define DEFAULT_Y 768.0
 
 /* Events and values for mlx_hook */
 enum e_events{
@@ -65,9 +65,9 @@ typedef struct s_vertex
 	float	x;
 	float	y;
 	float	z;
-	int	color;
-	int	size_x;
-	int	size_y;
+	int		color;
+	int		size_x;
+	int		size_y;
 }				t_vertex;
 
 typedef struct s_mlx
@@ -120,6 +120,8 @@ void		xyztoiso(t_vertex **v);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
+
+float		ft_fabs(float nbr);
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);
 int			gradient(t_trig t, float position);

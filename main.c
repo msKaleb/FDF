@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/15 12:18:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:40:31 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 /*
 * TODO:
 **		Input error management
-**  	Try Joe Iddon solution
-**		Read x and y in sequential order
+**		Call init_mlx() after knowing the size of the map
+*		to set the size of the window dinamically
+**  	Implement perspective projection
 */
 int	main(int argc, char **argv)
 {
@@ -32,8 +33,8 @@ int	main(int argc, char **argv)
 		perror("Error");
 		exit(EXIT_FAILURE);
 	}
-	init_mlx(&m);
 	v = read_map(fd, count_rows(argv[1]));
+	init_mlx(&m);
 	print_lines(v, m);
 	freemap(v);
 	mlx_put_image_to_window(m.mlx, m.win, m.img, 0, 0);

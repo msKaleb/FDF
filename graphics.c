@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/17 10:24:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:21:49 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ void	xyztoiso(t_vertex **v)
 		scr_y = (v[i][j].x + v[i][j].y) * sin(TRUE_ISO) - v[i][j].z;
 		v[i][j].x = scr_x;
 		v[i][j].y = scr_y;
-		// printf("v[%d][%d].x: %f - v[%d][%d].y: %f\n",\
-		// 	i, j, v[i][j].x, v[i][j].y, i, j);
+		/* printf("v[%d][%d].x: %f - v[%d][%d].y: %f\n",\
+			i, j, v[i][j].x, v[i][j].y, i, j); */
 		}
 		j = -1;
 	}
 }
 
 /*
-Converts every hexadecimal color that is not in the format
-of 0xFFFFFF (eg 0xff -> 0x0000FF or 0xff00 -> 0x00FF00)
+*Converts every hexadecimal color that is not in the format
+*of 0xFFFFFF (eg 0xff -> 0x0000FF or 0xff00 -> 0x00FF00)
 */
 char	*parse_color(char *str)
 {
@@ -104,13 +104,18 @@ int	get_color(char *str)
 	return (color);
 }
 
+/*
+*Iterate through the double pointer and draw the lines
+*between two given vertices. Different conditions are
+*needed to appropriately fill the grid on the boundaries.
+*/
 void	print_lines(t_vertex **v, t_mlx m)
 {
 	int	i;
 	int	j;
 
 	xyztoiso(v);
-	frame_map(v); // mal
+	frame_map(v);
 	i = -1;
 	j = -1;
 	while (++i < v[0]->size_y)

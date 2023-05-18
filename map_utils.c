@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/17 09:46:05 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:13:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ int	count_rows(char *map)
 		rows++;
 	close(fd);
 	return (rows);
-}
-
-/* Simple function to get the absolute value of a number */
-int	ft_abs(int n)
-{
-	if (n < 0)
-		return (n * -1);
-	return (n);
 }
 
 /*
