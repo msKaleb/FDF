@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/19 11:27:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:54:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,28 @@
 
 /* Keys may vary depending on the OS */
 # ifdef __linux__
-#  define XK_ESCAPE 0xff1b
-#  define XK_A 0x61
-#  define XK_D 0x64
 #  include "mlx_linux/mlx.h"	// MLX for Linux
+#  define XK_ESCAPE 	0xff1b
+#  define XK_A 			0x61
+#  define XK_D 			0x64
 # elif __APPLE__
-#  define XK_ESCAPE 0x35
 #  include "mlx/mlx.h"			// MLX for Mac
+#  define XK_ESCAPE 	0x35
+#  define XK_A 			0x61
+#  define XK_D 			0x64
 # endif /* OS Check */
 
+/* Not defined in my distro */
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846	// pi
 # endif
 
 /* Some needed values */
-# define DEFAULT_COLOR 0xBADA55	// Badass color
-# define TRUE_ISO 0.523599		// 30º angle
-# define ISO 0.46373398			// 26.57º angle
-# define DEFAULT_X 1024.0
-# define DEFAULT_Y 768.0
+# define DEFAULT_COLOR 	0xBADA55	// Badass color
+# define TRUE_ISO 		0.523599	// 30º angle
+# define ISO 			0.46373398	// 26.57º angle
+# define DEFAULT_X 		1024.0		// float type for trig operations
+# define DEFAULT_Y 		768.0		// float type for trig operations
 
 /* Events and values for mlx_hook */
 enum e_events{
@@ -122,15 +125,17 @@ void		xyztoiso(t_vertex **v);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
-void		rotate_map(t_vertex **v, t_mlx m);
 float		ft_fabs(float nbr);
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);
-int			gradient(t_trig t, float position);
 int			key_hook(int key_code, t_mlx *m);
+int			gradient(t_trig t, float position);
 int			count_rows(char *map);
 int			get_color(char *str);
 int			close_mlx(t_mlx *m);
 int			ft_abs(int n);
+
+/* Bonus part */
+void		rotate_map(t_vertex **v, t_mlx *m, float angle);
 
 #endif /* FT_FDF_H */

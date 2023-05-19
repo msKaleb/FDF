@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/14 19:52:28 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:34:53 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 *TODO:
 **		put pitch and yaw in cam struct
 *Function to implement Joe Iddon's method to represent
-*vertices in screen (provisional)
+*vertices in screen (provisional) - (BROKEN)
 */
 void	xyztoperspective(t_vertex **v)
 {
