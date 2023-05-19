@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/18 10:40:31 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:21:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /*
 * TODO:
 **		Input error management
-**		Call init_mlx() after knowing the size of the map
-*		to set the size of the window dinamically
 **  	Implement perspective projection
 */
 int	main(int argc, char **argv)

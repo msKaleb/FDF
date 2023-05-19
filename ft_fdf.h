@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/18 10:14:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:27:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 /* Keys may vary depending on the OS */
 # ifdef __linux__
 #  define XK_ESCAPE 0xff1b
+#  define XK_A 0x61
+#  define XK_D 0x64
 #  include "mlx_linux/mlx.h"	// MLX for Linux
 # elif __APPLE__
 #  define XK_ESCAPE 0x35
@@ -120,7 +122,7 @@ void		xyztoiso(t_vertex **v);
 void		freemap(t_vertex **v);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
-
+void		rotate_map(t_vertex **v, t_mlx m);
 float		ft_fabs(float nbr);
 
 int			mouse_hook(int button, int x, int y, t_mlx *m);

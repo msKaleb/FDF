@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/03 09:26:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:26:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ int	close_mlx(t_mlx *m)
 
 int	key_hook(int key_code, t_mlx *m)
 {
-	// ft_fprintf(1, "%s\n", change_base((unsigned long long)key_code, 'x'));
+	ft_fprintf(1, "%s\n", change_base((unsigned long long)key_code, 'x'));
 	if (key_code == XK_ESCAPE)
 		close_mlx(m);
+	if (key_code == XK_A)
+		
 	return (0);
 }
 
