@@ -6,11 +6,26 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/19 12:04:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:20:32 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
+
+int	map_ops(int key_code, t_mlx *m)
+{
+	if (key_code == XK_A)
+		rotate_map(m->v, m, 45);
+	if (key_code == XK_LEFT)
+		move_map(m, -10, 0);
+	if (key_code == XK_RIGHT)
+		move_map(m, 10, 0);
+	if (key_code == XK_UP)
+		move_map(m, 0, -10);
+	if (key_code == XK_DOWN)
+		move_map(m, 0, 10);
+	return (0);
+}
 
 // mlx_destroy_display(m->mlx);
 int	close_mlx(t_mlx *m)
@@ -26,6 +41,8 @@ int	key_hook(int key_code, t_mlx *m)
 {
 	if (key_code == XK_ESCAPE)
 		close_mlx(m);
+	else
+		map_ops(key_code, m);
 	return (0);
 }
 

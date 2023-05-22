@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/18 10:13:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:24:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	count_rows(char *map)
 *Calculates the boundaries of z value and
 *apply an offset to it to have the map framed
 */
-void	get_z_limits(t_vertex **v)
+/* void	get_z_limits(t_vertex **v)
 {
 	int	i;
 	int	j;
@@ -67,11 +67,10 @@ void	get_z_limits(t_vertex **v)
 		j = -1;
 		i++;
 	}
-}
+} */
 
 /*
 * TODO:	
-**		Find out a good offset for x and y
 ** 		Get rid of 'y' argument
 **		Check xlen is the same in every line (in count_rows())
 *Function to get the coordinates of each line in the map
@@ -88,13 +87,14 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	v = malloc(sizeof(t_vertex) * (xlen + 1));
 	i = 0;
 	if (!v)
-		perror("");
+		exit(error_exit(1));
 	while (line[i])
 	{
+		// ft_fprintf(1, "xlen %d - line[%d]: %d\n", xlen, i, line[i][0]);
+		if (line[i][0] == '\n')
+			exit(error_exit(3));
 		v[i].x = i;
 		v[i].y = y;
-		// v[i].x = (DEFAULT_X / 2) + i * (DEFAULT_X / (xlen * 2));
-		// v[i].y = y * ((DEFAULT_Y / 2) / rows);
 		v[i].z = ft_atoi(line[i]);
 		v[i].color = get_color(line[i]);
 		v[i].size_x = xlen;
@@ -126,6 +126,5 @@ t_vertex	**read_map(int fd, int rows)
 		dblfree((void **)linexyz);
 		line = get_next_line(fd);
 	}
-	// get_z_limits(v);
 	return (v);
 }

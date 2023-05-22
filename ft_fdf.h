@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/19 11:54:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:53:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 #  define XK_ESCAPE 	0xff1b
 #  define XK_A 			0x61
 #  define XK_D 			0x64
+#  define XK_UP			0xff52
+#  define XK_DOWN		0xff54
+#  define XK_LEFT		0xff51
+#  define XK_RIGHT		0xff53
 # elif __APPLE__
 #  include "mlx/mlx.h"			// MLX for Mac
 #  define XK_ESCAPE 	0x35
@@ -77,13 +81,14 @@ typedef struct s_vertex
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	void	*addr;
-	int		bpp;
-	int		sl;
-	int		endian;
+	t_vertex	**v;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	void		*addr;
+	int			bpp;
+	int			sl;
+	int			endian;
 }				t_mlx;
 
 typedef struct s_trig
@@ -110,7 +115,7 @@ typedef struct s_cam
 }				t_cam;
 
 /* Functions prototipes */
-t_vertex	*get_coords(char **line, int y, int rows);
+// t_vertex	*get_coords(char **line, int y, int rows);
 t_vertex	**read_map(int fd, int rows);
 
 t_trig		init_trig_var(t_vertex v1, t_vertex v2);
@@ -131,11 +136,13 @@ int			mouse_hook(int button, int x, int y, t_mlx *m);
 int			key_hook(int key_code, t_mlx *m);
 int			gradient(t_trig t, float position);
 int			count_rows(char *map);
+int			error_exit(int code);
 int			get_color(char *str);
 int			close_mlx(t_mlx *m);
 int			ft_abs(int n);
 
 /* Bonus part */
 void		rotate_map(t_vertex **v, t_mlx *m, float angle);
+void		move_map(t_mlx *m, int x, int y);
 
 #endif /* FT_FDF_H */

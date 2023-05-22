@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:07 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/19 11:12:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/20 11:36:50 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	frame_map(t_vertex **v)
 	int				j;
 
 	ml = get_limits(v);
-	sf = floorf(scaling_factor(ml));
+	// sf = floorf(scaling_factor(ml));
+	sf = scaling_factor(ml) - 0.5;
 	print_mlvalues(ml);
 	printf("scaling factor: %f\n", sf);
 	if (ml.xmin < 0 || ml.ymin < 0)
