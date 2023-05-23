@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/22 11:53:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:12:20 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_vertex
 	float	x;
 	float	y;
 	float	z;
+	float	scr_x;
+	float	scr_y;
 	int		color;
 	int		size_x;
 	int		size_y;
@@ -128,6 +130,7 @@ void		xyztoperspective(t_vertex **v);
 void		frame_map(t_vertex **v);
 void		xyztoiso(t_vertex **v);
 void		freemap(t_vertex **v);
+void		center_map(t_mlx *m);
 void		dblfree(void **var);
 void		init_mlx(t_mlx *m);
 float		ft_fabs(float nbr);
@@ -143,6 +146,7 @@ int			ft_abs(int n);
 
 /* Bonus part */
 void		rotate_map(t_vertex **v, t_mlx *m, float angle);
+void		zoom(t_mlx *m, int x, int y, int dir);
 void		move_map(t_mlx *m, int x, int y);
 
 #endif /* FT_FDF_H */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trig_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/10 13:05:30 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/23 10:49:42 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,21 @@ t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 {
 	t_trig	t;
 
-	if (v2.x < v1.x)
+	if (v2.scr_x < v1.scr_x)
 	{
-		t.x1 = v2.x;
-		t.y1 = v2.y;
-		t.x2 = v1.x;
-		t.y2 = v1.y;
+		t.x1 = v2.scr_x;
+		t.y1 = v2.scr_y;
+		t.x2 = v1.scr_x;
+		t.y2 = v1.scr_y;
 		t.scolor = v2.color;
 		t.fcolor = v1.color;
 	}
 	else
 	{
-		t.x1 = v1.x;
-		t.y1 = v1.y;
-		t.x2 = v2.x;
-		t.y2 = v2.y;
+		t.x1 = v1.scr_x;
+		t.y1 = v1.scr_y;
+		t.x2 = v2.scr_x;
+		t.y2 = v2.scr_y;
 		t.scolor = v1.color;
 		t.fcolor = v2.color;
 	}

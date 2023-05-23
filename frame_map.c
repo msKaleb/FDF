@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:07 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/20 11:36:50 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:44:58 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ t_map_limits	get_limits(t_vertex **v)
 	{
 		while (++j < v[i]->size_x)
 		{
-			if (v[i][j].x < ml.xmin)
-				ml.xmin = v[i][j].x;
-			if (v[i][j].x > ml.xmax)
-				ml.xmax = v[i][j].x;
-			if (v[i][j].y < ml.ymin)
-				ml.ymin = v[i][j].y;
-			if (v[i][j].y > ml.ymax)
-				ml.ymax = v[i][j].y;
+			if (v[i][j].scr_x < ml.xmin)
+				ml.xmin = v[i][j].scr_x;
+			if (v[i][j].scr_x > ml.xmax)
+				ml.xmax = v[i][j].scr_x;
+			if (v[i][j].scr_y < ml.ymin)
+				ml.ymin = v[i][j].scr_y;
+			if (v[i][j].scr_y > ml.ymax)
+				ml.ymax = v[i][j].scr_y;
 		}
 		j = -1;
 	}
@@ -60,8 +60,8 @@ void	negtopos(t_vertex **v, t_map_limits ml)
 	{
 		while (++j < v[i]->size_x)
 		{
-			v[i][j].x += ft_fabs(ml.xmin);
-			v[i][j].y += ft_fabs(ml.ymin);
+			v[i][j].scr_x += ft_fabs(ml.xmin);
+			v[i][j].scr_y += ft_fabs(ml.ymin);
 		}
 		j = -1;
 	}
@@ -106,8 +106,8 @@ void	frame_map(t_vertex **v)
 	ml = get_limits(v);
 	// sf = floorf(scaling_factor(ml));
 	sf = scaling_factor(ml) - 0.5;
-	print_mlvalues(ml);
-	printf("scaling factor: %f\n", sf);
+	// print_mlvalues(ml);
+	// printf("scaling factor: %f\n", sf);
 	if (ml.xmin < 0 || ml.ymin < 0)
 		negtopos(v, ml);
 	i = -1;
@@ -116,43 +116,40 @@ void	frame_map(t_vertex **v)
 	{
 		while (++j < v[i]->size_x)
 		{
-			v[i][j].x *= sf;
-			v[i][j].x += (DEFAULT_X - (ml.map_width * sf)) / 2;
-			v[i][j].y *= sf;
-			v[i][j].y += (DEFAULT_Y - (ml.map_height * sf)) / 2;
+			v[i][j].scr_x *= sf;
+			v[i][j].scr_x += (DEFAULT_X - (ml.map_width * sf)) / 2;
+			v[i][j].scr_y *= sf;
+			v[i][j].scr_y += (DEFAULT_Y - (ml.map_height * sf)) / 2;
 		}
 		j = -1;
 	}
 }
 
-/* void	frame_map(t_vertex **v)
+void	center_map(t_mlx *m)
 {
-	int	i;
-	int	j;
-	int	dx;
-	int	dy;
-	int	ar;
+	t_map_limits	ml;
+	int				i;
+	int				j;
+	float			translate;
 	
-	dx = get_max_x(v) - get_min_x(v);
-	dy = get_max_y(v) - get_min_y(v);
-	ar = dy / dx;
-	int sf = DEFAULT_X / dx;
 	i = -1;
 	j = -1;
-	ft_fprintf(1, "dx: %d - dy: %d\n", dx, dy);
-	while (++i < v[0]->size_y)
+	ml = get_limits(m->v);
+	print_mlvalues(ml);
+	// translate = (DEFAULT_X / 2) - (ml.map_width / 2);
+	translate = (DEFAULT_X / ml.map_width);
+	if (ml.xmin > (DEFAULT_X / 2))
+		translate *= -1;
+	printf("translate: %f\n", translate);
+	while (++i < m->v[0]->size_y)
 	{
-		while (++j < v[i]->size_x){
-			// ft_fprintf(1, "b v[i][j].x: %d\n", v[i][j].x);
-			// v[i][j].x *= DEFAULT_X / 3 / dx;
-			// v[i][j].x += DEFAULT_X / 3;
-			// v[i][j].y *= DEFAULT_Y / 3 / dy;
-			// v[i][j].y += DEFAULT_Y / 3;
-			v[i][j].x *= sf;
-			v[i][j].y *= sf;
-			v[i][j].z *= sf;
-			// ft_fprintf(1, "fp v[i][j].x: %d - v[i][j].y: %d\n", v[i][j].x, v[i][j].y);
-			}
+		while (++j < m->v[i]->size_x)
+		{
+			m->v[i][j].scr_x -= ml.xmin;
+			m->v[i][j].scr_x += (DEFAULT_X - ml.map_width) / 2;
+			m->v[i][j].scr_y -= ml.ymin;
+			m->v[i][j].scr_y += (DEFAULT_Y - ml.map_height) / 2;
+		}
 		j = -1;
 	}
-} */
+}
