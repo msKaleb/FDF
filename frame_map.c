@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:07 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 11:44:58 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:54:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,7 @@ void	frame_map(t_vertex **v)
 	int				j;
 
 	ml = get_limits(v);
-	// sf = floorf(scaling_factor(ml));
 	sf = scaling_factor(ml) - 0.5;
-	// print_mlvalues(ml);
-	// printf("scaling factor: %f\n", sf);
 	if (ml.xmin < 0 || ml.ymin < 0)
 		negtopos(v, ml);
 	i = -1;
@@ -116,6 +113,9 @@ void	frame_map(t_vertex **v)
 	{
 		while (++j < v[i]->size_x)
 		{
+			v[i][j].x *=sf;
+			v[i][j].y *=sf;
+			v[i][j].z *=sf;
 			v[i][j].scr_x *= sf;
 			v[i][j].scr_x += (DEFAULT_X - (ml.map_width * sf)) / 2;
 			v[i][j].scr_y *= sf;
@@ -130,17 +130,10 @@ void	center_map(t_mlx *m)
 	t_map_limits	ml;
 	int				i;
 	int				j;
-	float			translate;
 	
 	i = -1;
 	j = -1;
 	ml = get_limits(m->v);
-	print_mlvalues(ml);
-	// translate = (DEFAULT_X / 2) - (ml.map_width / 2);
-	translate = (DEFAULT_X / ml.map_width);
-	if (ml.xmin > (DEFAULT_X / 2))
-		translate *= -1;
-	printf("translate: %f\n", translate);
 	while (++i < m->v[0]->size_y)
 	{
 		while (++j < m->v[i]->size_x)
