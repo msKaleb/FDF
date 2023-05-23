@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 14:32:20 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/23 14:34:17 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,7 @@ void	zoom(t_mlx *m, int x, int y, int dir)
 	while (++i < m->v[0]->size_y)
 	{
 		while (++j < m->v[i]->size_x)
-		{
-			if (dir < 0)
-				apply_zoom(&m->v[i][j], -1);
-			else
-				apply_zoom(&m->v[i][j], 1);
-		}
+			apply_zoom(&m->v[i][j], dir);
 		j = -1;
 	}
 	center_map(m);
