@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:07 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 11:54:54 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:54:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	negtopos(t_vertex **v, t_map_limits ml)
 /*
 For debugging purposes
 */
-void	print_mlvalues(t_map_limits ml)
+/* void	print_mlvalues(t_map_limits ml)
 {
 	printf("ml.xmin: %f - ml.xmax: %f\nml.ymin: %f - ml.ymax: %f\n", \
 		ml.xmin, ml.xmax, ml.ymin, ml.ymax);
@@ -78,7 +78,7 @@ void	print_mlvalues(t_map_limits ml)
 		ml.map_width, ml.map_height);
 	printf("map_ar: %f - win_ar: %f\n", \
 		ml.map_width / ml.map_height, DEFAULT_X / DEFAULT_Y);
-}
+} */
 
 /*
 *Return the scaling factor, acording to the aspect ratio of the map.
@@ -113,35 +113,13 @@ void	frame_map(t_vertex **v)
 	{
 		while (++j < v[i]->size_x)
 		{
-			v[i][j].x *=sf;
-			v[i][j].y *=sf;
-			v[i][j].z *=sf;
+			v[i][j].x *= sf;
+			v[i][j].y *= sf;
+			v[i][j].z *= sf;
 			v[i][j].scr_x *= sf;
 			v[i][j].scr_x += (DEFAULT_X - (ml.map_width * sf)) / 2;
 			v[i][j].scr_y *= sf;
 			v[i][j].scr_y += (DEFAULT_Y - (ml.map_height * sf)) / 2;
-		}
-		j = -1;
-	}
-}
-
-void	center_map(t_mlx *m)
-{
-	t_map_limits	ml;
-	int				i;
-	int				j;
-	
-	i = -1;
-	j = -1;
-	ml = get_limits(m->v);
-	while (++i < m->v[0]->size_y)
-	{
-		while (++j < m->v[i]->size_x)
-		{
-			m->v[i][j].scr_x -= ml.xmin;
-			m->v[i][j].scr_x += (DEFAULT_X - ml.map_width) / 2;
-			m->v[i][j].scr_y -= ml.ymin;
-			m->v[i][j].scr_y += (DEFAULT_Y - ml.map_height) / 2;
 		}
 		j = -1;
 	}

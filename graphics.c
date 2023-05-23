@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 10:50:36 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:42:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	xyztoiso(t_vertex **v)
 	{
 		while (++j < v[i]->size_x)
 		{
-		// v[i][j].x = scr_x * cos(0.785) - scr_y * sin(0.785);
-		// v[i][j].y = scr_y * sin(0.785) + scr_y * cos(0.785);
 		scr_x = (v[i][j].x - v[i][j].y) * cos(TRUE_ISO);
 		scr_y = (v[i][j].x + v[i][j].y) * sin(TRUE_ISO) - v[i][j].z;
 		v[i][j].scr_x = scr_x;

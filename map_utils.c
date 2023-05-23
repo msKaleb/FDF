@@ -6,15 +6,13 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/22 12:24:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:36:55 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
 /*
-*TODO:
-**		check every line has the same length 
 *Count the rows of a map 
 */
 int	count_rows(char *map)
@@ -33,49 +31,9 @@ int	count_rows(char *map)
 }
 
 /*
-* TODO: 
-**		Get a good z value
-**		Adapt to Norm
-*Calculates the boundaries of z value and
-*apply an offset to it to have the map framed
-*/
-/* void	get_z_limits(t_vertex **v)
-{
-	int	i;
-	int	j;
-	int	nbr;
-
-	nbr = INT_MIN;
-	i = 0;
-	j = -1;
-	while (i < v[i]->size_y - 1)
-	{
-		while (++j < v[i]->size_x)
-			if (ft_abs(v[i][j].z) > ft_abs(nbr))
-				nbr = v[i][j].z;
-		j = -1;
-		i++;
-	}
-	i = 0;
-	j = -1;
-	if (ft_abs(nbr) < 5)
-		return ;
-	while (i < v[i]->size_y - 1)
-	{
-		while (++j < v[i]->size_x)
-			v[i][j].z = v[i][j].z * ((DEFAULT_Y / 3) / nbr);
-		j = -1;
-		i++;
-	}
-} */
-
-/*
-* TODO:	
-** 		Get rid of 'y' argument
-**		Check xlen is the same in every line (in count_rows())
 *Function to get the coordinates of each line in the map
 */
-t_vertex	*get_coords(char **line, int y, int rows)
+t_vertex	*get_coords(char **line, int y, int rows, int max_len)
 {
 	t_vertex	*v;
 	int			i;
@@ -84,24 +42,40 @@ t_vertex	*get_coords(char **line, int y, int rows)
 	xlen = 0;
 	while (line[xlen] && line[xlen][0] != '\n')
 		xlen++;
-	v = malloc(sizeof(t_vertex) * (xlen + 1));
-	i = 0;
+	if (xlen < max_len)
+		exit(error_exit(3));
+	v = malloc(sizeof(t_vertex) * (max_len + 1));
 	if (!v)
 		exit(error_exit(1));
-	while (line[i])
+	i = 0;
+	while (line[i] && i < max_len)
 	{
-		// ft_fprintf(1, "xlen %d - line[%d]: %d\n", xlen, i, line[i][0]);
-		if (line[i][0] == '\n')
-			exit(error_exit(3));
 		v[i].x = i;
 		v[i].y = y;
 		v[i].z = ft_atoi(line[i]);
 		v[i].color = get_color(line[i]);
-		v[i].size_x = xlen;
+		v[i].size_x = max_len;
 		v[i].size_y = rows;
 		i++;
 	}
 	return (v);
+}
+
+/*
+*Gets the length of the first line, and this is
+*the one taken into account across the map.
+*/
+int	get_max_len(char *line)
+{
+	char	**linexyz;
+	int		i;
+
+	i = 0;
+	linexyz = ft_split(line, ' ');
+	while (linexyz[i] && ft_isalnum(linexyz[i][0]) != 0)
+			i++;
+	dblfree((void **)linexyz);
+	return (i);
 }
 
 /*
@@ -113,14 +87,16 @@ t_vertex	**read_map(int fd, int rows)
 	char		**linexyz;
 	char		*line;
 	int			i;
+	int			max_len;
 
 	i = 0;
 	v = malloc(sizeof(t_vertex *) * (rows + 1));
 	line = get_next_line(fd);
+	max_len = get_max_len(line);
 	while (line != NULL)
 	{
 		linexyz = ft_split(line, ' ');
-		v[i] = get_coords(linexyz, i, rows);
+		v[i] = get_coords(linexyz, i, rows, max_len);
 		i++;
 		free(line);
 		dblfree((void **)linexyz);

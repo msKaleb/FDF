@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 09:58:25 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:42:50 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ int	error_exit(int code)
 		ft_fprintf(2, "\e[1;31mFound wrong line length. Exiting.\e[m\n");
 	return (EXIT_FAILURE);
 }
+
 /*
 * TODO:
 **  	Implement perspective projection
+**		Adapt to Norm (static functions)
 */
 int	main(int argc, char **argv)
 {
 	t_mlx		m;
 	int			fd;
-	
+
 	if (argc != 2)
 		return (error_exit(0));
 	fd = open(argv[1], O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 09:43:44 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:43:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	map_ops(int key_code, t_mlx *m)
 	if (key_code == XK_D)
 		rotate_map(m->v, m, -10);
 	if (key_code == XK_LEFT)
-		move_map(m, -10, 0);
+		move_map(m, -50, 0);
 	if (key_code == XK_RIGHT)
-		move_map(m, 10, 0);
+		move_map(m, 50, 0);
 	if (key_code == XK_UP)
-		move_map(m, 0, -10);
+		move_map(m, 0, -50);
 	if (key_code == XK_DOWN)
-		move_map(m, 0, 10);
+		move_map(m, 0, 50);
 	return (0);
 }
 
@@ -48,10 +48,10 @@ int	key_hook(int key_code, t_mlx *m)
 	return (0);
 }
 
+// (void)m;
+// ft_fprintf(1, "%d - %d - %d\n", button, x, y);
 int	mouse_hook(int button, int x, int y, t_mlx *m)
 {
-	// (void)m;
-	// ft_fprintf(1, "%d - %d - %d\n", button, x, y);
 	if (button == 4)
 		zoom(m, x, y, 1);
 	if (button == 5)

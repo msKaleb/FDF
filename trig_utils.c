@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 10:49:42 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:44:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 For debugging purposes
 */
-void	print_tvalues(t_trig t)
+/* void	print_tvalues(t_trig t)
 {
 	ft_fprintf(1, "x1: %d - y1: %d\n", t.x1, t.y1);
 	ft_fprintf(1, "x2: %d - y2: %d\n", t.x2, t.y2);
@@ -24,7 +24,7 @@ void	print_tvalues(t_trig t)
 	ft_fprintf(1, "de: %d\n", t.de);
 	ft_fprintf(1, "dne: %d\n", t.dne);
 	ft_fprintf(1, "m: %d\n", t.dy / t.dx);
-}
+} */
 
 /*
 Gets the decision_parameter variable depending on the trajectory
@@ -76,4 +76,3 @@ t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 	get_deltas(&t);
 	return (t);
 }
-

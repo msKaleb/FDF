@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 10:50:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:44:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	bresenham(t_vertex v1, t_vertex v2, t_mlx m)
 *Function to implement Joe Iddon's method to represent
 *vertices in screen (provisional) - (BROKEN)
 */
-void	xyztoperspective(t_vertex **v)
+/* void	xyztoperspective(t_vertex **v)
 {
 	int		pitch;
 	int		yaw;
@@ -161,3 +161,4 @@ void	xyztoperspective(t_vertex **v)
 		j = -1;
 	}
 }
+ */

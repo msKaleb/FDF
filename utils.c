@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:28:05 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/18 10:17:49 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:45:34 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	freemap(t_vertex **v)
 {
-	int i = 0;
+	int	i;
 	int	rows;
-	
+
+	i = 0;
 	rows = v[0]->size_y;
 	while (i < rows)
 	{
