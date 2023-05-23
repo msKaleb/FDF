@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 11:12:20 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:55:58 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,35 +118,37 @@ typedef struct s_cam
 
 /* Functions prototipes */
 // t_vertex	*get_coords(char **line, int y, int rows);
-t_vertex	**read_map(int fd, int rows);
+t_map_limits	get_limits(t_vertex **v);
 
-t_trig		init_trig_var(t_vertex v1, t_vertex v2);
+t_vertex		**read_map(int fd, int rows);
 
-void		print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
-void		bresenham(t_vertex v1, t_vertex v2, t_mlx m);
-void		print_vertex(t_mlx m, t_trig t, int color);
-void		print_lines(t_vertex **v, t_mlx m);
-void		xyztoperspective(t_vertex **v);
-void		frame_map(t_vertex **v);
-void		xyztoiso(t_vertex **v);
-void		freemap(t_vertex **v);
-void		center_map(t_mlx *m);
-void		dblfree(void **var);
-void		init_mlx(t_mlx *m);
-float		ft_fabs(float nbr);
+t_trig			init_trig_var(t_vertex v1, t_vertex v2);
 
-int			mouse_hook(int button, int x, int y, t_mlx *m);
-int			key_hook(int key_code, t_mlx *m);
-int			gradient(t_trig t, float position);
-int			count_rows(char *map);
-int			error_exit(int code);
-int			get_color(char *str);
-int			close_mlx(t_mlx *m);
-int			ft_abs(int n);
+void			print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
+void			bresenham(t_vertex v1, t_vertex v2, t_mlx m);
+void			print_vertex(t_mlx m, t_trig t, int color);
+void			print_lines(t_vertex **v, t_mlx m);
+void			xyztoperspective(t_vertex **v);
+void			frame_map(t_vertex **v);
+void			xyztoiso(t_vertex **v);
+void			freemap(t_vertex **v);
+void			center_map(t_mlx *m);
+void			dblfree(void **var);
+void			init_mlx(t_mlx *m);
+float			ft_fabs(float nbr);
+
+int				mouse_hook(int button, int x, int y, t_mlx *m);
+int				key_hook(int key_code, t_mlx *m);
+int				gradient(t_trig t, float position);
+int				count_rows(char *map);
+int				error_exit(int code);
+int				get_color(char *str);
+int				close_mlx(t_mlx *m);
+int				ft_abs(int n);
 
 /* Bonus part */
-void		rotate_map(t_vertex **v, t_mlx *m, float angle);
-void		zoom(t_mlx *m, int x, int y, int dir);
-void		move_map(t_mlx *m, int x, int y);
+void			rotate_map(t_vertex **v, t_mlx *m, float angle);
+void			zoom(t_mlx *m, int x, int y, int dir);
+void			move_map(t_mlx *m, int x, int y);
 
 #endif /* FT_FDF_H */
