@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 12:54:00 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:32:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,43 @@ void	center_map(t_mlx *m)
 	}
 }
 
+/* 	if (dir < 0)
+		{
+			m->v[i][j].scr_x *= 0.9;
+			m->v[i][j].scr_y *= 0.9;
+			m->v[i][j].x *= 0.9;
+			m->v[i][j].y *= 0.9;
+			m->v[i][j].z *= 0.9;
+		}
+	else
+		{
+			m->v[i][j].scr_x /= 0.9;
+			m->v[i][j].scr_y /= 0.9;
+			m->v[i][j].x /= 0.9;
+			m->v[i][j].y /= 0.9;
+			m->v[i][j].z /= 0.9;
+		} */
+		
+void	apply_zoom(t_vertex *v, int dir)
+{
+	if (dir < 0)
+		{
+			v->scr_x *= 0.9;
+			v->scr_y *= 0.9;
+			v->x *= 0.9;
+			v->y *= 0.9;
+			v->z *= 0.9;
+		}
+	else
+		{
+			v->scr_x /= 0.9;
+			v->scr_y /= 0.9;
+			v->x /= 0.9;
+			v->y /= 0.9;
+			v->z /= 0.9;
+		}
+}
+
 void	zoom(t_mlx *m, int x, int y, int dir)
 {
 	int		i;
@@ -41,7 +78,6 @@ void	zoom(t_mlx *m, int x, int y, int dir)
 
 	(void) x;
 	(void) y;
-	(void) dir;
 	i = -1;
 	j = -1;
 	mlx_destroy_image(m->mlx, m->img);
@@ -51,21 +87,9 @@ void	zoom(t_mlx *m, int x, int y, int dir)
 		while (++j < m->v[i]->size_x)
 		{
 			if (dir < 0)
-			{
-				m->v[i][j].scr_x *= 0.9;
-				m->v[i][j].scr_y *= 0.9;
-				m->v[i][j].x *= 0.9;
-				m->v[i][j].y *= 0.9;
-				m->v[i][j].z *= 0.9;
-			}
+				apply_zoom(&m->v[i][j], -1);
 			else
-			{
-				m->v[i][j].scr_x /= 0.9;
-				m->v[i][j].scr_y /= 0.9;
-				m->v[i][j].x /= 0.9;
-				m->v[i][j].y /= 0.9;
-				m->v[i][j].z /= 0.9;
-			}
+				apply_zoom(&m->v[i][j], 1);
 		}
 		j = -1;
 	}
