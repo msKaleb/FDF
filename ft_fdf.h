@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 12:55:58 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:42:50 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@
 # ifdef __linux__
 #  include "mlx_linux/mlx.h"	// MLX for Linux
 #  define XK_ESCAPE 	0xff1b
+#  define XK_W 			0x77
 #  define XK_A 			0x61
+#  define XK_S 			0x73
 #  define XK_D 			0x64
+#  define XK_Q 			0x71
+#  define XK_E 			0x65
 #  define XK_UP			0xff52
 #  define XK_DOWN		0xff54
 #  define XK_LEFT		0xff51
@@ -110,10 +114,12 @@ typedef struct s_trig
 
 typedef struct s_cam
 {
-	int	x;
-	int	y;
-	int	z;
-	int	fov;
+	float	x;
+	float	y;
+	float	z;
+	float	pitch;
+	float	yaw;
+	int		fov;
 }				t_cam;
 
 /* Functions prototipes */
@@ -128,7 +134,7 @@ void			print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void			bresenham(t_vertex v1, t_vertex v2, t_mlx m);
 void			print_vertex(t_mlx m, t_trig t, int color);
 void			print_lines(t_vertex **v, t_mlx m);
-void			xyztoperspective(t_vertex **v);
+void			xyztoperspective(t_mlx *m);
 void			frame_map(t_vertex **v);
 void			xyztoiso(t_vertex **v);
 void			freemap(t_vertex **v);

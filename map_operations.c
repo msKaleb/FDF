@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 14:34:17 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/24 12:14:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void	rotate_map(t_vertex **v, t_mlx *m, float angle)
 		j = -1;
 	}
 	xyztoiso(m->v);
+	// xyztoperspective(m);
 	center_map(m);
 	print_lines(v, *m);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);

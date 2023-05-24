@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 12:36:55 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/24 10:46:05 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	get_max_len(char *line)
 
 	i = 0;
 	linexyz = ft_split(line, ' ');
-	while (linexyz[i] && ft_isalnum(linexyz[i][0]) != 0)
+	while (linexyz[i] && (ft_isalnum(linexyz[i][0]) != 0
+		|| linexyz[i][0] == '-'))
 			i++;
 	dblfree((void **)linexyz);
 	return (i);

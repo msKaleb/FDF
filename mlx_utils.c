@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 12:43:54 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:44:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	map_ops(int key_code, t_mlx *m)
 {
-	if (key_code == XK_A)
+	if (key_code == XK_Q)
 		rotate_map(m->v, m, 10);
-	if (key_code == XK_D)
+	if (key_code == XK_E)
 		rotate_map(m->v, m, -10);
-	if (key_code == XK_LEFT)
+	if (key_code == XK_A)
 		move_map(m, -50, 0);
-	if (key_code == XK_RIGHT)
+	if (key_code == XK_D)
 		move_map(m, 50, 0);
-	if (key_code == XK_UP)
+	if (key_code == XK_W)
 		move_map(m, 0, -50);
-	if (key_code == XK_DOWN)
+	if (key_code == XK_S)
 		move_map(m, 0, 50);
 	return (0);
 }

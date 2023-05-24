@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 12:42:50 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/24 12:14:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(int argc, char **argv)
 		return (error_exit(1));
 	m.v = read_map(fd, count_rows(argv[1]));
 	init_mlx(&m);
+	// xyztoperspective(&m);
+	// center_map(&m);
 	xyztoiso(m.v);
 	frame_map(m.v);
 	print_lines(m.v, m);
