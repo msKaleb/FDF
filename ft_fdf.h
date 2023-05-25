@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/25 07:13:16 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:41:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,22 @@
 # elif __APPLE__
 #  include "mlx/mlx.h"			// MLX for Mac
 #  define XK_ESCAPE 	0x35
-#  define XK_A 			0x61
-#  define XK_D 			0x64
+#  define XK_W 			0x0d
+#  define XK_A 			0x00
+#  define XK_S 			0x01
+#  define XK_D 			0x02
+#  define XK_Q 			0x0c
+#  define XK_E 			0x0e
+#  define XK_P 			0x23
+#  define XK_UP			0x7e
+#  define XK_DOWN		0x7e
+#  define XK_LEFT		0x7d
+#  define XK_RIGHT		0x7b
 # endif /* OS Check */
 
 /* Not defined in my distro */
 # ifndef M_PI
-#  define M_PI 3.14159265358979323846	// pi
+#  define M_PI 3.14159265358979323846
 # endif
 
 /* Some needed values */
