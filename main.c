@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/25 10:46:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:33:32 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int	error_exit(int code)
 {
 	if (code == 0)
-		ft_fprintf(2, "\e[1;31mUsage: ./fdf map.fdf. Exiting.\e[m\n");
+		ft_fprintf(2, "\e[1;31mUsage: ./fdf map.fdf.\e[m\n");
 	if (code == 1)
 		ft_fprintf(2, "\e[1;31mCould not read the file. Exiting.\e[m\n");
 	if (code == 2)
