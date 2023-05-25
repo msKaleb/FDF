@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/24 12:12:40 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/25 08:22:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ t_cam	init_camera(void)
 	t_cam	c;
 
 	c.x = 0;
-	c.y = -10;
-	c.z = 10;
+	c.y = 15;
+	c.z = 20;
 	c.fov = 90;
-	c.pitch = -20;
-	c.yaw = 20;
+	c.pitch = 0;
+	c.yaw = 0;
 	return (c);
 }
 /*
@@ -140,6 +140,8 @@ void	xyztoperspective(t_mlx *m)
 	c = init_camera();
 	i = -1;
 	j = -1;
+	mlx_destroy_image(m->mlx, m->img);
+	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
 	while (++i < m->v[0]->size_y)
 	{
 		while (++j < m->v[i]->size_x)
@@ -157,7 +159,40 @@ void	xyztoperspective(t_mlx *m)
 		}
 		j = -1;
 	}
+	center_map(m);
+	print_lines(m->v, *m);
+	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 }
+
+/* void	xyztoperspective(t_mlx *m)
+{
+	t_cam	c;
+	int		i;
+	int		j;
+	int		nx, ny;
+	
+	c = init_camera();
+	i = -1;
+	j = -1;
+	mlx_destroy_image(m->mlx, m->img);
+	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
+	while (++i < m->v[0]->size_y)
+	{
+		while (++j < m->v[i]->size_x)
+		{
+			m->v[i][j].scr_x = c.x / -c.y;
+			m->v[i][j].scr_y = c.z / -c.y;
+			nx = (m->v[i][j].scr_x + DEFAULT_X / 2) / DEFAULT_X;
+			ny = (m->v[i][j].scr_y + DEFAULT_Y / 2) / DEFAULT_Y;
+			m->v[i][j].scr_x = floorf(nx * DEFAULT_X);
+			m->v[i][j].scr_y = floorf((1 - ny) * DEFAULT_Y);
+		}
+		j = -1;
+	}
+	center_map(m);
+	print_lines(m->v, *m);
+	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
+} */
 
 /* void	xyztoperspective(t_vertex **v)
 {

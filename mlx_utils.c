@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/24 11:44:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/25 07:14:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	key_hook(int key_code, t_mlx *m)
 {
 	if (key_code == XK_ESCAPE)
 		close_mlx(m);
+	if (key_code == XK_P)
+		xyztoperspective(m);
 	else
 		map_ops(key_code, m);
 	return (0);

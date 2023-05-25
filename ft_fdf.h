@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/24 11:42:50 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/25 07:13:16 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #  define XK_D 			0x64
 #  define XK_Q 			0x71
 #  define XK_E 			0x65
+#  define XK_P 			0x70
 #  define XK_UP			0xff52
 #  define XK_DOWN		0xff54
 #  define XK_LEFT		0xff51
