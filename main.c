@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/25 11:33:32 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:08:53 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (error_exit(1));
-	m.v = read_map(fd, count_rows(argv[1]));
 	init_mlx(&m);
+	m.v = read_map(fd, count_rows(argv[1]));
 	// xyztoperspective(&m);
 	// center_map(&m);
 	xyztoiso(m.v);

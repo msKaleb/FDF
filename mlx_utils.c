@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/25 11:55:17 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:20:00 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,14 @@ int	mouse_hook(int button, int x, int y, t_mlx *m)
 void	init_mlx(t_mlx *m)
 {
 	m->mlx = mlx_init();
+	if (m->mlx == NULL)
+		exit (error_exit(2));
 	m->win = mlx_new_window(m->mlx, DEFAULT_X, DEFAULT_Y, \
 		"FDF Project - msoria-j");
+	if (m->win == NULL)
+		exit (error_exit(2));
 	m->img = mlx_new_image(m->mlx, DEFAULT_X, DEFAULT_Y);
+	if (m->img == NULL)
+		exit (error_exit(2));
 	m->addr = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->endian);
 }

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/25 11:51:50 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:52:55 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,21 @@
 */
 int	count_rows(char *map)
 {
+	char	*line;
 	int		rows;
 	int		fd;
 
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
-		perror("Error");
+		exit (error_exit(1));
 	rows = 0;
-	while (get_next_line(fd) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
 		rows++;
+		line = get_next_line(fd);
+	}
 	close(fd);
 	return (rows);
 }
