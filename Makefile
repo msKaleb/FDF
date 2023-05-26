@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/19 11:29:54 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/26 11:57:24 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ ifeq ($(OS), Linux)
 else ifeq ($(OS), Darwin)
 # Mac (-lm compiler option)
 	ECHO = echo
-	CCOBJ = -Wall -Wextra -Werror -Imlx -c $< -o $@
+	CCOBJ = -g -O0 -Wall -Wextra -Werror -Imlx -c $< -o $@
 	FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 	MLXDIR = mlx/
 	MLX = $(MLXDIR)libmlx.a

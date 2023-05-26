@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/26 11:20:00 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:14:58 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	close_mlx(t_mlx *m)
 	freemap(m->v);
 	mlx_destroy_image(m->mlx, m->img);
 	mlx_destroy_window(m->mlx, m->win);
-	free(m->mlx);
+	// free(m->mlx);
 	system("leaks fdf"); // quitar
 	exit(EXIT_SUCCESS);
 }
