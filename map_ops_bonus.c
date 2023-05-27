@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:12:37 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:48:19 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,25 @@ void	center_map(t_mlx *m)
 		j = -1;
 	}
 }
-		
+
 void	apply_zoom(t_vertex *v, int dir)
 {
 	if (dir < 0)
-		{
-			v->scr_x *= 0.9;
-			v->scr_y *= 0.9;
-			v->x *= 0.9;
-			v->y *= 0.9;
-			v->z *= 0.9;
-		}
+	{
+		v->scr_x *= 0.9;
+		v->scr_y *= 0.9;
+		v->x *= 0.9;
+		v->y *= 0.9;
+		v->z *= 0.9;
+	}
 	else
-		{
-			v->scr_x /= 0.9;
-			v->scr_y /= 0.9;
-			v->x /= 0.9;
-			v->y /= 0.9;
-			v->z /= 0.9;
-		}
+	{
+		v->scr_x /= 0.9;
+		v->scr_y /= 0.9;
+		v->x /= 0.9;
+		v->y /= 0.9;
+		v->z /= 0.9;
+	}
 }
 
 void	zoom(t_mlx *m, int x, int y, int dir)

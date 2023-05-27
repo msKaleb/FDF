@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 09:44:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:12:32 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:51:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ t_cam	init_camera(void)
 	c.yaw = 0;
 	return (c);
 }
+
 /*
-*TODO:
-**		put pitch and yaw in cam struct
 *Function to implement Joe Iddon's method to represent
 *vertices in screen (provisional) - (BROKEN)
 */
@@ -35,7 +34,7 @@ void	xyztoperspective(t_mlx *m)
 	t_cam	c;
 	int		i;
 	int		j;
-	
+
 	c = init_camera();
 	i = -1;
 	j = -1;
@@ -46,15 +45,13 @@ void	xyztoperspective(t_mlx *m)
 		while (++j < m->v[i]->size_x)
 		{
 			c.yaw = (atan2(m->v[i][j].x - c.x, m->v[i][j].y - c.y)
-				* (180 / M_PI));
+					* (180 / M_PI));
 			c.pitch = (atan2(m->v[i][j].z - c.z, m->v[i][j].y - c.y)
-				* (180 / M_PI));
+					* (180 / M_PI));
 			m->v[i][j].scr_x = DEFAULT_X / 2
 				+ (c.yaw * (DEFAULT_X / c.fov));
 			m->v[i][j].scr_y = DEFAULT_Y / 2
 				- (c.pitch * (DEFAULT_X / c.fov));
-			printf("%f - %f\n", c.yaw, c.pitch);
-			printf("%f - %f\n", m->v[i][j].scr_x, m->v[i][j].scr_y);
 		}
 		j = -1;
 	}
