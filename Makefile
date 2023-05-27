@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/27 14:47:55 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/27 14:51:11 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,11 +113,11 @@ pre-build-bonus:
 %.o: %.c
 	 		$(CC) $(CCOBJ)
 
-$(NAME):	pre-build $(OBJ)
+$(NAME):	pre-build $(OBJ) $(OBJ_M)
 			$(CC) $(FLAGS) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
-bonus:		pre-build-bonus $(OBJ) $(OBJ_B)
+bonus:		pre-build-bonus $(OBJ) $(OBJ_B) $(OBJ_MB)
 			$(CC) $(FLAGS) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 			
