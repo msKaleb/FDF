@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:28:48 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:43:45 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,15 @@
 # define DEFAULT_Y 		768.0		// float type for trig operations
 
 /* Events and values for mlx_hook */
-enum e_events{
+# define ON_KEYDOWN		2
+# define ON_KEYUP		3
+# define ON_MOUSEDOWN	4
+# define ON_MOUSEUP		5
+# define ON_MOUSEMOVE	6
+# define ON_EXPOSE		12
+# define ON_DESTROY		17
+# define X_MASK			131072 // (1L << 17), for Linux
+/* enum e_events{
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -72,7 +80,7 @@ enum e_events{
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17,
 	X_MASK = (1L << 17)
-};
+}; */
 
 typedef struct s_map_limits
 {
@@ -155,7 +163,6 @@ float			ft_fabs(float nbr);
 
 int				mouse_hook(int button, int x, int y, t_mlx *m);
 int				key_hook(int key_code, t_mlx *m);
-int				gradient(t_trig t, float position);
 int				count_rows(char *map);
 int				error_exit(int code);
 int				get_color(char *str);

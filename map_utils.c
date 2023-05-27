@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:07:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/26 10:52:55 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:32:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	count_rows(char *map)
 /*
 *Function to get the coordinates of each line in the map
 */
-t_vertex	*get_coords(char **line, int y, int rows, int max_len)
+static t_vertex	*get_coords(char **line, int y, int rows, int max_len)
 {
 	t_vertex	*v;
 	int			i;
@@ -71,7 +71,7 @@ t_vertex	*get_coords(char **line, int y, int rows, int max_len)
 *Gets the length of the first line, and this is
 *the one taken into account across the map.
 */
-int	get_max_len(char *line)
+static int	get_max_len(char *line)
 {
 	char	**linexyz;
 	int		i;

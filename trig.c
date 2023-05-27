@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:30:22 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 09:44:40 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:35:21 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 *(0xBADA55 >> 8)	= 0xBADA 	& 0xFF = 0xDA - Green
 *(0xBADA55 >> 0)	= 0xBADA55 	& 0xFF = 0x55 - Blue
 */
-int	gradient(t_trig t, float position)
+static int	gradient(t_trig t, float position)
 {
 	int	color;
 	int	red;
@@ -43,7 +43,7 @@ int	gradient(t_trig t, float position)
 /*
 *For predominantly horizontal lines
 */
-void	bresenham_horizontal(t_mlx m, t_trig t)
+static void	bresenham_horizontal(t_mlx m, t_trig t)
 {
 	float	pos;
 	int		sign_dy;
@@ -72,7 +72,7 @@ void	bresenham_horizontal(t_mlx m, t_trig t)
 /*
 *For predominantly vertical lines
 */
-void	bresenham_vertical(t_mlx m, t_trig t)
+static void	bresenham_vertical(t_mlx m, t_trig t)
 {
 	float	pos;
 	int		sign_dy;

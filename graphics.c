@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/24 10:46:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:27:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	xyztoiso(t_vertex **v)
 *Converts every hexadecimal color that is not in the format
 *of 0xFFFFFF (eg 0xff -> 0x0000FF or 0xff00 -> 0x00FF00)
 */
-char	*parse_color(char *str)
+static char	*parse_color(char *str)
 {
 	char	*color;
 	int		i;
@@ -132,14 +132,3 @@ void	print_lines(t_vertex **v, t_mlx m)
 		j = -1;
 	}
 }
-
-/* void	xyztoiso(t_vertex *v)
-{
-	int		scr_x;
-	int		scr_y;
-
-	scr_x = (v->x - v->y) * cos(TRUE_ISO);
-	scr_y = -v->z + (v->x + v->y) * sin(TRUE_ISO);
-	v->x = scr_x;
-	v->y = scr_y;
-} */

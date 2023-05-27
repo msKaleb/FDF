@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:48:19 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:30:04 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	center_map(t_mlx *m)
 	}
 }
 
-void	apply_zoom(t_vertex *v, int dir)
+static void	apply_zoom(t_vertex *v, int dir)
 {
 	if (dir < 0)
 	{

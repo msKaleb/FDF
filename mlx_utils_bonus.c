@@ -6,13 +6,13 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:32:40 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:34:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf_bonus.h"
 
-int	map_ops(int key_code, t_mlx *m)
+static int	map_ops(int key_code, t_mlx *m)
 {
 	if (key_code == XK_Q)
 		rotate_map(m->v, m, 10);

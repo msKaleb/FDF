@@ -6,13 +6,13 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 09:44:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:51:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:34:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf_bonus.h"
 
-t_cam	init_camera(void)
+static t_cam	init_camera(void)
 {
 	t_cam	c;
 

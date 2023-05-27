@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/27 13:42:51 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/27 14:47:55 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,11 @@ SRC_B	=	map_ops_bonus.c \
 
 OBJ		=	$(SRC:.c=.o)
 
+OBJ_M	=	$(MAIN:.c=.o)
+
 OBJ_B	=	$(SRC_B:.c=.o)
+
+OBJ_MB	=	$(MAIN_B:.c=.o)
 
 CC		=	gcc
 
@@ -101,24 +105,24 @@ pre-build:
 			make -sC $(MLXDIR)
 
 pre-build-bonus:
-				make bonus -sC LibFT/
-				$(ECHO) $(BLUE) "$$HEADER" $(NONE)
-				$(ECHO) $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
-				make -sC $(MLXDIR)
+			make bonus -sC LibFT/
+			$(ECHO) $(BLUE) "$$HEADER" $(NONE)
+			$(ECHO) $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
+			make -sC $(MLXDIR)
 				
 %.o: %.c
 	 		$(CC) $(CCOBJ)
 
 $(NAME):	pre-build $(OBJ)
-			$(CC) $(FLAGS) $(MAIN) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+			$(CC) $(FLAGS) $(OBJ_M) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
 bonus:		pre-build-bonus $(OBJ) $(OBJ_B)
-			$(CC) $(FLAGS) $(MAIN_B) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) -o $(NAME)
+			$(CC) $(FLAGS) $(OBJ_MB) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 			
 clean:
-			$(RM) $(OBJ)
+			$(RM) $(OBJ) $(OBJ_B) $(OBJ_M) $(OBJ_MB)
 			make clean -sC LibFT/
 			make clean -sC $(MLXDIR)
 			
@@ -128,4 +132,4 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus pre-build pre-build-bonus

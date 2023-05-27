@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 12:44:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:34:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ For debugging purposes
 Gets the decision_parameter variable depending on the trajectory
 of the line: predominantly horizontal or predominantly vertical
 */
-void	get_deltas(t_trig *t)
+static void	get_deltas(t_trig *t)
 {
 	if (ft_abs(t->dy) > ft_abs(t->dx))
 	{

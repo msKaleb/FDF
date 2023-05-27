@@ -6,13 +6,13 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:07 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/23 12:54:08 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:29:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
-void	init_ml(t_map_limits *ml)
+static void	init_ml(t_map_limits *ml)
 {
 	ml->xmax = INT_MIN;
 	ml->xmin = INT_MAX;
@@ -49,7 +49,7 @@ t_map_limits	get_limits(t_vertex **v)
 	return (ml);
 }
 
-void	negtopos(t_vertex **v, t_map_limits ml)
+static void	negtopos(t_vertex **v, t_map_limits ml)
 {
 	int	i;
 	int	j;
@@ -83,7 +83,7 @@ For debugging purposes
 /*
 *Return the scaling factor, acording to the aspect ratio of the map.
 */
-float	scaling_factor(t_map_limits ml)
+static float	scaling_factor(t_map_limits ml)
 {
 	if ((ml.map_width / ml.map_height) > (DEFAULT_X / DEFAULT_Y))
 		return (DEFAULT_X / ml.map_width);
