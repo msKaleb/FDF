@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/26 11:57:24 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/27 13:42:51 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,17 +33,25 @@ OS		=	$(shell uname -s)
 
 NAME	=	fdf
 
-SRC		=	main.c \
-			utils.c \
+MAIN	=	main.c \
+			mlx_utils.c
+
+SRC		=	utils.c \
 			graphics.c \
 			trig.c \
 			trig_utils.c \
 			map_utils.c \
-			mlx_utils.c \
-			map_operations.c \
 			frame_map.c
 			
+MAIN_B	=	main_bonus.c
+
+SRC_B	=	map_ops_bonus.c \
+			mlx_utils_bonus.c \
+			perspective_bonus.c
+
 OBJ		=	$(SRC:.c=.o)
+
+OBJ_B	=	$(SRC_B:.c=.o)
 
 CC		=	gcc
 
@@ -87,26 +95,36 @@ endif
 all:		$(NAME)
 
 pre-build:
-			@make bonus -sC LibFT/
+			make bonus -sC LibFT/
 			$(ECHO) $(CYAN) "$$HEADER" $(NONE)
 			$(ECHO) $(GREEN)$(ITALIC) "	Compiling $(NAME)..."$(NONE)
-			@make -sC $(MLXDIR)
+			make -sC $(MLXDIR)
 
+pre-build-bonus:
+				make bonus -sC LibFT/
+				$(ECHO) $(BLUE) "$$HEADER" $(NONE)
+				$(ECHO) $(MAGENTA)$(ITALIC) "	Compiling $(NAME) (Bonus)..."$(NONE)
+				make -sC $(MLXDIR)
+				
 %.o: %.c
 	 		$(CC) $(CCOBJ)
 
 $(NAME):	pre-build $(OBJ)
-			$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
+			$(CC) $(FLAGS) $(MAIN) $(OBJ) $(LIBFT) $(MLX) -o $(NAME)
 			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
 
+bonus:		pre-build-bonus $(OBJ) $(OBJ_B)
+			$(CC) $(FLAGS) $(MAIN_B) $(OBJ) $(OBJ_B) $(LIBFT) $(MLX) -o $(NAME)
+			$(ECHO) $(BRIGHT_WHITE)$(BOLD)"\tDone!"$(NONE)
+			
 clean:
 			$(RM) $(OBJ)
-			@make clean -sC LibFT/
+			make clean -sC LibFT/
 			make clean -sC $(MLXDIR)
 			
 fclean:		clean
 			$(RM) $(NAME)
-			@make fclean -sC LibFT/
+			make fclean -sC LibFT/
 
 re:			fclean $(NAME)
 

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fdf.h                                           :+:      :+:    :+:   */
+/*   ft_fdf_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:28:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:28:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FDF_H
-# define FT_FDF_H
+#ifndef FT_FDF_BONUS_H
+# define FT_FDF_BONUS_H
 
 # include "LibFT/libft.h"
 # include <stdio.h>
@@ -162,4 +162,9 @@ int				get_color(char *str);
 int				close_mlx(t_mlx *m);
 int				ft_abs(int n);
 
-#endif /* FT_FDF_H */
+/* Bonus part */
+void			rotate_map(t_vertex **v, t_mlx *m, float angle);
+void			zoom(t_mlx *m, int x, int y, int dir);
+void			move_map(t_mlx *m, int x, int y);
+
+#endif /* FT_FDF_BONUS_H */

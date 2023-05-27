@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_operations.c                                   :+:      :+:    :+:   */
+/*   map_ops_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/24 12:14:30 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:12:37 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fdf.h"
+#include "ft_fdf_bonus.h"
 
 void	center_map(t_mlx *m)
 {
@@ -33,23 +33,6 @@ void	center_map(t_mlx *m)
 		j = -1;
 	}
 }
-
-/* 	if (dir < 0)
-		{
-			m->v[i][j].scr_x *= 0.9;
-			m->v[i][j].scr_y *= 0.9;
-			m->v[i][j].x *= 0.9;
-			m->v[i][j].y *= 0.9;
-			m->v[i][j].z *= 0.9;
-		}
-	else
-		{
-			m->v[i][j].scr_x /= 0.9;
-			m->v[i][j].scr_y /= 0.9;
-			m->v[i][j].x /= 0.9;
-			m->v[i][j].y /= 0.9;
-			m->v[i][j].z /= 0.9;
-		} */
 		
 void	apply_zoom(t_vertex *v, int dir)
 {
@@ -143,7 +126,6 @@ void	rotate_map(t_vertex **v, t_mlx *m, float angle)
 		j = -1;
 	}
 	xyztoiso(m->v);
-	// xyztoperspective(m);
 	center_map(m);
 	print_lines(v, *m);
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:28:05 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/25 11:26:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:16:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,24 @@ float	ft_fabs(float nbr)
 		return (-nbr);
 	else
 		return (nbr);
+}
+
+/*
+*Error management. List of codes:
+**	0 = Wrong number of arguments
+**	1 = Error upon opening file
+**	2 = Error on memory allocation
+**	3 = Wrong fdf format
+*/
+int	error_exit(int code)
+{
+	if (code == 0)
+		ft_fprintf(2, "\e[1;31mUsage: ./fdf map.fdf.\e[m\n");
+	if (code == 1)
+		ft_fprintf(2, "\e[1;31mCould not read the file. Exiting.\e[m\n");
+	if (code == 2)
+		ft_fprintf(2, "\e[1;31mError on malloc operation. Exiting.\e[m\n");
+	if (code == 3)
+		ft_fprintf(2, "\e[1;31mFound wrong line length. Exiting.\e[m\n");
+	return (EXIT_FAILURE);
 }
