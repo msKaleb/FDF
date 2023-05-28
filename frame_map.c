@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:07 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 14:29:12 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/28 11:53:20 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static void	negtopos(t_vertex **v, t_map_limits ml)
 	{
 		while (++j < v[i]->size_x)
 		{
-			v[i][j].scr_x += ft_fabs(ml.xmin);
-			v[i][j].scr_y += ft_fabs(ml.ymin);
+			v[i][j].scr_x += ft_abs(ml.xmin);
+			v[i][j].scr_y += ft_abs(ml.ymin);
 		}
 		j = -1;
 	}

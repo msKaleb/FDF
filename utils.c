@@ -6,12 +6,15 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:28:05 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:48:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/28 12:01:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
+/*
+*Iterate through the array freeing all the vertices
+*/
 void	freemap(t_vertex **v)
 {
 	int	i;
@@ -44,19 +47,9 @@ void	dblfree(void **var)
 }
 
 /*
-*Simple function to get the absolute value of a number (int)
+*Simple function to get the absolute value of a number
 */
-int	ft_abs(int n)
-{
-	if (n < 0)
-		return (n * -1);
-	return (n);
-}
-
-/*
-*Simple function to get the absolute value of a number (float)
-*/
-float	ft_fabs(float nbr)
+float	ft_abs(float nbr)
 {
 	if (nbr < 0)
 		return (-nbr);

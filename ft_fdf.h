@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 14:37:53 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/28 12:03:19 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void			center_map(t_mlx *m);
 void			dblfree(void **var);
 void			init_mlx(t_mlx *m);
 
-float			ft_fabs(float nbr);
+float			ft_abs(float nbr);
 
 int				mouse_hook(int button, int x, int y, t_mlx *m);
 int				key_hook(int key_code, t_mlx *m);
@@ -156,6 +156,5 @@ int				count_rows(char *map);
 int				error_exit(int code);
 int				get_color(char *str);
 int				close_mlx(t_mlx *m);
-int				ft_abs(int n);
 
 #endif /* FT_FDF_H */
