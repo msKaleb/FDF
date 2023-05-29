@@ -6,12 +6,15 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:32:07 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/28 11:53:20 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/29 08:26:17 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 
+/*
+*Default values are set before iterating the array.
+*/
 static void	init_ml(t_map_limits *ml)
 {
 	ml->xmax = INT_MIN;
@@ -20,6 +23,10 @@ static void	init_ml(t_map_limits *ml)
 	ml->ymin = INT_MAX;
 }
 
+/*
+*Get the boundaries of the map, as well as the width and height
+*to know the aspect ratio of the map.
+*/
 t_map_limits	get_limits(t_vertex **v)
 {
 	t_map_limits	ml;
@@ -49,6 +56,11 @@ t_map_limits	get_limits(t_vertex **v)
 	return (ml);
 }
 
+/*
+*If any vertex is in negative value, move the whole map so that the lowest
+*vertex value (x or y) is 0. Used to properly frame the map after applying
+*the scaling factor.
+*/
 static void	negtopos(t_vertex **v, t_map_limits ml)
 {
 	int	i;

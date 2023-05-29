@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/27 14:51:11 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/29 08:26:59 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,6 @@ BRIGHT_WHITE=$(COLOR)97m
 
 ifndef VERBOSE
 	MAKEFLAGS += --silent
-#	MAKEFLAGS += --no-print-directory
 endif
 
 all:		$(NAME)
