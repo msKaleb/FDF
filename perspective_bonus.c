@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 09:44:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 14:34:30 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:31:16 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static t_cam	init_camera(void)
 	t_cam	c;
 
 	c.x = 0;
-	c.y = 15;
-	c.z = 20;
+	c.y = 0;
+	c.z = 0;
 	c.fov = 90;
 	c.pitch = 0;
 	c.yaw = 0;
@@ -44,14 +44,18 @@ void	xyztoperspective(t_mlx *m)
 	{
 		while (++j < m->v[i]->size_x)
 		{
-			c.yaw = (atan2(m->v[i][j].x - c.x, m->v[i][j].y - c.y)
+			 c.yaw = (atan2(m->v[i][j].x - c.x, m->v[i][j].y - c.y)
 					* (180 / M_PI));
 			c.pitch = (atan2(m->v[i][j].z - c.z, m->v[i][j].y - c.y)
 					* (180 / M_PI));
-			m->v[i][j].scr_x = DEFAULT_X / 2
-				+ (c.yaw * (DEFAULT_X / c.fov));
-			m->v[i][j].scr_y = DEFAULT_Y / 2
-				- (c.pitch * (DEFAULT_X / c.fov));
+			// m->v[i][j].scr_x = DEFAULT_X / 2
+			// 	+ (c.yaw * (DEFAULT_X / c.fov));
+			// m->v[i][j].scr_y = DEFAULT_Y / 2
+			// 	- (c.pitch * (DEFAULT_X / c.fov));
+			// m->v[i][j].scr_x = m->v[i][j].x; //(m->v[i][j].x - m->v[i][j].y) * cos(ISO);
+			// m->v[i][j].scr_y = m->v[i][j].y; //(m->v[i][j].x + m->v[i][j].y) * sin(ISO) - m->v[i][j].z;
+			m->v[i][j].scr_x = (m->v[i][j].scr_x) / (m->v[i][j].y + 1);
+			m->v[i][j].scr_y = (m->v[i][j].scr_x) / (m->v[i][j].y + 1);
 		}
 		j = -1;
 	}

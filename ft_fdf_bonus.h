@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/28 12:01:41 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:42:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,5 +172,7 @@ int				close_mlx(t_mlx *m);
 void			rotate_map(t_vertex **v, t_mlx *m, float angle);
 void			zoom(t_mlx *m, int x, int y, int dir);
 void			move_map(t_mlx *m, int x, int y);
-
+void			parallel(int view, t_mlx *m);
+void			parallel_right(t_mlx *m);
+void			parallel_left(t_mlx *m);
 #endif /* FT_FDF_BONUS_H */

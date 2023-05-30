@@ -6,13 +6,9 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/29 08:26:59 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/05/30 12:12:56 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# TODO: 
-# Compile mlx library trhough this Makefile, instead of using their ./configure script.
-# Change compilation flags according to the OS in which is being run.
 
 define HEADER
 
@@ -26,7 +22,7 @@ define HEADER
 endef
 export HEADER
 
-# $@ = Name of the target
+# $@ = Name of the target (each file .o)
 # $< = First prerequisite name - in this case, in $(SRC)
 
 OS		=	$(shell uname -s)
@@ -41,13 +37,14 @@ SRC		=	utils.c \
 			trig.c \
 			trig_utils.c \
 			map_utils.c \
-			frame_map.c
+			frame_map.c \
 			
 MAIN_B	=	main_bonus.c
 
 SRC_B	=	map_ops_bonus.c \
 			mlx_utils_bonus.c \
-			perspective_bonus.c
+			perspective_bonus.c \
+			parallel_bonus.c \
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -71,8 +68,9 @@ ifeq ($(OS), Linux)
 	MLX = $(MLXDIR)libmlx_Linux.a
 else ifeq ($(OS), Darwin)
 # Mac (-lm compiler option)
+# Add -g -O0 in CCOBJ for debugging
 	ECHO = echo
-	CCOBJ = -g -O0 -Wall -Wextra -Werror -Imlx -c $< -o $@
+	CCOBJ = -Wall -Wextra -Werror -Imlx -c $< -o $@
 	FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 	MLXDIR = mlx/
 	MLX = $(MLXDIR)libmlx.a

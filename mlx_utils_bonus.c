@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:11:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 14:34:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:42:36 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ int	key_hook(int key_code, t_mlx *m)
 		close_mlx(m);
 	if (key_code == XK_P)
 		xyztoperspective(m);
+	if (key_code == XK_UP || key_code == XK_DOWN)
+		parallel(key_code, m);
+	if (key_code == XK_LEFT)
+		parallel_left(m);
+	if (key_code == XK_RIGHT)
+		parallel_right(m);
 	else
 		map_ops(key_code, m);
 	return (0);
