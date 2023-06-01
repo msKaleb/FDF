@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:54:01 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/30 10:02:30 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/01 07:45:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,19 @@ t_trig	init_trig_var(t_vertex v1, t_vertex v2)
 
 	if (v2.scr_x < v1.scr_x)
 	{
-		t.x1 = v2.scr_x;
-		t.y1 = v2.scr_y;
-		t.x2 = v1.scr_x;
-		t.y2 = v1.scr_y;
+		t.x1 = roundf(v2.scr_x);
+		t.y1 = roundf(v2.scr_y);
+		t.x2 = roundf(v1.scr_x);
+		t.y2 = roundf(v1.scr_y);
 		t.scolor = v2.color;
 		t.fcolor = v1.color;
 	}
 	else
 	{
-		t.x1 = v1.scr_x;
-		t.y1 = v1.scr_y;
-		t.x2 = v2.scr_x;
-		t.y2 = v2.scr_y;
+		t.x1 = roundf(v1.scr_x);
+		t.y1 = roundf(v1.scr_y);
+		t.x2 = roundf(v2.scr_x);
+		t.y2 = roundf(v2.scr_y);
 		t.scolor = v1.color;
 		t.fcolor = v2.color;
 	}

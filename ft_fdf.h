@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/28 12:03:19 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:04:13 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,6 @@
 # define ON_EXPOSE		12
 # define ON_DESTROY		17
 # define X_MASK			131072 // (1L << 17), for Linux
-/* enum e_events{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17,
-	X_MASK = (1L << 17)
-}; */
 
 typedef struct s_map_limits
 {

@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 14:27:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:10:44 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_vertex(t_mlx m, t_trig t, int color)
 		return ;
 	offset = (t.y1 * m.sl) + (t.x1 * (m.bpp / 8));
 	ptr = m.addr + offset;
-	*(unsigned int *)ptr = color;
+	*(unsigned int *)ptr = mlx_get_color_value(m.mlx, color);
 }
 
 /* 
@@ -61,8 +61,8 @@ void	xyztoiso(t_vertex **v)
 }
 
 /*
-*Converts every hexadecimal color that is not in the format
-*of 0xFFFFFF (eg 0xff -> 0x0000FF or 0xff00 -> 0x00FF00)
+*Converts every hexadecimal color that is not in the format '0xFFFFFF'
+*(eg 0xff -> 0x0000FF or 0xff00 -> 0x00FF00)
 */
 static char	*parse_color(char *str)
 {
@@ -85,8 +85,7 @@ static char	*parse_color(char *str)
 }
 
 /*
-*TODO:
-**		Check the use of mlx_get_color_value()
+*Read the color of the vertex stored in the map
 */
 int	get_color(char *str)
 {

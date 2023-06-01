@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/30 12:42:25 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:47:38 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@
 # endif
 
 /* Some needed values */
+# define LEFT 			0
+# define RIGHT			1
+# define FRONT			2
+# define TOP			3
 # define DEFAULT_COLOR 	0xBADA55	// Badass color
 # define TRUE_ISO 		0.523599	// 30º angle
 # define ISO 			0.46373398	// 26.57º angle
@@ -71,16 +75,6 @@
 # define ON_EXPOSE		12
 # define ON_DESTROY		17
 # define X_MASK			131072 // (1L << 17), for Linux
-/* enum e_events{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17,
-	X_MASK = (1L << 17)
-}; */
 
 typedef struct s_map_limits
 {
@@ -91,6 +85,7 @@ typedef struct s_map_limits
 	float	map_width;
 	float	map_height;
 }				t_map_limits;
+
 typedef struct s_vertex
 {
 	float	x;
@@ -113,6 +108,7 @@ typedef struct s_mlx
 	int			bpp;
 	int			sl;
 	int			endian;
+	int			projection;
 }				t_mlx;
 
 typedef struct s_trig
@@ -175,4 +171,5 @@ void			move_map(t_mlx *m, int x, int y);
 void			parallel(int view, t_mlx *m);
 void			parallel_right(t_mlx *m);
 void			parallel_left(t_mlx *m);
+void			project(t_mlx *m);
 #endif /* FT_FDF_BONUS_H */
