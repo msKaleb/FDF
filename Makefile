@@ -6,7 +6,7 @@
 #    By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/22 09:00:15 by msoria-j          #+#    #+#              #
-#    Updated: 2023/05/30 12:12:56 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/06/02 08:06:10 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OS		=	$(shell uname -s)
 NAME	=	fdf
 
 MAIN	=	main.c \
-			mlx_utils.c
+			mlx_utils.c \
 
 SRC		=	utils.c \
 			graphics.c \
@@ -43,7 +43,6 @@ MAIN_B	=	main_bonus.c
 
 SRC_B	=	map_ops_bonus.c \
 			mlx_utils_bonus.c \
-			perspective_bonus.c \
 			parallel_bonus.c \
 
 OBJ		=	$(SRC:.c=.o)

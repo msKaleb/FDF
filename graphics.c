@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:33:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/31 10:10:44 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:19:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*parse_color(char *str)
 	len = ft_strlen(str);
 	if (ft_isalnum(str[len - 1]) == 0)
 		len--;
-	i = 6;
+	i = 5;
 	while (i--)
 		color[i] = '0';
 	i = 5;

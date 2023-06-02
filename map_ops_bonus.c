@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 14:30:04 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:23:43 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void	zoom(t_mlx *m, int x, int y, int dir)
 	mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
 }
 
+/*
+*Apply the given offset to each vertex in the map.
+*/
 void	move_map(t_mlx *m, int x, int y)
 {
 	int		i;
@@ -99,6 +102,7 @@ void	move_map(t_mlx *m, int x, int y)
 }
 
 /*
+*Rotate the map using rotation matrices.
 *tmp[0] = tmpx
 *tmp[1] = tmpy
 */

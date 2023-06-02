@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/31 09:47:38 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:15:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,16 +126,6 @@ typedef struct s_trig
 	int	fcolor;
 }				t_trig;
 
-typedef struct s_cam
-{
-	float	x;
-	float	y;
-	float	z;
-	float	pitch;
-	float	yaw;
-	int		fov;
-}				t_cam;
-
 /* Functions prototipes */
 t_map_limits	get_limits(t_vertex **v);
 
@@ -143,7 +133,6 @@ t_vertex		**read_map(int fd, int rows);
 
 t_trig			init_trig_var(t_vertex v1, t_vertex v2);
 
-void			print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void			bresenham(t_vertex v1, t_vertex v2, t_mlx m);
 void			print_vertex(t_mlx m, t_trig t, int color);
 void			print_lines(t_vertex **v, t_mlx m);
@@ -172,4 +161,5 @@ void			parallel(int view, t_mlx *m);
 void			parallel_right(t_mlx *m);
 void			parallel_left(t_mlx *m);
 void			project(t_mlx *m);
+
 #endif /* FT_FDF_BONUS_H */

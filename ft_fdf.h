@@ -6,7 +6,7 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/31 10:04:13 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:15:10 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ t_vertex		**read_map(int fd, int rows);
 
 t_trig			init_trig_var(t_vertex v1, t_vertex v2);
 
-void			print_line(t_vertex v1, t_vertex v2, t_mlx m, t_trig t);
 void			bresenham(t_vertex v1, t_vertex v2, t_mlx m);
 void			print_vertex(t_mlx m, t_trig t, int color);
 void			print_lines(t_vertex **v, t_mlx m);

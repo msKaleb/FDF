@@ -6,17 +6,12 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 10:42:58 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/27 13:29:36 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:22:10 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_fdf.h"
 
-/*
-* TODO:
-**  	Implement perspective projection
-**		Adapt to Norm (static functions)
-*/
 int	main(int argc, char **argv)
 {
 	t_mlx		m;
