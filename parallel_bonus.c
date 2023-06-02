@@ -6,36 +6,11 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:46:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/05/30 13:14:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:44:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf_bonus.h"
-
-/* static void	get_scr_coordinates(t_mlx *m, int view)
-{
-	float	angle_rad;
-	float	tmp[2];
-
-	angle_rad = 90 * (M_PI / 180);
-	if (view == XK_UP)
-	{
-		m->v[i][j].scr_x = m->v[i][j].x;
-		m->v[i][j].scr_y = m->v[i][j].y;
-	}
-	else if (view == XK_LEFT)
-	{
-		tmp[0] = m->v[i][j].x;
-		tmp[1] = m->v[i][j].y;
-		m->v[i][j].x = tmp[0] * cos(angle_rad) + tmp[1] * sin(angle_rad);
-		m->v[i][j].y = -tmp[0] * sin(angle_rad) + tmp[1] * cos(angle_rad);
-	}
-	else if (view == XK_DOWN)
-	{
-		m->v[i][j].scr_x = m->v[i][j].x;
-		m->v[i][j].scr_y = -m->v[i][j].z;
-	}
-} */
 
 void	parallel_right(t_mlx *m)
 {

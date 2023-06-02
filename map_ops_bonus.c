@@ -6,12 +6,16 @@
 /*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:27:31 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/06/02 08:23:43 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 08:39:57 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf_bonus.h"
 
+/*
+*To center the map, we first put each vertex to the previous smallest
+*position, and then move it to its respective center of the screen.
+*/
 void	center_map(t_mlx *m)
 {
 	t_map_limits	ml;
@@ -34,6 +38,10 @@ void	center_map(t_mlx *m)
 	}
 }
 
+/*
+*Function to actually apply the zoom. It is called in every iteration
+*through the array/map.
+*/
 static void	apply_zoom(t_vertex *v, int dir)
 {
 	if (dir < 0)
@@ -54,6 +62,10 @@ static void	apply_zoom(t_vertex *v, int dir)
 	}
 }
 
+/*
+*For zooming in and out, either multiply or divide by 0.9, depending
+*on the direction. Next re-center the map.
+*/
 void	zoom(t_mlx *m, int x, int y, int dir)
 {
 	int		i;
