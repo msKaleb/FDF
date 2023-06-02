@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdf_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j < msoria-j@student.42urduliz.c    +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 17:19:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/06/02 08:15:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:01:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@
 #  define XK_E 			0x0e
 #  define XK_P 			0x23
 #  define XK_UP			0x7e
-#  define XK_DOWN		0x7e
-#  define XK_LEFT		0x7d
-#  define XK_RIGHT		0x7b
+#  define XK_DOWN		0x7d
+#  define XK_LEFT		0x7b
+#  define XK_RIGHT		0x7c
 # endif /* OS Check */
 
 /* Not defined in my distro */
