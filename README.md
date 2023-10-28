@@ -7,7 +7,9 @@ This project uses trigonometric transformations to place 3dimensional vertices (
 (like Bresenham algorithm to draw the lines between two points, or linear gradient to change smoothly from one color to another)
 
 ## Examples
-
+![screenshot](https://raw.githubusercontent.com/msKaleb/FDF/main/img/fdf_01.png)
+![screenshot](https://raw.githubusercontent.com/msKaleb/FDF/main/img/fdf_02.png)
+![screenshot](https://raw.githubusercontent.com/msKaleb/FDF/main/img/fdf_03.png)
 ## How To Use
 
 ```bash
@@ -20,7 +22,7 @@ $ cd FDF
 # Compile
 $ make / make bonus
 
-# Now you can use it (don't forget to include the header files)
+# Run
 $ ./fdf /path_to_map/map.fdf
 ```
 
