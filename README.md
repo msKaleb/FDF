@@ -12,15 +12,15 @@ This project uses trigonometric transformations to place 3dimensional vertices (
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/msKaleb/LibFT.git
+$ git clone --recursive https://github.com/msKaleb/FDF.git
 
 # Go into the repository
-$ cd LibFT
+$ cd FDF
 
-# Compile and create the static library (libft.a)
+# Compile
 $ make / make bonus
 
 # Now you can use it (don't forget to include the header files)
-$ gcc -Wall -Werror -Wextra main.c libft.a -o program_name
+$ ./fdf /path_to_map/map.fdf
 ```
 
